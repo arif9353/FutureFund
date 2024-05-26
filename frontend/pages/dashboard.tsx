@@ -26,6 +26,9 @@ export default function Dashboard() {
         <>
             <div className="flex flex-col min-h-screen w-screen text-white">
                 <Top_Nav />
+                <div className="w-full flex h-full">
+                    
+                </div>
                 
             </div>
         </>
