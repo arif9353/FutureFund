@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { auth } from './firebase_store';
+import { auth } from '../firebase/firebase_store';
 import { useRouter } from 'next/router';
 
 export default function Logout() {

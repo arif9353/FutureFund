@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { auth } from './firebase_store';
+import { auth } from '../firebase/firebase_store';
 import { sendPasswordResetEmail, fetchSignInMethodsForEmail } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import Link from 'next/link';

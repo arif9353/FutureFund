@@ -1,7 +1,7 @@
 import Top_Nav from "@/_components/Top_Nav";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { auth } from "./firebase_store";
+import { auth } from "../firebase/firebase_store";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {

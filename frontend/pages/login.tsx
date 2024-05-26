@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { auth, googleProvider } from './firebase_store';
+import { auth, googleProvider } from '../firebase/firebase_store';
 import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, getRedirectResult, UserCredential, onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';

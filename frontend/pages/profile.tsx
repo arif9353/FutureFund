@@ -2,7 +2,7 @@ import Top_Nav from "@/_components/Top_Nav";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { auth } from "./firebase_store";
+import { auth } from "../firebase/firebase_store";
 
 export default function Profile() {
     const router = useRouter();

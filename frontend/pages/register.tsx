@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { auth, googleProvider } from './firebase_store';
+import { auth, googleProvider } from '../firebase/firebase_store';
 import { signInWithPopup, createUserWithEmailAndPassword } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import { FirebaseError } from 'firebase/app';
