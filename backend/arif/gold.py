@@ -1,10 +1,16 @@
 import yfinance as yf
 import pandas as pd
-import requests
+import os, requests
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
+from dotenv import load_dotenv
+
+load_dotenv()
+
+ALPHA_VANTAGE_API = os.getenv("ALPHA_VANTAGE_API")
+EXCHANGE_RATE_API = os.getenv("EXCHANGE_RATE_API")
 
 # Fetch historical gold prices (using GLD ETF as a proxy)
 gold_data = yf.download('GLD', start='2010-01-01', end='2024-05-24')
@@ -45,12 +51,25 @@ y_pred = model.predict(X_test_scaled)
 mse = mean_squared_error(y_test, y_pred)
 print(f"Mean Squared Error: {mse}")
 
+def fetch_usd_to_inr_rate():
+    url =f"https://v6.exchangerate-api.com/v6/{EXCHANGE_RATE_API}/latest/USD"
+    print(url)
+    response = requests.get(url)
+    data = response.json()
+    
+    if data['result'] == 'success':
+        usd_to_inr_rate = data['conversion_rates']['INR']
+        print(usd_to_inr_rate)
+        return usd_to_inr_rate
+    else:
+        print(f"Error fetching data: {data['error-type']}")
+        return None
+
 
 def fetch_real_time_gold_price_alpha_vantage():
     # Replace with your actual Alpha Vantage API key
-    API_KEY = 'QYHRK01Q1ORWYPSJ'
     symbol = 'GLD'  # GLD is an ETF that tracks the price of gold
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={API_KEY}'
+    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={ALPHA_VANTAGE_API}'
 
     response = requests.get(url)
     data = response.json()
@@ -76,6 +95,7 @@ def predict_next_n_days(n_days):
     last_row = gold_data.iloc[-1].copy()
     
     predictions = []
+    usd_to_inr = fetch_usd_to_inr_rate()
 
     for _ in range(n_days):
         ma_10 = last_row['MA_10']
@@ -89,7 +109,8 @@ def predict_next_n_days(n_days):
 
         # Predict future gold price (next closing price)
         future_price = model.predict(input_data_scaled)[0]
-        predictions.append(future_price)
+        future_price_inr = future_price * usd_to_inr
+        predictions.append(future_price_inr)
 
         # Update the last_row with the new prediction
         # Use concat to append the new predicted price
