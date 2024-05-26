@@ -1,0 +1,1 @@
+The Frontend is based upon Javascript, NextJS, Tailwind CSS, using Firebase for Authentication and Storage of data.
