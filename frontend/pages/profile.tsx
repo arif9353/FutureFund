@@ -26,7 +26,7 @@ export default function Profile() {
         <>
             <div className="min-h-screen w-screen text-white flex flex-col">
                 <Top_Nav />
-
+                
             </div>
         </>
     )

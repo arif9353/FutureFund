@@ -71,8 +71,8 @@ export default function Register() {
                 </div>
 
                 <div className="pc:w-[60%] mob:w-full pc:h-screen mob:h-[70%] shadow-md px-5 pt-6 pb-8 mb-4 flex flex-col justify-center items-center mob:border-t mob:border-t-white">
-                    <form className='pc:w-[400px]' onSubmit={(e) => { e.preventDefault() }}>
-                        <div className="mb-4">
+                    <form className='pc:w-[400px] mob:w-[90%]' onSubmit={(e) => { e.preventDefault() }}>
+                        <div className="mb-4 mob:mt-4">
                             <h2 className='mb-6 text-2xl font-bold'>Register</h2>
                             <input
                                 type="text"

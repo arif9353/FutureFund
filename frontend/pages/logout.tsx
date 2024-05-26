@@ -17,5 +17,8 @@ export default function Logout() {
         logout();
     }, []);
 
-    return <></>;
+    return <>
+        
+    
+    </>;
 }

@@ -4,6 +4,8 @@ import { auth } from '../firebase/firebase_store';
 import { sendPasswordResetEmail, fetchSignInMethodsForEmail } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import { IoBackspace } from 'react-icons/io5';
+import { IoMdArrowDropleft } from 'react-icons/io';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState<string>('');
@@ -35,9 +37,9 @@ export default function ForgotPassword() {
                     </div>
                 </div>
 
-                <div className="pc:w-[60%] mob:w-full pc:h-screen mob:h-[70%] shadow-md px-5 pt-6 pb-8 mb-4 flex flex-col justify-center items-center mob:border-t mob:border-t-white">
+                <div className="pc:w-[60%] mob:w-full pc:h-screen mob:h-[70%] shadow-md px-5 pb-8 flex flex-col justify-center items-center mob:border-t mob:border-t-white">
                     <form className='pc:w-[400px] mob:w-[90%]' onSubmit={(e) => { e.preventDefault() }}>
-                        <div className="mb-4">
+                        <div className="mb-4  mob:mt-8">
                             <h2 className='mb-6 text-2xl font-bold'>Forgot Password</h2>
                             {emailSent && <p className='my-6 mb-10 text-lg font-base text-slate-300'>
                                 An email has been sent to reset your password. Please check your inbox and follow the instructions. <br /><br />
@@ -61,7 +63,8 @@ export default function ForgotPassword() {
                         </div>}
 
                         <div className="flex justify-between items-center mt-4">
-                            <Link href="/login" className="text-xs underline">Back to Login</Link>
+                            <Link href="/login" className="text-xs underline flex flex-row items-center gap-2">
+                                {emailSent && <IoMdArrowDropleft size={"20px"}/>}  Back to Login</Link>
                         </div>
                     </form>
                 </div>
