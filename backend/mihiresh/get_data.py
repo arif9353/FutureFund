@@ -6,13 +6,6 @@ import time
 import requests
 import logging
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 
@@ -68,33 +61,28 @@ async def get_top_cryptos(url1):
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def get_stock_advice():
+async def get_stock_advice(base_url):
     try:
         # Initialize data list
         data = []
-        
-        # Base URL for the AJAX request
-        base_url = 'https://m.moneycontrol.com/more_market.php'
         
         # Initial parameters for the AJAX request
         params = {
             'sec': 'stk_adv',
             'ajax': 1,
             'start': 1,
-            'limit': 25
+            'limit': 60
         }
-        print("i")
+
         while True:
             response = requests.get(base_url, params=params)
             if response.status_code != 200:
                 logging.error(f"Failed to retrieve data from AJAX request: {response.status_code}")
-                print("Failed to retrieve data from AJAX request:")
                 break
             
             soup = BeautifulSoup(response.content, 'html.parser')
-            print("\n\n\nSoup: ",soup)
-            additional_data = parse_stock_advice(soup)
-            print("\n\n\nAdditional: ", additional_data)
+            additional_data = await parse_stock_advice(soup)
+            print("additional data", additional_data)
             if not additional_data:
                 break
             
@@ -111,58 +99,62 @@ def get_stock_advice():
         logging.error(f"An error occurred: {e}")
         return {'error': f'An error occurred: {e}'}
 
-def parse_stock_advice(soup):
-    middle_section = soup.find('div', {'class': 'middle_section'})
+async def parse_stock_advice(soup):
     data = []
-    if middle_section:
-        news_list = middle_section.find('ul', {'class': 'news_list'})
-        if news_list:
-            articles = news_list.find_all('li')
-            for article in articles:
-                try:
-                    stock_info = article.find('div', {'class': 'rb_gd14'})
-                    if stock_info:
-                        stock_name_link = stock_info.find('a')
-                        stock_name = stock_name_link.get_text(strip=True) if stock_name_link else 'N/A'
-                        stock_price_element = stock_info.find_all('strong')[1] if len(stock_info.find_all('strong')) > 1 else None
-                        stock_price = stock_price_element.get_text(strip=True).replace(',', '') if stock_price_element else '0.0'
+    news_list = soup.find('ul', {'class': 'news_list'})
+    lmno = 0
+    if news_list:
+        articles = news_list.find_all('li')
+        for article in articles:
+            lmno=lmno+1
+            try:
+                stock_info = article.find('div', {'class': 'rb_gd14'})
+                if stock_info:
+                    stock_name_link = stock_info.find('a')
+                    stock_name = stock_name_link.get_text(strip=True) if stock_name_link else 'N/A'
+                    stock_price_element = stock_info.find_all('strong')[1] if len(stock_info.find_all('strong')) > 1 else None
+                    stock_price = stock_price_element.get_text(strip=True).replace(',', '') if stock_price_element else '0.0'
+                    try:
+                        stock_price_float = float(stock_price)
+                    except ValueError:
+                        stock_price_float = 0.0
+                    article_link = article.find('div', {'class': 'MT5'}).find('a')
+                    recommendation = article_link.get_text(strip=True)
+                    recommendation_parts = recommendation.split(':')
+                    if len(recommendation_parts) > 1:
+                        recommendation_trimmed = recommendation_parts[0].split(';')[0].strip()
+                        source = recommendation_parts[-1].strip()
+                    else:
+                        recommendation_trimmed = recommendation
+                        source = ''
+                    match = re.search(r'target of Rs (\d+[:,]?\d+)', recommendation)
+                    if match:
+                        target_value = match.group(1).replace(',', '')
                         try:
-                            stock_price_float = float(stock_price)
+                            target_value_float = float(target_value)
                         except ValueError:
-                            stock_price_float = 0.0
-                        article_link = article.find('div', {'class': 'MT5'}).find('a')
-                        recommendation = article_link.get_text(strip=True)
-                        recommendation_parts = recommendation.split(':')
-                        if len(recommendation_parts) > 1:
-                            recommendation_trimmed = recommendation_parts[0].split(';')[0].strip()
-                            source = recommendation_parts[-1].strip()
-                        else:
-                            recommendation_trimmed = recommendation
-                            source = ''
-                        match = re.search(r'target of Rs (\d+[:,]?\d+)', recommendation)
-                        if match:
-                            target_value = match.group(1).replace(',', '')
-                            try:
-                                target_value_float = float(target_value)
-                            except ValueError:
-                                target_value_float = 0.0
-                        else:
-                            target_value = ''
                             target_value_float = 0.0
-                        revenue = target_value_float - stock_price_float
-                        if stock_price_float != 0:
-                            profit_percent = (revenue / stock_price_float) * 100
-                        else:
-                            profit_percent = 0.0
-                        data.append({
-                            'Stock Name': stock_name,
-                            'Price': f'Rs {stock_price}',
-                            'Recommendation': recommendation_trimmed,
-                            'Target Price': target_value,
-                            'Source': source,
-                            'Revenue': f'Rs {revenue:.2f}',
-                            'Profit Percent': f'{profit_percent:.2f}%'
-                        })
-                except Exception as e:
-                    logging.error(f"Error processing article: {e}")
+                    else:
+                        target_value = ''
+                        target_value_float = 0.0
+                    revenue = target_value_float - stock_price_float
+                    if stock_price_float != 0:
+                        profit_percent = (revenue / stock_price_float) * 100
+                    else:
+                        profit_percent = 0.0
+                    data.append({
+                        'Stock Name': stock_name,
+                        'Price': stock_price,
+                        'Recommendation': recommendation_trimmed,
+                        'Target Price': target_value,
+                        'Source': source,
+                        'Revenue': revenue,
+                        'Profit Percent': profit_percent
+                    })      
+            except Exception as e:
+                logging.error(f"Error processing article: {e}")
+        print("this is lmnopq",lmno)
+    else:
+        logging.warning('No news list found in the soup')
+
     return data
