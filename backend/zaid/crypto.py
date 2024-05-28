@@ -1,3 +1,8 @@
+import requests
+from bs4 import BeautifulSoup
+import re
+import json
+
 def get_top_cryptos(url1):
     # Send a GET request to the website
     response = requests.get(url1)
@@ -16,6 +21,7 @@ def get_top_cryptos(url1):
             
 
             data = []
+            i=0
             for row in rows:
                 columns = row.find_all('td')
                 name = columns[0].get_text(strip=True)
@@ -31,20 +37,23 @@ def get_top_cryptos(url1):
 
                 data.append({
                     'Name': name,
-                    'Price': f'Rs. {price}',
+                    'Price': price,
                     'Change': change,
                     'Change Percent': chg_percent,
-                    '24H High': f'Rs. {high_24h}',
-                    '24H Low': f'Rs. {low_24h}',
-                    '52 Week High': f'Rs. {high_52_week}',
-                    '52 Week Low': f'Rs. {low_52_week}',
+                    '24H High': high_24h,
+                    '24H Low': low_24h,
+                    '52 Week High': high_52_week,
+                    '52 Week Low':  low_52_week,
                     '3M Performance': perf_3m,
                     'Technical Review': technical_review
                 })
-
+                i=i+1
+                if(i==10):
+                    break
             return json.dumps(data, indent=4)
         else:
             return json.dumps({'error': 'No table found on the page.'})
+
     else:
         return json.dumps({'error': 'Failed to retrieve the webpage.'})
 

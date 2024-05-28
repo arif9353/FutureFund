@@ -1,3 +1,9 @@
+import requests
+from bs4 import BeautifulSoup
+import re
+import json
+
+
 def get_stock_advice(url):
     # Send a GET request to the website
     response = requests.get(url)
