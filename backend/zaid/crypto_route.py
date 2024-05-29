@@ -1,7 +1,6 @@
-#pip install requests
-
 import requests
-#note : dont remove change headers : (error : access denied)
+import json
+
 def fetch_and_map_crypto_data(url, exclude_fields=None):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -37,6 +36,23 @@ def print_crypto_details(name, details):
         print(f"{key}: {value}")
     print()
 
+def calculate_profit_details(entry):
+    r2_str = entry.get('R2', '0').replace(',', '')
+    last_price_str = entry.get('lastPrice', '0').replace(',', '')
+    
+    if r2_str and last_price_str:
+        r2 = float(r2_str)
+        last_price = float(last_price_str)
+        profit_percentage = ((r2 - last_price) / last_price) * 100
+        profit_amount = r2 - last_price
+        entry['profit_percentage'] = round(profit_percentage, 3)
+        entry['profit_amount'] = round(profit_amount, 3)
+    else:
+        entry['profit_percentage'] = 0
+        entry['profit_amount'] = 0
+        
+    return entry
+
 url1 = "https://priceapi.moneycontrol.com/technicalCompanyData/cryptoCurrency/topCrypto?section=pivot&quote=inr&deviceType=W"
 mapped_data1 = fetch_and_map_crypto_data(url1)
 
@@ -58,5 +74,6 @@ for entry in mapped_data2:
         merged_data[name].update(entry)
 
 for name, details in merged_data.items():
-    print_crypto_details(name, details)
+    merged_data[name] = calculate_profit_details(details)
 
+print(json.dumps(merged_data, indent=4))
