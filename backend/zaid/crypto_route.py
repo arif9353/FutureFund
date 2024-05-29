@@ -1,3 +1,5 @@
+#pip install requests
+
 import requests
 #note : dont remove change headers : (error : access denied)
 def fetch_and_map_crypto_data(url, exclude_fields=None):
