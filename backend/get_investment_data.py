@@ -14,36 +14,42 @@ ALPHA_VANTAGE_API = os.getenv("ALPHA_VANTAGE_API")
 ###THIS IS FOR GOLD
 
 async def fetch_usd_to_inr_rate():
-    url =f"https://v6.exchangerate-api.com/v6/f9b6ab6c50a2837e18b4ff2d/latest/USD"
-    response = requests.get(url)
-    data = response.json()
-    
-    if data['result'] == 'success':
-        usd_to_inr_rate = data['conversion_rates']['INR']
-        return usd_to_inr_rate
-    else:
-        print(f"Error fetching data: {data['error-type']}")
-        return None
-
+    try:
+        url =f"https://v6.exchangerate-api.com/v6/f9b6ab6c50a2837e18b4ff2d/latest/USD"
+        response = requests.get(url)
+        data = response.json()
+        
+        if data['result'] == 'success':
+            usd_to_inr_rate = data['conversion_rates']['INR']
+            return usd_to_inr_rate
+        else:
+            print(f"Error fetching data: {data['error-type']}")
+            return None
+    except Exception as e:
+        print(f"Error fetching currency exchange data (usd-to-inr): {str(e)}")
+        return f"Error Occurred: {str(e)}"
 
 async def get_gold_data():
-    # Replace with your actual Alpha Vantage API key
-    symbol = 'GLD'  # GLD is an ETF that tracks the price of gold
-    url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={ALPHA_VANTAGE_API}'
+    try:    
+        # Replace with your actual Alpha Vantage API key
+        symbol = 'GLD'  # GLD is an ETF that tracks the price of gold
+        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={ALPHA_VANTAGE_API}'
 
-    response = requests.get(url)
-    data = response.json()
+        response = requests.get(url)
+        data = response.json()
 
-    if "Time Series (1min)" in data:
-        latest_time = list(data['Time Series (1min)'].keys())[0]
-        latest_data = data['Time Series (1min)'][latest_time]
-        latest_price = float(latest_data['4. close'])
-        usd_to_inr = await fetch_usd_to_inr_rate()
-        latest_price_inr = usd_to_inr * latest_price
-        return latest_price_inr
-    else:
-        print(f"Error fetching data: {data}")
-        return None
+        if "Time Series (1min)" in data:
+            latest_time = list(data['Time Series (1min)'].keys())[0]
+            latest_data = data['Time Series (1min)'][latest_time]
+            latest_price = float(latest_data['4. close'])
+            usd_to_inr = await fetch_usd_to_inr_rate()
+            latest_price_inr = usd_to_inr * latest_price
+            return latest_price_inr
+        else:
+            print(f"Error fetching data: {data}")
+            return None
+    except Exception as e:
+        print(f"Error fetching gold value: {str(e)}")
 
 
 ### THIS IS FOR CRYPTOCURRENCY
@@ -70,7 +76,7 @@ async def fetch_and_map_crypto_data(url, exclude_fields=None):
             print(f"Failed to retrieve data: {response.status_code}")
             return None
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred while fetching crypto data: {str(e)}")
         return None
 
 async def map_data_to_headers(data, headers, exclude_fields=None):
@@ -85,7 +91,7 @@ async def map_data_to_headers(data, headers, exclude_fields=None):
             mapped_data.append(mapped_entry)
         return mapped_data
     except Exception as e:
-        print(f"An error occurred while mapping data to headers: {e}")
+        print(f"An error occurred while mapping data to headers: {str(e)}")
         return []
 
 async def calculate_profit_details(entry):
@@ -106,7 +112,7 @@ async def calculate_profit_details(entry):
 
         return entry
     except Exception as e:
-        print(f"An error occurred while calculating profit details: {e}")
+        print(f"An error occurred while calculating profit details: {str(e)}")
         entry['profit_percentage'] = 0
         entry['profit_amount'] = 0
         return entry
@@ -148,8 +154,8 @@ async def get_crypto_data():
         
         return result[:25]
     except Exception as e:
-        print(f"An error occurred while getting filtered and sorted crypto data: {e}")
-        return json.dumps([], indent=4)
+        print(f"An error occurred while getting filtered and sorted crypto data: {str(e)}")
+        return f"An error occurred while getting filtered and sorted crypto data: {str(e)}"
 
 
 ##THIS IS FOR STOCK
@@ -190,15 +196,15 @@ async def get_stock_data(base_url):
 
     except Exception as e:
         print(f"An error occurred: {e}")
-        return {'error': f'An error occurred: {e}'}
+        return {'An error occurred while trying to get the stock data: {e}'}
 
 async def parse_stock_advice(soup):
-    data = []
-    news_list = soup.find('ul', {'class': 'news_list'})
-    if news_list:
-        articles = news_list.find_all('li')
-        for article in articles:
-            try:
+    try:
+        data = []
+        news_list = soup.find('ul', {'class': 'news_list'})
+        if news_list:
+            articles = news_list.find_all('li')
+            for article in articles:
                 stock_info = article.find('div', {'class': 'rb_gd14'})
                 if stock_info:
                     stock_name_link = stock_info.find('a')
@@ -242,12 +248,13 @@ async def parse_stock_advice(soup):
                         'Revenue': revenue,
                         'Profit Percent': profit_percent
                     })      
-            except Exception as e:
-                print(f"Error processing article: {e}")
-    else:
-        print('No news list found in the soup')
+        else:
+            print('No news list found in the soup')
 
-    return data
+        return data
+    except Exception as e:
+        print(f"Error occurred while trying to parse stock data: {str(e)}")
+        return f"Error occurred while trying to parse stock data: {str(e)}"
 
 ### THIS IS FOR RECURRING DEPOSITS
 
@@ -280,7 +287,8 @@ async def get_bank_names_for_RD():
         }
         return bank_interest_data
     except Exception as e:
-        print(str(e))
+        print(f"Error occured while trying to get bank names for recurrent deposit {str(e)}")
+        return f"Error occured while trying to get bank names for recurrent deposit {str(e)}"
 
 
 ###THIS IS FOR BONDS
@@ -436,21 +444,25 @@ async def get_bond_details(url1):
         return None
 
 async def get_bonds_data(url):
-    all_bond_details = await get_bond_details(url)
-    if not all_bond_details:
-        return json.dumps({"bonds": [], "success": False})
-    
-    final_answer = []
-    for bond in all_bond_details:
-        estimated_face_value = await estimate_face_value(bond)
-        if estimated_face_value is None:
-            continue
-        bond_profit = await calculate_bond_profit(bond, estimated_face_value)
-        if bond_profit is None:
-            continue
-        bond['estimated_face_value'] = estimated_face_value
-        bond['bond_profit'] = bond_profit['profit']
-        final_answer.append(bond)
-    
-    final_answer.sort(key=lambda x: float(x['bond_profit'].replace('₹', '').replace(',', '').strip()), reverse=True)
-    return final_answer[:25]
+    try:
+        all_bond_details = await get_bond_details(url)
+        if not all_bond_details:
+            return json.dumps({"bonds": [], "success": False})
+        
+        final_answer = []
+        for bond in all_bond_details:
+            estimated_face_value = await estimate_face_value(bond)
+            if estimated_face_value is None:
+                continue
+            bond_profit = await calculate_bond_profit(bond, estimated_face_value)
+            if bond_profit is None:
+                continue
+            bond['estimated_face_value'] = estimated_face_value
+            bond['bond_profit'] = bond_profit['profit']
+            final_answer.append(bond)
+        
+        final_answer.sort(key=lambda x: float(x['bond_profit'].replace('₹', '').replace(',', '').strip()), reverse=True)
+        return final_answer[:25]
+    except Exception as e:
+        print(f"Error fetching bond details: {str(e)}")
+        return f"Error fetching bond details: {str(e)}"
