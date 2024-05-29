@@ -48,63 +48,108 @@ async def get_gold_data():
 
 ### THIS IS FOR CRYPTOCURRENCY
 
-async def get_crypto_data(url1):
-    # Send a GET request to the website
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
-    }
-    response = requests.get(url1, headers=headers)
-    print(response)
 
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Parse the HTML content of the page
-        soup = BeautifulSoup(response.content, 'html.parser')
+async def fetch_and_map_crypto_data(url, exclude_fields=None):
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+        }
+        response = requests.get(url, headers=headers)
 
-        # Find the table containing the cryptocurrency data
-        table = soup.find('table', {'class': 'tableWrapper_web_tbl_indices__qR1nw'})
-
-        if table:
-            # Extract rows from the table
-            count = 0
-            rows = table.find_all('tr')[1:]  # Exclude header row
-            data = []
-            for row in rows:
-
-                columns = row.find_all('td')
-                name = columns[0].get_text(strip=True)
-                price = columns[1].get_text(strip=True).replace(',', '')
-                """
-                change = columns[2].get_text(strip=True)
-                chg_percent = columns[3].get_text(strip=True)
-                high_24h = columns[4].get_text(strip=True).replace(',', '')
-                low_24h = columns[5].get_text(strip=True).replace(',', '')
-                high_52_week = columns[6].get_text(strip=True).replace(',', '')
-                low_52_week = columns[7].get_text(strip=True).replace(',', '')
-                perf_3m = columns[8].get_text(strip=True)
-                """
-                technical_review = columns[9].get_text(strip=True)
-                if technical_review == "Very Bullish":
-                    count = count + 1
-                    data.append({
-                        'Name': name,
-                        'Price': f'Rs. {price}',
-                        #'Change': change,
-                        #'Change Percent': chg_percent,
-                        #'24H High': f'Rs. {high_24h}',
-                        #'24H Low': f'Rs. {low_24h}',
-                        #'52 Week High': f'Rs. {high_52_week}',
-                        #'52 Week Low': f'Rs. {low_52_week}',
-                        #'3M Performance': perf_3m,
-                        'Technical Review': technical_review
-                    })
-
-            print(count)
-            return data
+        if response.status_code == 200:
+            try:
+                data = response.json()
+                headers = data['body']['tableHeaders']
+                table_data = data['body']['tableData']['inr']
+                mapped_data = await map_data_to_headers(table_data, headers, exclude_fields)
+                return mapped_data
+            except requests.exceptions.JSONDecodeError:
+                print("Error decoding JSON")
+                return None
         else:
-            return json.dumps({'error': 'No table found on the page.'})
-    else:
-        return json.dumps({'error': 'Failed to retrieve the webpage.'})
+            print(f"Failed to retrieve data: {response.status_code}")
+            return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+async def map_data_to_headers(data, headers, exclude_fields=None):
+    try:
+        mapped_data = []
+        for entry in data:
+            mapped_entry = {}
+            for index, header in enumerate(headers):
+                if exclude_fields and header['name'] in exclude_fields:
+                    continue
+                mapped_entry[header['name']] = entry[index]
+            mapped_data.append(mapped_entry)
+        return mapped_data
+    except Exception as e:
+        print(f"An error occurred while mapping data to headers: {e}")
+        return []
+
+async def calculate_profit_details(entry):
+    try:
+        r2_str = entry.get('R2', '0').replace(',', '')
+        last_price_str = entry.get('lastPrice', '0').replace(',', '')
+
+        if r2_str and last_price_str:
+            r2 = float(r2_str)
+            last_price = float(last_price_str)
+            profit_percentage = ((r2 - last_price) / last_price) * 100
+            profit_amount = r2 - last_price
+            entry['profit_percentage'] = round(profit_percentage, 3)
+            entry['profit_amount'] = round(profit_amount, 3)
+        else:
+            entry['profit_percentage'] = 0
+            entry['profit_amount'] = 0
+
+        return entry
+    except Exception as e:
+        print(f"An error occurred while calculating profit details: {e}")
+        entry['profit_percentage'] = 0
+        entry['profit_amount'] = 0
+        return entry
+
+async def get_crypto_data():
+    try:
+        url1 = "https://priceapi.moneycontrol.com/technicalCompanyData/cryptoCurrency/topCrypto?section=pivot&quote=inr&deviceType=W"
+        mapped_data1 = await fetch_and_map_crypto_data(url1)
+
+        url2 = "https://priceapi.moneycontrol.com/technicalCompanyData/cryptoCurrency/topCrypto?section=overview&quote=inr&deviceType=W"
+        exclude_fields = [
+            "PerChange1W", "PerChange1M", "PerChange3M", "PerChange6M", 
+            "PerChangeYTD", "PerChange1Y", "PerChange2Y", "PerChange3Y", "PerChange5Y"
+        ]
+        mapped_data2 = await fetch_and_map_crypto_data(url2, exclude_fields)
+
+        merged_data = {}
+        for entry in mapped_data1:
+            name = entry.get('currencyName')
+            if name:
+                merged_data[name] = entry
+        for entry in mapped_data2:
+            name = entry.get('currencyName')
+            if name and name in merged_data:
+                merged_data[name].update(entry)
+
+        for name, details in merged_data.items():
+            merged_data[name] = await calculate_profit_details(details)
+
+        # Filter, sort the data, and exclude negative profit percentages
+        filtered_data = {
+            name: details for name, details in merged_data.items()
+            if details.get('technicalRating') in ['Bullish', 'Very Bullish'] and details.get('profit_percentage', 0) > 0
+        }
+        sorted_data = sorted(filtered_data.items(), key=lambda x: x[1]['profit_amount'], reverse=True)
+
+        # Return only currencyName and lastPrice
+        result = [{'currencyName': details['currencyName'], 'lastPrice': details['lastPrice'], 'expectedprice': details['R2']} for tag, details in sorted_data]
+        
+        return result[:25]
+    except Exception as e:
+        print(f"An error occurred while getting filtered and sorted crypto data: {e}")
+        return json.dumps([], indent=4)
 
 
 ##THIS IS FOR STOCK
@@ -317,14 +362,14 @@ async def calculate_bond_profit(bond_data, face_value):
         # Calculate the total number of payments
         total_payments = payments_per_year * maturity_period_years
         
-        # Calculate the total coupon payments
+
         if frequency == 'CUMULATIVE AT MATURITY':
             total_coupon_payments = annual_coupon_payment * maturity_period_years  # Simplified for cumulative bonds
         else:
             monthly_coupon_payment = annual_coupon_payment / 12
             total_coupon_payments = monthly_coupon_payment * total_payments
         
-        # Calculate the profit
+
         profit = total_coupon_payments - (price - face_value)
         
         return {
