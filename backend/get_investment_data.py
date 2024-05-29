@@ -6,8 +6,12 @@ import time
 import requests
 import logging
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 ALPHA_VANTAGE_API = os.getenv("ALPHA_VANTAGE_API")
+
+
+###THIS IS FOR GOLD
 
 async def fetch_usd_to_inr_rate():
     url =f"https://v6.exchangerate-api.com/v6/f9b6ab6c50a2837e18b4ff2d/latest/USD"
@@ -41,6 +45,8 @@ async def get_gold_data():
         print(f"Error fetching data: {data}")
         return None
 
+
+### THIS IS FOR CRYPTOCURRENCY
 
 async def get_crypto_data(url1):
     # Send a GET request to the website
@@ -101,6 +107,8 @@ async def get_crypto_data(url1):
         return json.dumps({'error': 'Failed to retrieve the webpage.'})
 
 
+##THIS IS FOR STOCK
+
 
 async def get_stock_data(base_url):
     try:
@@ -132,8 +140,8 @@ async def get_stock_data(base_url):
             params['start'] += params['limit']
             
             time.sleep(2)  # Delay between requests to mimic user behavior
-
-        return data
+        sorted_data = sorted(data, key=lambda x: x['Profit Percent'], reverse=True)
+        return sorted_data[:25]
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -196,6 +204,8 @@ async def parse_stock_advice(soup):
 
     return data
 
+### THIS IS FOR RECURRING DEPOSITS
+
 async def get_bank_names_for_RD():
     try:
         bank_interest_data = {
@@ -226,3 +236,176 @@ async def get_bank_names_for_RD():
         return bank_interest_data
     except Exception as e:
         print(str(e))
+
+
+###THIS IS FOR BONDS
+
+async def estimate_face_value(bond_data):
+    try:
+        # Extract relevant details from the bond data
+        coupon_rate = float(bond_data['coupon'].replace('%', '').strip()) / 100
+        yield_rate = float(bond_data['yield'].replace('%', '').strip()) / 100
+        maturity_date = datetime.strptime(bond_data['maturity'], '%b %Y')
+        if maturity_date.year == 9999:
+            print(f"Skipping bond {bond_data['name']} with maturity date of Dec 9999.")
+            return None
+        current_date = datetime.now()  # Use the current date
+        price = float(bond_data['price'].replace('₹', '').replace(',', '').strip())
+        frequency = bond_data['frequency']
+        
+        # Calculate the maturity period in years, including months
+        maturity_period_years = (maturity_date - current_date).days / 365.25
+        
+        # Determine the number of payments per year based on the frequency
+        if frequency == 'MONTHLY':
+            payments_per_year = 12
+        elif frequency == 'QUARTERLY':
+            payments_per_year = 4
+        elif frequency == 'SEMI ANNUAL':
+            payments_per_year = 2
+        elif frequency == 'CUMULATIVE AT MATURITY':
+            payments_per_year = 1  # For cumulative bonds, we treat as a single payment at the end
+        else:  # Assume ANNUALLY
+            payments_per_year = 1
+        
+        # Calculate the total number of payments
+        total_payments = payments_per_year * maturity_period_years
+        
+        # Calculate the yield per period
+        yield_per_period = yield_rate / payments_per_year
+        
+        # Approximate the coupon payment per period
+        coupon_payment_per_period = (coupon_rate / payments_per_year) * price
+        
+        # Calculate the face value
+        face_value = coupon_payment_per_period * (1 - (1 + yield_per_period) ** -total_payments) / yield_per_period
+        face_value += price / ((1 + yield_per_period) ** total_payments)
+        
+        return round(face_value, 2)
+    except Exception as e:
+        print(f"Error estimating face value for bond {bond_data['name']}: {e}")
+        return None
+
+async def calculate_bond_profit(bond_data, face_value):
+    try:
+        # Extract relevant details from the bond data
+        name = bond_data['name']
+        coupon_rate = float(bond_data['coupon'].replace('%', '').strip()) / 100
+        maturity_date = datetime.strptime(bond_data['maturity'], '%b %Y')
+        current_date = datetime.now()  # Use the current date
+        price = float(bond_data['price'].replace('₹', '').replace(',', '').strip())
+        frequency = bond_data['frequency']
+        
+        # Calculate the maturity period in years, including months
+        maturity_period_years = (maturity_date - current_date).days / 365.25
+        
+        # Calculate the annual coupon payment
+        annual_coupon_payment = coupon_rate * face_value
+        
+        # Determine the number of payments per year based on the frequency
+        if frequency == 'MONTHLY':
+            payments_per_year = 12
+        elif frequency == 'QUARTERLY':
+            payments_per_year = 4
+        elif frequency == 'SEMI ANNUAL':
+            payments_per_year = 2
+        elif frequency == 'CUMULATIVE AT MATURITY':
+            payments_per_year = 1  # For cumulative bonds, we treat as a single payment at the end
+        else:  # Assume ANNUALLY
+            payments_per_year = 1
+        
+        # Calculate the total number of payments
+        total_payments = payments_per_year * maturity_period_years
+        
+        # Calculate the total coupon payments
+        if frequency == 'CUMULATIVE AT MATURITY':
+            total_coupon_payments = annual_coupon_payment * maturity_period_years  # Simplified for cumulative bonds
+        else:
+            monthly_coupon_payment = annual_coupon_payment / 12
+            total_coupon_payments = monthly_coupon_payment * total_payments
+        
+        # Calculate the profit
+        profit = total_coupon_payments - (price - face_value)
+        
+        return {
+            "name": name,
+            "coupon_rate": f"{coupon_rate * 100:.4f}%",
+            "maturity": bond_data['maturity'],
+            "yield": bond_data['yield'],
+            "price": f"₹ {price:,.2f}",
+            "frequency": frequency,
+            "profit": f"₹ {profit:,.2f}"
+        }
+    except Exception as e:
+        print(f"Error calculating profit for bond {bond_data['name']}: {e}")
+        return None
+
+async def get_bond_details(url1):
+    try:
+        response = requests.get(url1)
+        
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.content, 'html.parser')
+            bond_rows = soup.find_all('tr', class_='clickable-row')
+            bonds = []
+            
+            for bond_row in bond_rows:
+                bond_name = bond_row.find('p', class_='company-title-f-cata').text.strip()
+                bond_coupon = bond_row.find_all('td', class_='table-data')[1].find('p').text.strip()
+                bond_maturity = bond_row.find_all('td', class_='table-data')[2].find('p').text.strip()
+                bond_frequency = bond_row.find_all('td', class_='table-data')[4].find('p').text.strip()
+                bond_yield = bond_row.find_all('td', class_='table-data')[5].find('p').text.strip()
+                bond_price_str = bond_row.find_all('td', class_='table-data')[6].find('p').text.strip()
+                bond_price = float(bond_price_str.replace('₹', '').replace(',', '').strip())
+                
+                try:
+                    float(bond_coupon.replace('%', '').strip())
+                    maturity_date = datetime.strptime(bond_maturity, '%b %Y')
+                    
+                    if maturity_date.year == 9999:
+                        print(f"Skipping bond {bond_name} with maturity date of Dec 9999.")
+                        continue
+                except ValueError:
+                    print(f"Skipping bond {bond_name} due to invalid data.")
+                    continue
+                
+                bond_details = {
+                    'name': bond_name,
+                    'coupon': bond_coupon,
+                    'maturity': bond_maturity,
+                    'yield': bond_yield,
+                    'price': bond_price_str,
+                    'frequency': bond_frequency
+                }
+                
+                bonds.append(bond_details)
+            
+            bonds.sort(key=lambda x: (float(x['price'].replace('₹', '').replace(',', '').strip()), 
+                                      -float(x['yield'].replace('%', '').strip())))
+            
+            return bonds
+        else:
+            return None
+    except Exception as e:
+        print(f"Error fetching bond details: {e}")
+        return None
+
+async def get_bonds_data(url):
+    all_bond_details = await get_bond_details(url)
+    if not all_bond_details:
+        return json.dumps({"bonds": [], "success": False})
+    
+    final_answer = []
+    for bond in all_bond_details:
+        estimated_face_value = await estimate_face_value(bond)
+        if estimated_face_value is None:
+            continue
+        bond_profit = await calculate_bond_profit(bond, estimated_face_value)
+        if bond_profit is None:
+            continue
+        bond['estimated_face_value'] = estimated_face_value
+        bond['bond_profit'] = bond_profit['profit']
+        final_answer.append(bond)
+    
+    final_answer.sort(key=lambda x: float(x['bond_profit'].replace('₹', '').replace(',', '').strip()), reverse=True)
+    return final_answer[:25]
