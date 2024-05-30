@@ -11,10 +11,8 @@ import json
 import re
 
 
-
-
 # Dictionary mapping locations to their respective URLs
-async def get_url(location):
+def get_url(location):
     location_url_map = {
         'pune': 'https://www.nobroker.in/property/sale/pune/multiple?searchParam=W3sibGF0IjoxOC41NTc3NDQ2LCJsb24iOjczLjkxMjQ2NzQsInBsYWNlSWQiOiJDaElKaVNGeWVzWEF3anNScmN5RkZzUHlzTkUiLCJwbGFjZU5hbWUiOiJQdW5lIn0seyJsYXQiOjE4LjUwNzM1MTQsImxvbiI6NzMuODA3NjU0MywicGxhY2VJZCI6IkNoSUpuWVN2TXJlX3dqc1I4RVQtczBpTEI5USIsInBsYWNlTmFtZSI6IktvdGhydWQifSx7ImxhdCI6MTguNTA4NjQyOSwibG9uIjo3My44MzE0MDkxLCJwbGFjZUlkIjoiQ2hJSndfQnlYNHVfd2pzUmVwc1U0Z3RNX3drIiwicGxhY2VOYW1lIjoiRXJhbmR3YW5lIn1d&radius=2.0&city=pune&locality=Pune,Kothrud,Erandwane',
         'mumbai': 'https://www.nobroker.in/property/sale/mumbai/multiple?searchParam=W3sibGF0IjoxOS4yNDY3MjE4LCJsb24iOjcyLjk3NTk3MTMsInBsYWNlSWQiOiJDaElKNjQwYUNCSzU1enNSaWZwc0V5U1kydU0iLCJwbGFjZU5hbWUiOiJUaGFuZSBXZXN0In0seyJsYXQiOjE5LjIzODA2ODMsImxvbiI6NzIuODUyMjUxMiwicGxhY2VJZCI6IkNoSUo5eGZSUE02dzV6c1JrdlpibFl0VlhWRSIsInBsYWNlTmFtZSI6IkJvcml2YWxpIFdlc3QifSx7ImxhdCI6MTkuMDE3Nzk4OSwibG9uIjo3Mi44NDc4MTE5OTk5OTk5OSwicGxhY2VJZCI6IkNoSUpEODJnRHR2TzV6c1IwRnVaT1ZCR2lrSSIsInBsYWNlTmFtZSI6IkRhZGFyIn1d&radius=2.0&city=mumbai&locality=Thane%20West,Borivali%20West,Dadar',
@@ -28,14 +26,15 @@ async def get_url(location):
         'ghaziabad': 'https://www.nobroker.in/property/sale/ghaziabad/multiple?searchParam=W3sibGF0IjoyOC42NDYwMTc2LCJsb24iOjc3LjM2OTUxNjYsInBsYWNlSWQiOiJDaElKUFlReHJydjZERGtSOXloRkVIUjhoZlUiLCJwbGFjZU5hbWUiOiJJbmRpcmFwdXJhbSJ9LHsibGF0IjoyOC42NjIzNzU4LCJsb24iOjc3LjM3MzQ0LCJwbGFjZUlkIjoiQ2hJSkVZeFF3YUg2RERrUmRNTzlFUjQxUTkwIiwicGxhY2VOYW1lIjoiVmFzdW5kaGFyYSJ9LHsibGF0IjoyOC42NTA4MTIxLCJsb24iOjc3LjM3MDU2MTEsInBsYWNlSWQiOiJFbDVUYUdGcmRHa2dTMmhoYm1Rc0lGTm9ZV3QwYVNCTGFHRnVaQ0EwTENCSmJtUnBjbUZ3ZFhKaGJTd2dSMmhoZW1saFltRmtMQ0JIYUdGNmFXRmlZV1FnWkdsemRISnBZM1FzSUZWMGRHRnlJRkJ5WVdSbGMyZ3NJRWx1WkdsaElpNHFMQW9VQ2hJSjlWWEd0ckQ2RERrUkd1SnpoY2ZHN2RRU0ZBb1NDZU5mUWZHbC1ndzVFYTd3MjZ1OU94QXciLCJwbGFjZU5hbWUiOiJTaGFrdGkgS2hhbmQifV0=&radius=2.0&city=ghaziabad&locality=Indirapuram,Vasundhara,Shakti%20Khand',
         'faridabad': 'https://www.nobroker.in/property/sale/faridabad/multiple?searchParam=W3sibGF0IjoyOC40MjE0MzQ3LCJsb24iOjc3LjMzNDk3OTE5OTk5OTk5LCJwbGFjZUlkIjoiQ2hJSk8tYlB1dzdkRERrUmxlbVRXLVQyRkU0IiwicGxhY2VOYW1lIjoiTmVoYXJwYXIgRmFyaWRhYmFkIn0seyJsYXQiOjI4LjQxMzgwNDUsImxvbiI6NzcuMzIyMzkxNSwicGxhY2VJZCI6IkNoSUpoNGwxNDYzZEREa1I5eVl4TXNjdGp6dyIsInBsYWNlTmFtZSI6IlNlY3RvciAxNiJ9LHsibGF0IjoyOC40MjIxMTk0LCJsb24iOjc3LjMyNTczNTksInBsYWNlSWQiOiJDaElKbVNZdHBIUGRERGtSUUZSUF96NWdpdGMiLCJwbGFjZU5hbWUiOiJPbGQgRmFyaWRhYmFkIn1d&radius=2.0&city=faridabad&locality=Neharpar%20Faridabad,Sector%2016,Old%20Faridabad'
     }
-    if location in location_url_map:
-        return location_url_map[location]
-    
-async def get_soup_data(location):
+    return location_url_map.get(location, None)
+
+def get_soup_data(location):
     try:
         driver = webdriver.Chrome()  # Ensure the ChromeDriver is in your PATH
         city = location
-        url = await get_url(city)
+        url = get_url(city)
+        if not url:
+            return None
         driver.get(url)
 
         SCROLL_PAUSE_TIME = 2
@@ -55,12 +54,16 @@ async def get_soup_data(location):
 
         return soup
     except Exception as e:
-        print(f"Error fetching gold value: {str(e)}")
+        print(f"Error fetching data: {str(e)}")
+        return None
 
-async def extract_property_details(location):
+def extract_property_details(location):
     try:
         properties = []
         soup = get_soup_data(location)
+        if not soup:
+            return properties
+
         property_articles = soup.find_all('article', {'aria-label': 'article'})
         for article in property_articles:
             try:
@@ -104,23 +107,32 @@ async def extract_property_details(location):
         return properties
     
     except Exception as e:
-        print(f"Error fetching gold value: {str(e)}")
+        print(f"Error fetching property details: {str(e)}")
+        return []
 
-
-async def extract_bhk(title):
+def extract_bhk(title):
     match = re.search(r'(\d+)\s+BHK', title)
     return int(match.group(1)) if match else None
 
-async def remove_bhk_from_title(title):
+def remove_bhk_from_title(title):
     return re.sub(r'\d+\s+BHK\s*', '', title).strip()
 
-async def extract_location(title):
+def extract_location(title):
     parts = re.split(r'\s{2,}', title)
     return parts[1] if len(parts) > 1 else title
 
-async def preprocessing(location):
+def transform_value_emi(value):
+    if '.' in value:
+        # Remove the decimal point and convert to integer, then multiply by 100000
+        value_str = value.replace('.', '')
+        return int(value_str) * 1000
+    else:
+        # Return the value unchanged if it doesn't contain a decimal point
+        return int(value)
+
+def preprocessing(location):
     try:
-        property_details = await extract_property_details(location)
+        property_details = extract_property_details(location)
         df = pd.DataFrame(property_details)
 
         df['title'] = df['title'].replace('For Sale  In', '', regex=True)
@@ -130,12 +142,10 @@ async def preprocessing(location):
         df['title'] = df['title'].replace('House ', '', regex=True)
         df['title'] = df['title'].replace('Flat ', '', regex=True)
 
-        df['bhk'] = df['title'].apply(await extract_bhk)
-        df['title'] = df['title'].apply(await remove_bhk_from_title)
+        df['bhk'] = df['title'].apply(extract_bhk)
+        df['title'] = df['title'].apply(remove_bhk_from_title)
 
         df['location'] = df['title'].apply(extract_location)
-
-        df['title'] = df['title'].replace(f'{df['location']}', '', regex=True)
 
         df['location'] = df['location'].replace(' East', '', regex=True)
         df['location'] = df['location'].replace(' West', '', regex=True)
@@ -143,48 +153,55 @@ async def preprocessing(location):
         df['area'] = df['area'].replace('₹', '', regex=True)
         df['area'] = df['area'].replace(' per sq.ft.', '', regex=True)
         df['area'] = df['area'].replace(',', '', regex=True)
+        df.rename(columns={'area': 'rate'}, inplace=True)
 
         df['builtup'] = df['builtup'].replace(' sqft', '', regex=True)
         df['builtup'] = df['builtup'].replace(',', '', regex=True)
+        df.rename(columns={'builtup': 'area'}, inplace=True)
 
         df['estimated_emi'] = df['estimated_emi'].replace('₹', '', regex=True)
         df['estimated_emi'] = df['estimated_emi'].replace('/Month', '', regex=True)
         df['estimated_emi'] = df['estimated_emi'].replace(' Lacs', '', regex=True)
         df['estimated_emi'] = df['estimated_emi'].replace(',', '', regex=True)
+        df['estimated_emi'] = df['estimated_emi'].apply(transform_value_emi)
 
         df['price'] = pd.to_numeric(df['price'], errors='coerce')
         df['area'] = pd.to_numeric(df['area'], errors='coerce')
-        df['builtup'] = pd.to_numeric(df['builtup'], errors='coerce')
         df['bhk'] = pd.to_numeric(df['bhk'], errors='coerce')
         df['estimated_emi'] = pd.to_numeric(df['estimated_emi'], errors='coerce')
 
         return df
 
     except Exception as e:
-        print(f"Error fetching gold value: {str(e)}")
+        print(f"Error preprocessing data: {str(e)}")
+        return pd.DataFrame()
 
-async def calculate_inflated_price(current_price, rate, years):
+def calculate_inflated_price(current_price, rate, years):
     return current_price * (1 + rate) ** years
     
-async def get_top_properties(location, average_cpi, years):
+def get_top_properties(location, average_cpi, years):
     try:
-        df = await preprocessing(location)
-        df['goal_price'] = df['price'].apply(await calculate_inflated_price, args=(average_cpi, years))
+        df = preprocessing(location)
+        df['goal_price'] = df['price'].apply(calculate_inflated_price, args=(average_cpi, years))
         df['goal_price'] = df['goal_price'].map('{:,.2f}'.format)
         df['goal_price'] = df['goal_price'].replace(',', '', regex=True)
         df['goal_price'] = pd.to_numeric(df['goal_price'])
         df['profit'] = df['goal_price'] - df['price']
         df['profit_percentage'] = (df['profit'] / df['price']) * 100
-        df_sorted_25 = df.sort_values(by='profit_percentage', ascending=False).head(25)
-        return df_sorted_25
+        columns_final = ['title', 'price', 'rate', 'address', 'area', 'estimated_emi', 'bhk', 'location', 'goal_price', 'profit']
+        property_data = df[columns_final]
+        property_data = property_data.dropna()
+        top_25_properties = property_data.sort_values(by='profit', ascending=False).head(25)
+        return top_25_properties
     except Exception as e:
-        print(f"Error fetching gold value: {str(e)}")
+        print(f"Error getting top properties: {str(e)}")
+        return pd.DataFrame()
 
 async def property_json(location, average_cpi, years):
     try:
-        df_top_25 = await get_top_properties(location, average_cpi, years)
+        df_top_25 = get_top_properties(location, average_cpi, years)
         properties_list = df_top_25.to_dict(orient='records')
-        properties = json.dumps(properties_list, indent=2)
-        return properties
+        return properties_list
     except Exception as e:
-        print(f"Error fetching gold value: {str(e)}")
+        print(f"Error generating property JSON: {str(e)}")
+        return None
