@@ -65,7 +65,6 @@ async def fetch_and_map_crypto_data(url, exclude_fields=None):
         if response.status_code == 200:
             try:
                 data = response.json()
-                print(data)
                 headers = data['body']['tableHeaders']
                 table_data = data['body']['tableData']['inr']
                 mapped_data = await map_data_to_headers(table_data, headers, exclude_fields)
@@ -151,7 +150,7 @@ async def get_crypto_data():
         sorted_data = sorted(filtered_data.items(), key=lambda x: x[1]['profit_amount'], reverse=True)
 
         # Return only currencyName and lastPrice
-        result = [{'currencyName': details['currencyName'], 'lastPrice': details['lastPrice'], 'expectedprice': details['R2']} for tag, details in sorted_data]
+        result = [{'name': details['currencyName'], 'last_price': details['lastPrice'], 'expected_price': details['R2']} for tag, details in sorted_data]
         
         return result[:25]
     except Exception as e:

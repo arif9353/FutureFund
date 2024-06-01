@@ -25,7 +25,7 @@ export default function Explore() {
                 <div className="w-screen flex mob:flex-col pc:justify-center gap-2 p-4">
                     <div className="w-[30%] mob:w-full mob:h-[350px] pc:h-[calc(85vh)] border rounded-lg ">
                         <h1 className="text-center text-xl my-4"> Top 25 Stocks</h1>
-                        <div className="overflow-x-hidden overflow-y-auto max-h-[90%]">
+                        <div className="overflow-x-hidden overflow-y-auto max-h-[90%] mob:max-h-[80%]">
                             {data && data?.stock_data?.map((stock, index) => {
                                 console.log(stock)
                                 return (
