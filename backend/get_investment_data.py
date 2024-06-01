@@ -3,9 +3,6 @@ from bs4 import BeautifulSoup
 import json
 import re, os
 import time
-import requests
-import logging
-from bs4 import BeautifulSoup
 from datetime import datetime
 
 ALPHA_VANTAGE_API = os.getenv("ALPHA_VANTAGE_API")
@@ -150,7 +147,7 @@ async def get_crypto_data():
         sorted_data = sorted(filtered_data.items(), key=lambda x: x[1]['profit_amount'], reverse=True)
 
         # Return only currencyName and lastPrice
-        result = [{'name': details['currencyName'], 'last_price': details['lastPrice'], 'expected_price': details['R2']} for tag, details in sorted_data]
+        result = [{'name': details['currencyName'], 'last_price': details['lastPrice'], 'expected_price': details['R2'], 'logourl': details['logoUrl']} for tag, details in sorted_data]
         
         return result[:25]
     except Exception as e:
@@ -191,7 +188,7 @@ async def get_stock_data(base_url):
             params['start'] += params['limit']
             
             time.sleep(2)  # Delay between requests to mimic user behavior
-        sorted_data = sorted(data, key=lambda x: x['Profit Percent'], reverse=True)
+        sorted_data = sorted(data, key=lambda x: x['profit_percent'], reverse=True)
         return sorted_data[:25]
 
     except Exception as e:
@@ -261,29 +258,29 @@ async def parse_stock_advice(soup):
 async def get_bank_names_for_RD():
     try:
         bank_interest_data = {
-            "SBI Bank": "6.5 - 7",
-            "ICICI Bank": "4.75 - 7.20",
-            "HDFC Bank": "4.50 - 7.25",
-            "Kotak Mahindra Bank": "6.00 - 7.40",
-            "Axis Bank": "5.75 - 7.20",
-            "Bank of Baroda": "5.75 - 7.25",
-            "Punjab National Bank": "6.00 - 7.25",
-            "IDBI Bank": "6.25 - 7.00",
-            "Canara Bank": "6.15 - 7.25",
-            "Union Bank of India": "5.75 - 6.50",
-            "Yes Bank": "6.10 - 7.75",
-            "Bandhan Bank": "4.50 - 7.85",
-            "Bank of Maharashtra": "5.50 - 6.25",
-            "IndusInd Bank": "7.00 - 7.75",
-            "Jammu and Kashmir Bank": "5.75 - 7.10",
-            "Karnataka Bank": "5.80 - 7.40",
-            "Saraswat Bank": "7.00 - 7.50",
-            "Federal Bank": "5.75 - 7.50",
-            "DBS Bank": "6.00 - 7.50",
-            "RBL Bank": "5.00 - 8.00",
-            "Indian Bank": "4.50 - 7.25",
-            "Indian Overseas Bank": "5.75 - 7.30",
-            "TMB Bank": "6.75 - 7.75"
+            "sbi_bank": "6.5 - 7",
+            "icici_bank": "4.75 - 7.20",
+            "hdfc_bank": "4.50 - 7.25",
+            "kotak_mahindra_bank": "6.00 - 7.40",
+            "axis_bank": "5.75 - 7.20",
+            "bank_of_baroda": "5.75 - 7.25",
+            "punjab_national_bank": "6.00 - 7.25",
+            "idbi_bank": "6.25 - 7.00",
+            "canara_bank": "6.15 - 7.25",
+            "union_bank_of_india": "5.75 - 6.50",
+            "yes_bank": "6.10 - 7.75",
+            "bandhan_bank": "4.50 - 7.85",
+            "bank_of_maharashtra": "5.50 - 6.25",
+            "indusind_bank": "7.00 - 7.75",
+            "jammu_and_kashmir Bank": "5.75 - 7.10",
+            "karnataka_bank": "5.80 - 7.40",
+            "saraswat_bank": "7.00 - 7.50",
+            "federal_bank": "5.75 - 7.50",
+            "dbs_bank": "6.00 - 7.50",
+            "rbl_bank": "5.00 - 8.00",
+            "indian_bank": "4.50 - 7.25",
+            "indian_overseas_bank": "5.75 - 7.30",
+            "tmb_bank": "6.75 - 7.75"
         }
         return bank_interest_data
     except Exception as e:
@@ -410,7 +407,11 @@ async def get_bond_details(url1):
                 bond_yield = bond_row.find_all('td', class_='table-data')[5].find('p').text.strip()
                 bond_price_str = bond_row.find_all('td', class_='table-data')[6].find('p').text.strip()
                 bond_price = float(bond_price_str.replace('₹', '').replace(',', '').strip())
-                
+                logo_div = bond_row.find('div', class_='company-logo-f-cata-table')
+                style_attr = logo_div['style']
+                match = re.search(r'url\(\s*(.*?)\s*\)', style_attr)
+                logo_url = match.group(1) if match else None
+
                 try:
                     float(bond_coupon.replace('%', '').strip())
                     maturity_date = datetime.strptime(bond_maturity, '%b %Y')
@@ -428,7 +429,8 @@ async def get_bond_details(url1):
                     'maturity': bond_maturity,
                     'yield': bond_yield,
                     'price': bond_price_str,
-                    'frequency': bond_frequency
+                    'frequency': bond_frequency,
+                    'logo': logo_url
                 }
                 
                 bonds.append(bond_details)
