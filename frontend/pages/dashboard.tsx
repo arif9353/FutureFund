@@ -34,7 +34,9 @@ export default function Dashboard() {
                     <div className="pc:w-[100%] p-3 rounded-md">
                         <div className="flex flex-row flex-wrap gap-6 justify-center">
 
-                            <button className="bg-[#2a2c34] text-left text-sm py-4 px-5 rounded-md hover:bg-secondary h-[200px] pc:w-[350px] mob:w-[90%] flex flex-col justify-between">
+                            <button
+                                onClick={() => router.push("/investments")}
+                                className="bg-[#2a2c34] text-left text-sm py-4 px-5 rounded-md hover:bg-secondary h-[200px] pc:w-[350px] mob:w-[90%] flex flex-col justify-between">
                                 <div>
                                     <span className="text-lg font-semibold">Investments Allocation</span>
                                     <span className="block text-xs mt-1">Manage and allocate your investments.</span>
@@ -45,7 +47,7 @@ export default function Dashboard() {
                             </button>
 
                             <button
-                                onClick={() => router.push("/chat-with-ai")}
+                                onClick={() => router.push("/chat")}
                                 className="bg-[#2a2c34] text-left text-sm py-4 px-5 rounded-md hover:bg-secondary h-[200px] pc:w-[350px] mob:w-[90%] flex flex-col justify-between">
                                 <div>
                                     <span className="text-lg font-semibold">Chat with AI</span>
@@ -67,7 +69,7 @@ export default function Dashboard() {
                             </button> */}
 
                             <button
-                                onClick={() => router.push("/explore-market")}
+                                onClick={() => router.push("/explore")}
                                 className="bg-[#2a2c34] text-left text-sm py-4 px-5 rounded-md hover:bg-secondary h-[200px] pc:w-[350px] mob:w-[90%] flex flex-col justify-between">
                                 <div>
                                     <span className="text-lg font-semibold">Explore Market</span>

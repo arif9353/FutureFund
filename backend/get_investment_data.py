@@ -65,6 +65,7 @@ async def fetch_and_map_crypto_data(url, exclude_fields=None):
         if response.status_code == 200:
             try:
                 data = response.json()
+                print(data)
                 headers = data['body']['tableHeaders']
                 table_data = data['body']['tableData']['inr']
                 mapped_data = await map_data_to_headers(table_data, headers, exclude_fields)
@@ -240,13 +241,13 @@ async def parse_stock_advice(soup):
                     else:
                         profit_percent = 0.0
                     data.append({
-                        'Stock Name': stock_name,
-                        'Price': stock_price,
-                        'Recommendation': recommendation_trimmed,
-                        'Target Price': target_value,
-                        'Source': source,
-                        'Revenue': revenue,
-                        'Profit Percent': profit_percent
+                        'name': stock_name,
+                        'price': stock_price,
+                        'recommendation': recommendation_trimmed,
+                        'target_price': target_value,
+                        'source': source,
+                        'revenue': revenue,
+                        'profit_percent': profit_percent
                     })      
         else:
             print('No news list found in the soup')

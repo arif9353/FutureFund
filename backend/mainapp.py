@@ -6,9 +6,20 @@ from property import property_json
 
 app = FastAPI()
 
-@app.post('/fetchdata')
-async def fetch_data(location: str=Form(...)):
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],  
+)
+
+@app.get('/fetchdata')
+async def fetch_data():
     try:
+        print("fetching data")
+        
+        location="Mumbai"
         average_cpi = 0.046433252043303265
         years = 10
         crypto_data = await get_crypto_data()
