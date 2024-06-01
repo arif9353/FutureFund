@@ -229,154 +229,179 @@ export const static_data = {
     "crypto_data": [
         {
             "name": "Bitcoin",
-            "last_price": "5,889,001",
-            "expected_price": "6,055,656.67"
+            "last_price": "5,860,500",
+            "expected_price": "6,055,656.67",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/btc/84.png"
         },
         {
             "name": "Ethereum",
-            "last_price": "327,105.8",
-            "expected_price": "340,098.03"
+            "last_price": "329,517.2",
+            "expected_price": "340,098.03",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/eth/84.png"
         },
         {
             "name": "Cream Finance",
-            "last_price": "6,350.00",
-            "expected_price": "7,091.12"
+            "last_price": "6,455.00",
+            "expected_price": "7,091.12",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/cream/84.png"
         },
         {
-            "name": "Solana",
-            "last_price": "14,683.87",
-            "expected_price": "15,017.45"
-        },
-        {
-            "name": "Omni Network",
-            "last_price": "1,690.85",
-            "expected_price": "2,006.61"
+            "name": "Binance Coin",
+            "last_price": "52,183.29",
+            "expected_price": "52,682.05",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/bnb/84.png"
         },
         {
             "name": "Auction",
-            "last_price": "2,050.1",
-            "expected_price": "2,330.87"
+            "last_price": "2,080.2",
+            "expected_price": "2,330.87",
+            "logourl": "https://media.wazirx.com/media/auction/84.png"
+        },
+        {
+            "name": "Arweave",
+            "last_price": "3,780.00",
+            "expected_price": "4,030.35",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/ar/84.png"
+        },
+        {
+            "name": "Omni Network",
+            "last_price": "1,780.00",
+            "expected_price": "2,006.61",
+            "logourl": "https://media.wazirx.com/media/omni/84.png"
+        },
+        {
+            "name": "Aave",
+            "last_price": "9,188.99",
+            "expected_price": "9,387.6",
+            "logourl": "https://media.wazirx.com/media/aave/84.png"
         },
         {
             "name": "Zcash",
-            "last_price": "2,267.07",
-            "expected_price": "2,406.67"
+            "last_price": "2,268.14",
+            "expected_price": "2,406.67",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/zec/84.png"
         },
         {
-            "name": "Livepeer",
-            "last_price": "2,019.0",
-            "expected_price": "2,125.87"
+            "name": "Ethereum Classic",
+            "last_price": "2,621.153",
+            "expected_price": "2,732.46",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/etc/84.png"
         },
         {
             "name": "Uniswap",
-            "last_price": "881.94",
-            "expected_price": "979.51"
+            "last_price": "886.65",
+            "expected_price": "979.51",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/uni/84.png"
         },
         {
-            "name": "Chainlink",
-            "last_price": "1,619.00",
-            "expected_price": "1,679.99"
-        },
-        {
-            "name": "Ethereum Name Service",
-            "last_price": "2,312.0",
-            "expected_price": "2,371.13"
+            "name": "Livepeer",
+            "last_price": "2,048.2",
+            "expected_price": "2,125.87",
+            "logourl": "https://media.wazirx.com/media/lpt/84.png"
         },
         {
             "name": "DeXe",
             "last_price": "1,078.91",
-            "expected_price": "1,127.45"
+            "expected_price": "1,127.45",
+            "logourl": "https://media.wazirx.com/media/dexe/84.png"
+        },
+        {
+            "name": "Chainlink",
+            "last_price": "1,632.10",
+            "expected_price": "1,679.99",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/link/84.png"
         },
         {
             "name": "MyNeighborAlice",
-            "last_price": "139.94",
-            "expected_price": "179.05"
-        },
-        {
-            "name": "Arweave",
-            "last_price": "4,000.00",
-            "expected_price": "4,030.35"
-        },
-        {
-            "name": "Render Token",
-            "last_price": "890.00",
-            "expected_price": "916.66"
+            "last_price": "140.00",
+            "expected_price": "179.05",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/alice/84.png"
         },
         {
             "name": "Adventure Gold",
             "last_price": "116.11",
-            "expected_price": "141.26"
-        },
-        {
-            "name": "dogwifhat",
-            "last_price": "294.363",
-            "expected_price": "317.59"
+            "expected_price": "141.26",
+            "logourl": "https://media.wazirx.com/media/agld/84.png"
         },
         {
             "name": "Mask Network",
             "last_price": "327.26",
-            "expected_price": "349.91"
-        },
-        {
-            "name": "iExecRLC",
-            "last_price": "288.89",
-            "expected_price": "310.81"
-        },
-        {
-            "name": "Perpetual Protocol",
-            "last_price": "98.0002",
-            "expected_price": "113.62"
+            "expected_price": "349.91",
+            "logourl": "https://media.wazirx.com/media/mask/84.png"
         },
         {
             "name": "Pendle",
-            "last_price": "564.966",
-            "expected_price": "580.05"
+            "last_price": "559.000",
+            "expected_price": "580.05",
+            "logourl": "https://media.wazirx.com/media/pendle/84.png"
         },
         {
-            "name": "ether.fi",
-            "last_price": "417.99",
-            "expected_price": "429.3"
+            "name": "dogwifhat",
+            "last_price": "301.000",
+            "expected_price": "317.59",
+            "logourl": "https://media.wazirx.com/media/wif/84.png"
         },
         {
-            "name": "Ondo",
-            "last_price": "108.0092",
-            "expected_price": "118.65"
+            "name": "iExecRLC",
+            "last_price": "292.27",
+            "expected_price": "308.3",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/rlc/84.png"
         },
         {
             "name": "Lido DAO",
-            "last_price": "220.99",
-            "expected_price": "231.42"
+            "last_price": "215.41",
+            "expected_price": "231.42",
+            "logourl": "https://media.wazirx.com/media/ldo/84.png"
         },
         {
-            "name": "Band Protocol",
-            "last_price": "151.0000",
-            "expected_price": "160.82"
+            "name": "ether.fi",
+            "last_price": "418.50",
+            "expected_price": "429.3",
+            "logourl": "https://media.wazirx.com/media/ethfi/84.png"
+        },
+        {
+            "name": "AVA",
+            "last_price": "62.001",
+            "expected_price": "69.96",
+            "logourl": "https://media.wazirx.com/media/ava/84.png"
+        },
+        {
+            "name": "Perpetual Protocol",
+            "last_price": "105.9991",
+            "expected_price": "113.33",
+            "logourl": "https://media.wazirx.com/media/perp/84.png"
+        },
+        {
+            "name": "Ethereum Name Service",
+            "last_price": "2,365.0",
+            "expected_price": "2,371.13",
+            "logourl": "https://stat2.moneycontrol.com/assets/images/crypto/ens/84.png"
         }
     ],
     "recurrent_deposit": {
-        "SBI Bank": "6.5 - 7",
-        "ICICI Bank": "4.75 - 7.20",
-        "HDFC Bank": "4.50 - 7.25",
-        "Kotak Mahindra Bank": "6.00 - 7.40",
-        "Axis Bank": "5.75 - 7.20",
-        "Bank of Baroda": "5.75 - 7.25",
-        "Punjab National Bank": "6.00 - 7.25",
-        "IDBI Bank": "6.25 - 7.00",
-        "Canara Bank": "6.15 - 7.25",
-        "Union Bank of India": "5.75 - 6.50",
-        "Yes Bank": "6.10 - 7.75",
-        "Bandhan Bank": "4.50 - 7.85",
-        "Bank of Maharashtra": "5.50 - 6.25",
-        "IndusInd Bank": "7.00 - 7.75",
-        "Jammu and Kashmir Bank": "5.75 - 7.10",
-        "Karnataka Bank": "5.80 - 7.40",
-        "Saraswat Bank": "7.00 - 7.50",
-        "Federal Bank": "5.75 - 7.50",
-        "DBS Bank": "6.00 - 7.50",
-        "RBL Bank": "5.00 - 8.00",
-        "Indian Bank": "4.50 - 7.25",
-        "Indian Overseas Bank": "5.75 - 7.30",
-        "TMB Bank": "6.75 - 7.75"
+        "sbi_bank": "6.5 - 7",
+        "icici_bank": "4.75 - 7.20",
+        "hdfc_bank": "4.50 - 7.25",
+        "kotak_mahindra_bank": "6.00 - 7.40",
+        "axis_bank": "5.75 - 7.20",
+        "bank_of_baroda": "5.75 - 7.25",
+        "punjab_national_bank": "6.00 - 7.25",
+        "idbi_bank": "6.25 - 7.00",
+        "canara_bank": "6.15 - 7.25",
+        "union_bank_of_india": "5.75 - 6.50",
+        "yes_bank": "6.10 - 7.75",
+        "bandhan_bank": "4.50 - 7.85",
+        "bank_of_maharashtra": "5.50 - 6.25",
+        "indusind_bank": "7.00 - 7.75",
+        "jammu_and_kashmir Bank": "5.75 - 7.10",
+        "karnataka_bank": "5.80 - 7.40",
+        "saraswat_bank": "7.00 - 7.50",
+        "federal_bank": "5.75 - 7.50",
+        "dbs_bank": "6.00 - 7.50",
+        "rbl_bank": "5.00 - 8.00",
+        "indian_bank": "4.50 - 7.25",
+        "indian_overseas_bank": "5.75 - 7.30",
+        "tmb_bank": "6.75 - 7.75"
     },
     "gold_data": 17963.10337,
     "bond_data": [
@@ -387,6 +412,7 @@ export const static_data = {
             "yield": "8.7500%",
             "price": "₹  10,98,510.48",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/e63dadb6-5dcd-49a9-ae6a-367b51c5d95e.png",
             "estimated_face_value": 1172104.93,
             "bond_profit": "₹ 374,694.65"
         },
@@ -397,6 +423,7 @@ export const static_data = {
             "yield": "8.8000%",
             "price": "₹  10,52,341.83",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/e63dadb6-5dcd-49a9-ae6a-367b51c5d95e.png",
             "estimated_face_value": 1082284.36,
             "bond_profit": "₹ 161,007.83"
         },
@@ -407,6 +434,7 @@ export const static_data = {
             "yield": "7.6800%",
             "price": "₹  10,49,906.58",
             "frequency": "ANNUALLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/92034e97-154d-475e-9b13-ddfad0adbcb3.jpg",
             "estimated_face_value": 1058778.02,
             "bond_profit": "₹ 66,940.40"
         },
@@ -417,6 +445,7 @@ export const static_data = {
             "yield": "14.7000%",
             "price": "₹  1,01,052.64",
             "frequency": "MONTHLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/214032f9-2f89-4f69-af19-e3d903c66a64.jpg",
             "estimated_face_value": 97991.65,
             "bond_profit": "₹ 65,866.51"
         },
@@ -427,6 +456,7 @@ export const static_data = {
             "yield": "7.3700%",
             "price": "₹  10,56,913.70",
             "frequency": "ANNUALLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/c20754ec-9eab-4450-910e-58eba0fc5c3c.png",
             "estimated_face_value": 1060095.81,
             "bond_profit": "₹ 57,254.64"
         },
@@ -437,6 +467,7 @@ export const static_data = {
             "yield": "9.0500%",
             "price": "₹  10,21,458.10",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/e63dadb6-5dcd-49a9-ae6a-367b51c5d95e.png",
             "estimated_face_value": 1030327.55,
             "bond_profit": "₹ 53,425.30"
         },
@@ -447,6 +478,7 @@ export const static_data = {
             "yield": "11.2899%",
             "price": "₹  1,00,117.81",
             "frequency": "MONTHLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/ab684c8a-bb06-4714-8a56-6ed4c77f0b6f.jfif",
             "estimated_face_value": 98035.74,
             "bond_profit": "₹ 51,441.69"
         },
@@ -457,6 +489,7 @@ export const static_data = {
             "yield": "9.2000%",
             "price": "₹  1,02,083.16",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/6243c68d-3931-45bf-a31c-50cfc3e804ac.bmp",
             "estimated_face_value": 100478.46,
             "bond_profit": "₹ 26,865.39"
         },
@@ -467,6 +500,7 @@ export const static_data = {
             "yield": "10.9980%",
             "price": "₹  1,00,172.27",
             "frequency": "MONTHLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/b8e3c88c-fe0a-4522-bc50-5fae459fe29c.png",
             "estimated_face_value": 98977.71,
             "bond_profit": "₹ 26,466.41"
         },
@@ -477,6 +511,7 @@ export const static_data = {
             "yield": "10.4709%",
             "price": "₹  1,00,438.36",
             "frequency": "MONTHLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/06dd09dc-6c79-4bb5-af92-01cc7ea2a3b7.png",
             "estimated_face_value": 99314.81,
             "bond_profit": "₹ 26,121.74"
         },
@@ -487,6 +522,7 @@ export const static_data = {
             "yield": "9.2000%",
             "price": "₹  1,02,063.86",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/6243c68d-3931-45bf-a31c-50cfc3e804ac.bmp",
             "estimated_face_value": 100570.71,
             "bond_profit": "₹ 24,004.77"
         },
@@ -497,6 +533,7 @@ export const static_data = {
             "yield": "11.7500%",
             "price": "₹  2,46,738.75",
             "frequency": "SEMI ANNUALLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/24de30bc-596d-4517-9e07-91c761dfad43.jpg",
             "estimated_face_value": 259203.86,
             "bond_profit": "₹ 21,638.19"
         },
@@ -507,6 +544,7 @@ export const static_data = {
             "yield": "9.2480%",
             "price": "₹  1,01,809.56",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/6243c68d-3931-45bf-a31c-50cfc3e804ac.bmp",
             "estimated_face_value": 100182.07,
             "bond_profit": "₹ 20,777.00"
         },
@@ -517,6 +555,7 @@ export const static_data = {
             "yield": "9.2472%",
             "price": "₹  1,01,809.56",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/6243c68d-3931-45bf-a31c-50cfc3e804ac.bmp",
             "estimated_face_value": 100344.13,
             "bond_profit": "₹ 17,983.75"
         },
@@ -527,6 +566,7 @@ export const static_data = {
             "yield": "9.2460%",
             "price": "₹  1,01,809.56",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/6243c68d-3931-45bf-a31c-50cfc3e804ac.bmp",
             "estimated_face_value": 100522.14,
             "bond_profit": "₹ 15,199.40"
         },
@@ -537,6 +577,7 @@ export const static_data = {
             "yield": "10.5000%",
             "price": "₹  1,01,815.02",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/27ff500b-5fc6-4c48-ae45-3c0f80e24ac4.png",
             "estimated_face_value": 104814.74,
             "bond_profit": "₹ 14,261.74"
         },
@@ -547,6 +588,7 @@ export const static_data = {
             "yield": "7.4500%",
             "price": "₹  1,04,956.02",
             "frequency": "ANNUALLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/c20754ec-9eab-4450-910e-58eba0fc5c3c.png",
             "estimated_face_value": 108227.04,
             "bond_profit": "₹ 12,964.39"
         },
@@ -557,6 +599,7 @@ export const static_data = {
             "yield": "11.2963%",
             "price": "₹  99,941.10",
             "frequency": "MONTHLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/5aeccc88-8740-415a-ba6a-0b186b5f83ef.png",
             "estimated_face_value": 99308.12,
             "bond_profit": "₹ 12,695.11"
         },
@@ -567,6 +610,7 @@ export const static_data = {
             "yield": "9.1500%",
             "price": "₹  1,02,061.46",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/6243c68d-3931-45bf-a31c-50cfc3e804ac.bmp",
             "estimated_face_value": 101456.54,
             "bond_profit": "₹ 9,977.44"
         },
@@ -577,6 +621,7 @@ export const static_data = {
             "yield": "5.1000%",
             "price": "₹  1,10,865.18",
             "frequency": "ANNUALLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/c11462c0-6bb5-4da0-9bda-9c644f896e4e.png",
             "estimated_face_value": 117434.44,
             "bond_profit": "₹ 8,405.43"
         },
@@ -587,6 +632,7 @@ export const static_data = {
             "yield": "7.4500%",
             "price": "₹  1,04,016.57",
             "frequency": "ANNUALLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/b89ffbc6-3578-4aa9-bdbe-76b483af5413.png",
             "estimated_face_value": 105558.98,
             "bond_profit": "₹ 7,348.55"
         },
@@ -597,6 +643,7 @@ export const static_data = {
             "yield": "10.2727%",
             "price": "₹  1,00,162.74",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/a0199931-19da-4674-887e-9cbf1521ee66.jpg",
             "estimated_face_value": 99373.29,
             "bond_profit": "₹ 7,129.40"
         },
@@ -607,6 +654,7 @@ export const static_data = {
             "yield": "9.4000%",
             "price": "₹  10,82,265.00",
             "frequency": "ANNUALLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/84e7a79b-21f9-4cdc-996a-24d739d75d27.jpg",
             "estimated_face_value": 1079799.91,
             "bond_profit": "₹ 5,740.21"
         },
@@ -617,6 +665,7 @@ export const static_data = {
             "yield": "9.5000%",
             "price": "₹  10,06,956.25",
             "frequency": "ANNUALLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/84e7a79b-21f9-4cdc-996a-24d739d75d27.jpg",
             "estimated_face_value": 999198.11,
             "bond_profit": "₹ 5,311.45"
         },
@@ -627,23 +676,12 @@ export const static_data = {
             "yield": "11.7600%",
             "price": "₹  1,02,087.33",
             "frequency": "QUARTERLY",
+            "logo": "https://ib-prod-media.s3.amazonaws.com/5aeccc88-8740-415a-ba6a-0b186b5f83ef.png",
             "estimated_face_value": 100412.56,
             "bond_profit": "₹ 4,905.77"
         }
     ],
     "property_data": [
-        {
-            "title": "Bank Auction Property - Avishkar Empress  Dadar West",
-            "price": 55200000,
-            "rate": "29253",
-            "address": "Bank Auction Property - Avishkar Empress  Near Nabar Guruji School, Krushnaji Waman Chitale Rd, Dadar West,Mumbai",
-            "area": 1887,
-            "estimated_emi": 316000,
-            "bhk": 3,
-            "location": "Dadar",
-            "goal_price": 86906926.97,
-            "profit": 31706926.97
-        },
         {
             "title": "Bank Auction Property - Avishkar Empress  Dadar West",
             "price": 55200000,
@@ -669,14 +707,50 @@ export const static_data = {
             "profit": 24009955.57
         },
         {
-            "title": "West View    Thane West",
+            "title": "Belgrave Square & Eaton Square Chs - Lodha Sterling  Thane West",
+            "price": 25000000,
+            "rate": "27624",
+            "address": "Belgrave square, Lodha Sterling VTC: Thane D-306, Kolshet Rd, Sandoz Baug, Thane West Thane, Maharashtra 400607, India",
+            "area": 905,
+            "estimated_emi": 143000,
+            "bhk": 2,
+            "location": "Thane",
+            "goal_price": 39360021.27,
+            "profit": 14360021.270000003
+        },
+        {
+            "title": "Belgrave Square & Eaton Square Chs - Lodha Sterling  Thane West",
+            "price": 25000000,
+            "rate": "27624",
+            "address": "Belgrave square, Lodha Sterling VTC: Thane D-306, Kolshet Rd, Sandoz Baug, Thane West Thane, Maharashtra 400607, India",
+            "area": 905,
+            "estimated_emi": 143000,
+            "bhk": 2,
+            "location": "Thane",
+            "goal_price": 39360021.27,
+            "profit": 14360021.270000003
+        },
+        {
+            "title": "Borivali",
             "price": 20000000,
-            "rate": "14286",
-            "address": ", Shivaji Nagar, near Anmol Heights",
-            "area": 1400,
+            "rate": "11111",
+            "address": "Independent House, Gorai 2 near Pragati School and Junior College",
+            "area": 1800,
             "estimated_emi": 115000,
             "bhk": 3,
-            "location": "Thane",
+            "location": "Borivali",
+            "goal_price": 31488017.02,
+            "profit": 11488017.02
+        },
+        {
+            "title": "Borivali",
+            "price": 20000000,
+            "rate": "11111",
+            "address": "Independent House, Gorai 2 near Pragati School and Junior College",
+            "area": 1800,
+            "estimated_emi": 115000,
+            "bhk": 3,
+            "location": "Borivali",
             "goal_price": 31488017.02,
             "profit": 11488017.02
         },
@@ -691,6 +765,18 @@ export const static_data = {
             "location": "Thane",
             "goal_price": 31488017.02,
             "profit": 11488017.02
+        },
+        {
+            "title": "Sugee Atharva  Dadar West",
+            "price": 19500000,
+            "rate": "35455",
+            "address": "Sugee Atharva  sugee atharva, KakasahebGadgilMarg, Prabhadevi, Mumbai",
+            "area": 550,
+            "estimated_emi": 112000,
+            "bhk": 1,
+            "location": "Dadar",
+            "goal_price": 30700816.59,
+            "profit": 11200816.59
         },
         {
             "title": "Sugee Atharva  Dadar West",
@@ -713,18 +799,6 @@ export const static_data = {
             "estimated_emi": 112000,
             "bhk": 2,
             "location": "Borivali",
-            "goal_price": 30700816.59,
-            "profit": 11200816.59
-        },
-        {
-            "title": "Sugee Atharva  Dadar West",
-            "price": 19500000,
-            "rate": "35455",
-            "address": "Sugee Atharva  sugee atharva, KakasahebGadgilMarg, Prabhadevi, Mumbai",
-            "area": 550,
-            "estimated_emi": 112000,
-            "bhk": 1,
-            "location": "Dadar",
             "goal_price": 30700816.59,
             "profit": 11200816.59
         },
@@ -753,18 +827,6 @@ export const static_data = {
             "profit": 10913616.170000002
         },
         {
-            "title": "Jeevan Jyoti Chs   Thane West",
-            "price": 19000000,
-            "rate": "19000",
-            "address": "shiva ji nagar",
-            "area": 1000,
-            "estimated_emi": 109000,
-            "bhk": 3,
-            "location": "Thane",
-            "goal_price": 29913616.17,
-            "profit": 10913616.170000002
-        },
-        {
             "title": "Rustomjee Urbania Athena  Thane West",
             "price": 17700000,
             "rate": "13501",
@@ -799,30 +861,6 @@ export const static_data = {
             "location": "Thane",
             "goal_price": 27709454.98,
             "profit": 10109454.98
-        },
-        {
-            "title": "Bank Auction Property -mulberry Chsl  Thane West",
-            "price": 17600000,
-            "rate": "15842",
-            "address": "Bank Auction Property -Mulberry CHSL  Near Kaushalya Medical Foundation Trust Hospital, Ramabai Ambedkar Nagar, Thane West, Mumbai",
-            "area": 1111,
-            "estimated_emi": 101000,
-            "bhk": 1,
-            "location": "Thane",
-            "goal_price": 27709454.98,
-            "profit": 10109454.98
-        },
-        {
-            "title": "One Hiranandani Park  Fairway, Ghodbunder Road  Ghodbunder Road",
-            "price": 17000000,
-            "rate": "28333",
-            "address": "Thane West, Thane",
-            "area": 600,
-            "estimated_emi": 97434,
-            "bhk": 2,
-            "location": "Fairway, Ghodbunder Road",
-            "goal_price": 26764814.47,
-            "profit": 9764814.469999999
         },
         {
             "title": "Vasundhara Kanakia Spaces  Thane West",
@@ -861,30 +899,6 @@ export const static_data = {
             "profit": 9305293.79
         },
         {
-            "title": "Ganesh Siddhi 1  Borivali West",
-            "price": 15500000,
-            "rate": "22143",
-            "address": "Ram Mandir Raod",
-            "area": 700,
-            "estimated_emi": 88837,
-            "bhk": 2,
-            "location": "Borivali",
-            "goal_price": 24403213.19,
-            "profit": 8903213.190000001
-        },
-        {
-            "title": "Raymond Ten X Habitat  Thane West",
-            "price": 15500000,
-            "rate": "13478",
-            "address": "Pokhran Rd no 2, Next to Sunita devi singhania school",
-            "area": 1150,
-            "estimated_emi": 88837,
-            "bhk": 2,
-            "location": "Thane",
-            "goal_price": 24403213.19,
-            "profit": 8903213.190000001
-        },
-        {
             "title": "Raymond Ten X Habitat  Thane West",
             "price": 15500000,
             "rate": "13478",
@@ -909,16 +923,16 @@ export const static_data = {
             "profit": 8730892.93
         },
         {
-            "title": "Lodha Amara New Tower  Thane West,",
-            "price": 15200000,
-            "rate": "16558",
-            "address": "Lodha Amara New Tower  Kolshet Rd, Kolshet Industrial Area, Thane West, Thane, Maharashtra 400607",
-            "area": 918,
-            "estimated_emi": 87118,
-            "bhk": 2,
-            "location": "Thane,",
-            "goal_price": 23930892.93,
-            "profit": 8730892.93
+            "title": "Imperial Height  Jambli Naka",
+            "price": 14500000,
+            "rate": "11154",
+            "address": "5XRH+FW9, Khartan Rd, Juhu Chandan Society, Jambli Naka, Thane West, Thane, Maharashtra 400601, India",
+            "area": 1300,
+            "estimated_emi": 83106,
+            "bhk": 3,
+            "location": "Jambli Naka",
+            "goal_price": 22828812.34,
+            "profit": 8328812.34
         },
         {
             "title": "Everest World, Kolshet Road   Thane West",
@@ -931,6 +945,42 @@ export const static_data = {
             "location": "Thane",
             "goal_price": 22828812.34,
             "profit": 8328812.34
+        },
+        {
+            "title": "Imperial Height  Jambli Naka",
+            "price": 14500000,
+            "rate": "11154",
+            "address": "5XRH+FW9, Khartan Rd, Juhu Chandan Society, Jambli Naka, Thane West, Thane, Maharashtra 400601, India",
+            "area": 1300,
+            "estimated_emi": 83106,
+            "bhk": 3,
+            "location": "Jambli Naka",
+            "goal_price": 22828812.34,
+            "profit": 8328812.34
+        },
+        {
+            "title": "Rosa Oasis  Hiranandani Estate, Thane West",
+            "price": 13000000,
+            "rate": "12808",
+            "address": "Hiranandani Estate thane west",
+            "area": 1015,
+            "estimated_emi": 74508,
+            "bhk": 2,
+            "location": "Hiranandani Estate, Thane",
+            "goal_price": 20467211.06,
+            "profit": 7467211.059999999
+        },
+        {
+            "title": "Trinity Hills  Haware City, Thane West",
+            "price": 12500000,
+            "rate": "8333",
+            "address": "Haware City, Thane West, Thane",
+            "area": 1500,
+            "estimated_emi": 71643,
+            "bhk": 3,
+            "location": "Haware City, Thane",
+            "goal_price": 19680010.64,
+            "profit": 7180010.640000001
         }
     ],
     "success": true
