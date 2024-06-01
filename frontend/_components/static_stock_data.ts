@@ -228,129 +228,129 @@ export const static_data = {
     ],
     "crypto_data": [
         {
-            "currencyName": "Bitcoin",
-            "lastprice": "5,889,001",
-            "expectedprice": "6,055,656.67"
+            "name": "Bitcoin",
+            "last_price": "5,889,001",
+            "expected_price": "6,055,656.67"
         },
         {
-            "currencyName": "Ethereum",
-            "lastprice": "327,105.8",
-            "expectedprice": "340,098.03"
+            "name": "Ethereum",
+            "last_price": "327,105.8",
+            "expected_price": "340,098.03"
         },
         {
-            "currencyName": "Cream Finance",
-            "lastprice": "6,350.00",
-            "expectedprice": "7,091.12"
+            "name": "Cream Finance",
+            "last_price": "6,350.00",
+            "expected_price": "7,091.12"
         },
         {
-            "currencyName": "Solana",
-            "lastprice": "14,683.87",
-            "expectedprice": "15,017.45"
+            "name": "Solana",
+            "last_price": "14,683.87",
+            "expected_price": "15,017.45"
         },
         {
-            "currencyName": "Omni Network",
-            "lastprice": "1,690.85",
-            "expectedprice": "2,006.61"
+            "name": "Omni Network",
+            "last_price": "1,690.85",
+            "expected_price": "2,006.61"
         },
         {
-            "currencyName": "Auction",
-            "lastprice": "2,050.1",
-            "expectedprice": "2,330.87"
+            "name": "Auction",
+            "last_price": "2,050.1",
+            "expected_price": "2,330.87"
         },
         {
-            "currencyName": "Zcash",
-            "lastprice": "2,267.07",
-            "expectedprice": "2,406.67"
+            "name": "Zcash",
+            "last_price": "2,267.07",
+            "expected_price": "2,406.67"
         },
         {
-            "currencyName": "Livepeer",
-            "lastprice": "2,019.0",
-            "expectedprice": "2,125.87"
+            "name": "Livepeer",
+            "last_price": "2,019.0",
+            "expected_price": "2,125.87"
         },
         {
-            "currencyName": "Uniswap",
-            "lastprice": "881.94",
-            "expectedprice": "979.51"
+            "name": "Uniswap",
+            "last_price": "881.94",
+            "expected_price": "979.51"
         },
         {
-            "currencyName": "Chainlink",
-            "lastprice": "1,619.00",
-            "expectedprice": "1,679.99"
+            "name": "Chainlink",
+            "last_price": "1,619.00",
+            "expected_price": "1,679.99"
         },
         {
-            "currencyName": "Ethereum Name Service",
-            "lastprice": "2,312.0",
-            "expectedprice": "2,371.13"
+            "name": "Ethereum Name Service",
+            "last_price": "2,312.0",
+            "expected_price": "2,371.13"
         },
         {
-            "currencyName": "DeXe",
-            "lastprice": "1,078.91",
-            "expectedprice": "1,127.45"
+            "name": "DeXe",
+            "last_price": "1,078.91",
+            "expected_price": "1,127.45"
         },
         {
-            "currencyName": "MyNeighborAlice",
-            "lastprice": "139.94",
-            "expectedprice": "179.05"
+            "name": "MyNeighborAlice",
+            "last_price": "139.94",
+            "expected_price": "179.05"
         },
         {
-            "currencyName": "Arweave",
-            "lastprice": "4,000.00",
-            "expectedprice": "4,030.35"
+            "name": "Arweave",
+            "last_price": "4,000.00",
+            "expected_price": "4,030.35"
         },
         {
-            "currencyName": "Render Token",
-            "lastprice": "890.00",
-            "expectedprice": "916.66"
+            "name": "Render Token",
+            "last_price": "890.00",
+            "expected_price": "916.66"
         },
         {
-            "currencyName": "Adventure Gold",
-            "lastprice": "116.11",
-            "expectedprice": "141.26"
+            "name": "Adventure Gold",
+            "last_price": "116.11",
+            "expected_price": "141.26"
         },
         {
-            "currencyName": "dogwifhat",
-            "lastprice": "294.363",
-            "expectedprice": "317.59"
+            "name": "dogwifhat",
+            "last_price": "294.363",
+            "expected_price": "317.59"
         },
         {
-            "currencyName": "Mask Network",
-            "lastprice": "327.26",
-            "expectedprice": "349.91"
+            "name": "Mask Network",
+            "last_price": "327.26",
+            "expected_price": "349.91"
         },
         {
-            "currencyName": "iExecRLC",
-            "lastprice": "288.89",
-            "expectedprice": "310.81"
+            "name": "iExecRLC",
+            "last_price": "288.89",
+            "expected_price": "310.81"
         },
         {
-            "currencyName": "Perpetual Protocol",
-            "lastprice": "98.0002",
-            "expectedprice": "113.62"
+            "name": "Perpetual Protocol",
+            "last_price": "98.0002",
+            "expected_price": "113.62"
         },
         {
-            "currencyName": "Pendle",
-            "lastprice": "564.966",
-            "expectedprice": "580.05"
+            "name": "Pendle",
+            "last_price": "564.966",
+            "expected_price": "580.05"
         },
         {
-            "currencyName": "ether.fi",
-            "lastprice": "417.99",
-            "expectedprice": "429.3"
+            "name": "ether.fi",
+            "last_price": "417.99",
+            "expected_price": "429.3"
         },
         {
-            "currencyName": "Ondo",
-            "lastprice": "108.0092",
-            "expectedprice": "118.65"
+            "name": "Ondo",
+            "last_price": "108.0092",
+            "expected_price": "118.65"
         },
         {
-            "currencyName": "Lido DAO",
-            "lastprice": "220.99",
-            "expectedprice": "231.42"
+            "name": "Lido DAO",
+            "last_price": "220.99",
+            "expected_price": "231.42"
         },
         {
-            "currencyName": "Band Protocol",
-            "lastprice": "151.0000",
-            "expectedprice": "160.82"
+            "name": "Band Protocol",
+            "last_price": "151.0000",
+            "expected_price": "160.82"
         }
     ],
     "recurrent_deposit": {
