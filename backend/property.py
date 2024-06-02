@@ -11,6 +11,7 @@ import json
 import re
 
 
+
 # Dictionary mapping locations to their respective URLs
 def get_url(location):
     location_url_map = {
@@ -191,8 +192,8 @@ def get_top_properties(location, average_cpi, years):
         columns_final = ['title', 'price', 'rate', 'address', 'area', 'estimated_emi', 'bhk', 'location', 'goal_price', 'profit']
         property_data = df[columns_final]
         property_data = property_data.dropna()
-        top_25_properties = property_data.sort_values(by='profit', ascending=False).head(25)
-        return top_25_properties
+        top_properties = property_data.sort_values(by='profit', ascending=False)
+        return top_properties.head(25)
     except Exception as e:
         print(f"Error getting top properties: {str(e)}")
         return pd.DataFrame()
