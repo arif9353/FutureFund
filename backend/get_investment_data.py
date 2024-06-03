@@ -495,7 +495,7 @@ async def get_stock_data_main(base_url):
             'sec': 'stk_adv',
             'ajax': 1,
             'start': 1,
-            'limit': 60
+            'limit': 50
         }
 
         while True:

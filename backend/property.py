@@ -189,10 +189,10 @@ def get_top_properties(location, average_cpi, years):
         df['goal_price'] = pd.to_numeric(df['goal_price'])
         df['profit'] = df['goal_price'] - df['price']
         df['profit_percentage'] = (df['profit'] / df['price']) * 100
-        columns_final = ['title', 'price', 'rate', 'address', 'area', 'estimated_emi', 'bhk', 'location', 'goal_price', 'profit']
+        columns_final = ['title', 'price', 'rate', 'address', 'area', 'estimated_emi', 'bhk', 'location', 'goal_price', 'profit', 'profit_percentage']
         property_data = df[columns_final]
         property_data = property_data.dropna()
-        top_properties = property_data.sort_values(by='profit', ascending=False)
+        top_properties = property_data.sort_values(by='profit_percentage', ascending=False)
         return top_properties.head(25)
     except Exception as e:
         print(f"Error getting top properties: {str(e)}")

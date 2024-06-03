@@ -1,7 +1,7 @@
 from fastapi import FastAPI,File,UploadFile,Form, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from get_investment_data import get_bonds_data, get_stock_data, get_crypto_data, get_bank_names_for_RD, get_gold_data
+from get_investment_data import get_bonds_data, get_stock_data, get_crypto_data, get_bank_names_for_RD, get_gold_data, get_stock_data_main
 from property import property_json
 from prediction import model_predict
 app = FastAPI()
@@ -31,7 +31,9 @@ async def fetch_data():
         gold_data = await get_gold_data()
         bond_data = await get_bonds_data('https://www.indiabonds.com/search/?limit=100&switch_one=radio-grid')
         property_data = await property_json(location, average_cpi, years)
+        stock_main_data = await get_stock_data_main('https://m.moneycontrol.com/more_market.php')
         Json_Main = {
+            "stock": stock_main_data,
             "crypto":crypto_data[1],
             "recurrent_deposit": recurrent_deposit_data,
             "gold":gold_data,
@@ -48,18 +50,7 @@ async def fetch_data():
 async def main_model():
     try:
         global Json_Main
-        json_data = {
-            "location":"Mumbai",
-            "years_to_retire":30,
-            "salary":75000,
-            "investment_amount" : 15000,
-            "current_savings" : 100000,
-            "debt": 300000,
-            "other_expenses" : 30000,
-            "number_of_dependents": 3,
-            "current_invested_amount" : 0,
-            "bank":"sbi_bank"
-        }
+        json_data = {'location': 'Mumbai', 'years_to_retire': 30, 'salary': 175000, 'investment_amount': 100000, 'current_savings': 100000, 'debt': 30000, 'other_expenses': 30000, 'number_of_dependents': 3, 'current_invested_amount': 0, 'bank': 'sbi_bank'} 
         print(Json_Main)
         ans = model_predict(json_data,Json_Main)
         return JSONResponse(content={'low_json':ans},status_code=200)
