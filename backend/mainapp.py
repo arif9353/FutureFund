@@ -47,11 +47,12 @@ async def fetch_data():
     
 #'stock_data': stock_data, 'crypto_data': crypto_data, 'recurrent_deposit': recurrent_deposit_data, 'gold_data': gold_data,'bond_data': bond_data,          
 
-@app.get('/model')
-async def main_model():
+@app.post('/model')
+async def main_model(location:str=Form(...),years_to_retire: int = Form(...),salary: float=Form(...),investment_amount: float=Form(...),current_savings: float=Form(...),debt: float=Form(...),other_expenses: float=Form(...),number_of_dependents: int=Form(...),current_invested_amount: float=Form(...),bank: str=Form(...)):
     try:
         global Json_Main
-        json_data = {'location': 'Mumbai', 'years_to_retire': 30, 'salary': 175000, 'investment_amount': 100000, 'current_savings': 100000, 'debt': 30000, 'other_expenses': 30000, 'number_of_dependents': 3, 'current_invested_amount': 0, 'bank': 'sbi_bank'} 
+        average_cpi = 0.046433252043303265
+        json_data = {'location': location, 'years_to_retire': years_to_retire, 'salary': salary, 'investment_amount': investment_amount, 'current_savings': current_savings, 'debt': debt, 'other_expenses': other_expenses, 'number_of_dependents': number_of_dependents, 'current_invested_amount': current_invested_amount, 'bank': bank} 
         ans = await model_predict(json_data,Json_Main)
         return JSONResponse(content={'low_json':ans[0],'high_json':ans[1]},status_code=200)
     except Exception as e:
