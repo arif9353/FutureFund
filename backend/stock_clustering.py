@@ -77,7 +77,7 @@ async def ticker_value(all_recommended_stocks):
     except Exception as e:
         print(f"error ocurred in ticker_value function in stock_clustering.py {e}")
 
-def get_ticker_symbol_yahoo(company_name, retries=5, delay=1):
+def get_ticker_symbol_yahoo(company_name, retries=2, delay=1):
     try:
         global final_tickers
         global ticker_dict
@@ -87,10 +87,7 @@ def get_ticker_symbol_yahoo(company_name, retries=5, delay=1):
                 response = search(company_name)
                 if 'quotes' in response and response['quotes']:
                     symbol = response['quotes'][0]['symbol']
-                    print(f"Found symbol for {company_name}: {symbol}")
                     return symbol
-                else:
-                    print(f"No results found for {company_name}. Response: {response}")
             except Exception as e:
                 print(f"Exception fetching data for {company_name}: {e}")
             time.sleep(delay)
@@ -107,14 +104,12 @@ async def fetch_stock_data(stocks, period='5y'):
         stock_data = {}
         for stock in stocks.keys():
             try:
-                print(f"Fetching data for {stock}...")
                 ticker = yf.Ticker(stock)
                 stock_history = ticker.history(period=period)
                 if not stock_history.empty:
                     stock_data[stock] = stock_history
                     final_tickers[stock] = stocks[stock]
-                else:
-                    print(f"{stock}: No data found, symbol may be delisted or incorrectly formatted")
+
             except Exception as e:
                 print(f"{stock}: Error fetching data - {e}")
         return stock_data

@@ -28,7 +28,8 @@ async def fetch_data():
         crypto_data = await get_crypto_data()
         stock_data = await get_stock_data('https://m.moneycontrol.com/more_market.php')
         recurrent_deposit_data = await get_bank_names_for_RD()
-        gold_data = await get_gold_data()
+        #gold_data = await get_gold_data()
+        gold_data = 18010.96
         bond_data = await get_bonds_data('https://www.indiabonds.com/search/?limit=100&switch_one=radio-grid')
         property_data = await property_json(location, average_cpi, years)
         stock_main_data = await get_stock_data_main('https://m.moneycontrol.com/more_market.php')
@@ -52,6 +53,6 @@ async def main_model():
         global Json_Main
         json_data = {'location': 'Mumbai', 'years_to_retire': 30, 'salary': 175000, 'investment_amount': 100000, 'current_savings': 100000, 'debt': 30000, 'other_expenses': 30000, 'number_of_dependents': 3, 'current_invested_amount': 0, 'bank': 'sbi_bank'} 
         ans = await model_predict(json_data,Json_Main)
-        return JSONResponse(content={'low_json':ans},status_code=200)
+        return JSONResponse(content={'low_json':ans[0],'high_json':ans[1]},status_code=200)
     except Exception as e:
         return JSONResponse(content={'message':f'failure while trying {str(e)}', 'success': False}, status_code=500)

@@ -5,8 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
-from dotenv import load_dotenv
-import asyncio
 
 # Fetch historical gold prices (using GLD ETF as a proxy)
 gold_data = yf.download('GLD', start='2010-01-01', end='2024-05-24')
@@ -75,8 +73,6 @@ async def fetch_real_time_gold_price_alpha_vantage():
             latest_price = float(latest_data['4. close'])
             usd_to_inr = await fetch_usd_to_inr_rate()
             latest_price = latest_price*usd_to_inr
-            print("\nThe leatest price is: ", latest_price)
-            print("\n")
             """
         latest_price=215.3
         latest_price = latest_price*83.4319
@@ -93,8 +89,8 @@ async def fetch_real_time_gold_price_alpha_vantage():
 async def predict_next_n_days(n_days):
     try:
         # Fetch real-time gold data
-        gold_price = await fetch_real_time_gold_price_alpha_vantage()
-        print(gold_price)
+        #gold_price = await fetch_real_time_gold_price_alpha_vantage()
+        gold_price = 18010.96
         if gold_price is None:
             return None
         # Copy the last row of the gold_data DataFrame to use for prediction
@@ -126,7 +122,6 @@ async def predict_next_n_days(n_days):
             last_row['Volatility'] = extended_close.rolling(window=10).std().iloc[-1]
             last_row['Return'] = future_price / gold_data['Close'].iloc[-1] - 1
 
-        print("This is predictions:\n",predictions)
         return predictions
     except Exception as e:
         print(f"error occurred in predict_next_n_days function in gold.py {str(e)}")
@@ -136,7 +131,6 @@ async def predict_next_n_days(n_days):
 async def get_gold_for_main():
     try:
         future_gold_prices = await predict_next_n_days(30)
-        print(future_gold_prices)
         print("future gold price: ",future_gold_prices[-1])
         return future_gold_prices[-1]
     except Exception as e:
@@ -146,3 +140,25 @@ if __name__ == "__main__":
     answer = asyncio.run(get_gold_for_main())
     print(answer)
 '''
+
+"""
+                if count_high < 3:
+                    if stock_price > max_price:
+                        max_price = stock_price
+                        quantity = int(investment_amount / stock_price)
+                    categorized_stocks['High'].append(stock)
+                    count_high += 1
+
+                if stock_price > max_price:
+                        max_price = stock_price
+                        quantity = int(investment_amount / stock_price)
+                    categorized_stocks['Medium'].append(stock)
+                    count_mid += 1
+
+                if count_low < 3:
+                    if stock_price > max_price:
+                        max_price = stock_price
+                        quantity = int(investment_amount / stock_price)
+                    categorized_stocks['Low'].append(stock)
+                    count_low += 1
+"""

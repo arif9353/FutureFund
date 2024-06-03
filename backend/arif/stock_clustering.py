@@ -4,7 +4,6 @@ import numpy as np
 import yfinance as yf
 from yahooquery import search
 import time
-import asyncio
 
 final_tickers = {}
 ticker_dict = {}
@@ -25,11 +24,14 @@ async def stock_clustering(all_recommended_stocks):
         output = metrics_df['Risk_Level']
         return output,all_recommended_stocks
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"error ocurred in stock_clustering function in stock_clustering.py {e}")
 
 def filter_unique_stocks(all_recommended_stocks):
-    unique_stocks = {stock['name']: stock for stock in all_recommended_stocks}
-    return list(unique_stocks.values())
+    try:
+        unique_stocks = {stock['name']: stock for stock in all_recommended_stocks}
+        return list(unique_stocks.values())
+    except Exception as e:
+        print(f"error ocurred in filter_unique_stocks function in stock_clustering.py {e}")
 
 async def get_metrics_df(all_recommended_stocks):
     try:
@@ -39,7 +41,7 @@ async def get_metrics_df(all_recommended_stocks):
         metrics_df = await calculate_metrics(all_recommended_stocks)
         return metrics_df
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"error ocurred in get_metrics_df function in stock_clustering.py {e}")
 
 async def calculate_metrics(all_recommended_stocks):
     try:
@@ -57,7 +59,7 @@ async def calculate_metrics(all_recommended_stocks):
         metrics_df = pd.DataFrame(metrics).T
         return metrics_df
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"error ocurred in calculate_metrics function in stock_clustering.py {e}")
 
 async def ticker_value(all_recommended_stocks):
     try:
@@ -73,9 +75,9 @@ async def ticker_value(all_recommended_stocks):
         tickers = list(filter(None, tickers))
         return ticker_dict
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"error ocurred in ticker_value function in stock_clustering.py {e}")
 
-def get_ticker_symbol_yahoo(company_name, retries=5, delay=1):
+def get_ticker_symbol_yahoo(company_name, retries=2, delay=1):
     try:
         global final_tickers
         global ticker_dict
@@ -85,17 +87,14 @@ def get_ticker_symbol_yahoo(company_name, retries=5, delay=1):
                 response = search(company_name)
                 if 'quotes' in response and response['quotes']:
                     symbol = response['quotes'][0]['symbol']
-                    print(f"Found symbol for {company_name}: {symbol}")
                     return symbol
-                else:
-                    print(f"No results found for {company_name}. Response: {response}")
             except Exception as e:
                 print(f"Exception fetching data for {company_name}: {e}")
             time.sleep(delay)
         print(f"Failed to get ticker for {company_name} after {retries} attempts")
         return None
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"error ocurred in get_ticker_symbol_yahoo function in stock_clustering.py {e}")
 
 async def fetch_stock_data(stocks, period='5y'):
     try:
@@ -105,17 +104,15 @@ async def fetch_stock_data(stocks, period='5y'):
         stock_data = {}
         for stock in stocks.keys():
             try:
-                print(f"Fetching data for {stock}...")
                 ticker = yf.Ticker(stock)
                 stock_history = ticker.history(period=period)
                 if not stock_history.empty:
                     stock_data[stock] = stock_history
                     final_tickers[stock] = stocks[stock]
-                    print(f"Data for {stock}: {stock_history.head()}")
-                else:
-                    print(f"{stock}: No data found, symbol may be delisted or incorrectly formatted")
+
             except Exception as e:
                 print(f"{stock}: Error fetching data - {e}")
         return stock_data
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"error ocurred in fetch_stock_data function in stock_clustering.py {e}")
+
