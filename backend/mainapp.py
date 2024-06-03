@@ -51,8 +51,7 @@ async def main_model():
     try:
         global Json_Main
         json_data = {'location': 'Mumbai', 'years_to_retire': 30, 'salary': 175000, 'investment_amount': 100000, 'current_savings': 100000, 'debt': 30000, 'other_expenses': 30000, 'number_of_dependents': 3, 'current_invested_amount': 0, 'bank': 'sbi_bank'} 
-        print(Json_Main)
-        ans = model_predict(json_data,Json_Main)
+        ans = await model_predict(json_data,Json_Main)
         return JSONResponse(content={'low_json':ans},status_code=200)
     except Exception as e:
         return JSONResponse(content={'message':f'failure while trying {str(e)}', 'success': False}, status_code=500)

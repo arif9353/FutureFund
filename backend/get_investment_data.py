@@ -28,10 +28,10 @@ async def fetch_usd_to_inr_rate():
 
 async def get_gold_data():
     try:    
-        """
+        
         # Replace with your actual Alpha Vantage API key
         symbol = 'GLD'  # GLD is an ETF that tracks the price of gold
-        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey=None'
+        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey=QYHRK01Q1ORWYPSJ'
 
         response = requests.get(url)
         data = response.json()
@@ -40,19 +40,21 @@ async def get_gold_data():
             latest_time = list(data['Time Series (1min)'].keys())[0]
             latest_data = data['Time Series (1min)'][latest_time]
             latest_price = float(latest_data['4. close'])
-            latest_price = latest_price*83.4319
+            usd_to_inr = await fetch_usd_to_inr_rate()
+            latest_price = latest_price * usd_to_inr
             print("\nThe leatest price is: ", latest_price)
             print("\n")
-        """
+            """
         latest_price=215.3
         latest_price = latest_price*83.4319
         print("\nThe leatest price is: ", latest_price)
         return latest_price
         """
+            return latest_price
         else:
             print(f"Error fetching data: {data}")
             return None
-        """
+        
     except Exception as e:
         print(f"Error fetching gold value: {str(e)}")
 
@@ -246,15 +248,16 @@ async def parse_stock_advice(soup):
                         profit_percent = (revenue / stock_price_float) * 100
                     else:
                         profit_percent = 0.0
-                    data.append({
-                        'name': stock_name,
-                        'price': stock_price,
-                        'recommendation': recommendation_trimmed,
-                        'target_price': target_value,
-                        'source': source,
-                        'revenue': revenue,
-                        'profit_percent': profit_percent
-                    })      
+                    if profit_percent >0.0:
+                        data.append({
+                            'name': stock_name,
+                            'price': stock_price,
+                            'recommendation': recommendation_trimmed,
+                            'target_price': target_value,
+                            'source': source,
+                            'revenue': revenue,
+                            'profit_percent': profit_percent
+                        })      
         else:
             print('No news list found in the soup')
 
