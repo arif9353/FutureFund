@@ -63,11 +63,12 @@ async def model_predict(employee_json, realtime_json):
         low_percent = ans[0]
         mid_percent = ans[1]
         high_percent = ans[2]
+        print("This is realtime_json in model_predict\n",realtime_json["stock"])
         categorized_stocks = await stock_cluster_gen(float(investment_amount/2),realtime_json["stock"])
+        print("\nThese are categorized stocks in model_predict in prediction.py: \n",categorized_stocks)
         low_json = await dealing_low(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks))
-        print("This is low_json Finale:\n",low_json)
+        print("\nThese are categorized stocks in model_predict in prediction.py after jsonlow: \n",categorized_stocks)
         high_json =  await dealing_high(investment_amount,years_to_retire,bank,realtime_json, copy.deepcopy(categorized_stocks))
-        print("This is high_json Finale:\n",high_json)
         fin_resp = []
         fin_resp.append(low_json)
         fin_resp.append(high_json)
@@ -87,18 +88,15 @@ async def stock_cluster_gen(investment_amount, stock_data):
         clusters_df,all_recommend_stocks = await stock_clustering(affordable_stocks)
         cluster_json = clusters_df.to_json()
         cluster_dict = json.loads(cluster_json)
-        print(f"\n\n\nThis is Clustering_json: {cluster_dict}\n\n")
-        stocks_recommendation = []
+
+
         for stock in all_recommend_stocks:
             stock_name = stock['name']
             if stock_name in cluster_dict:
                 stock['category'] = cluster_dict[stock_name]
-                stocks_recommendation.append(stock)
-        print("These are categorized stocks\n:", all_recommend_stocks)
-        if not stocks_recommendation:
+        if not all_recommend_stocks:
             return None
-        stocks_recommendation.reset
-        return stocks_recommendation
+        return all_recommend_stocks
     except Exception as e:
         print(f"error ocurred in stock_cluster_gen fn {str(e)}")
 
@@ -151,7 +149,7 @@ async def stock_values_giver(investment_amount, stock_data):
                             quantity = curr_quantity
                         categorized_stocks['Low'].append(stock)
                     count_low += 1
-        print("\nThis is categorized stocks:\n",categorized_stocks)
+        print("\nThis is categorized stocks in stock_values_giver:\n",categorized_stocks)
         if not categorized_stocks["High"] and not categorized_stocks["Medium"] and not categorized_stocks["Low"]:
             return None,None,None
         return categorized_stocks,max_price,quantity
@@ -305,8 +303,6 @@ async def dealing_low(investment_amount,years,bank,realtime_json,categorized_sto
             's6':float(investment_amount*(float(low_percent["s6"])))/100
         }
         print("befor changes:\n",low_amounts)
-        print("investement for stocks:\n",low_amounts["s1"])
-        print(f"categorized_stocks from dealing_low:\n{categorized_stocks}")
         stock_data,stock_maxprice,stock_quantity = await stock_values_giver(low_amounts["s1"],categorized_stocks)
         crypto_data = await crypto_values_giver(realtime_json["crypto"],low_amounts["s2"])
         property_data,property_maxemi = await shortlist_properties(realtime_json["property"],low_amounts["s4"])

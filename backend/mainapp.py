@@ -52,6 +52,7 @@ async def main_model(location:str=Form(...),years_to_retire: int = Form(...),sal
     try:
         global Json_Main
         average_cpi = 0.046433252043303265
+        print("\nTHIS IS JSON_MAIN: \n",Json_Main)
         json_data = {'location': location, 'years_to_retire': years_to_retire, 'salary': salary, 'investment_amount': investment_amount, 'current_savings': current_savings, 'debt': debt, 'other_expenses': other_expenses, 'number_of_dependents': number_of_dependents, 'current_invested_amount': current_invested_amount, 'bank': bank} 
         ans = await model_predict(json_data,Json_Main)
         return JSONResponse(content={'low_json':ans[0],'high_json':ans[1]},status_code=200)
