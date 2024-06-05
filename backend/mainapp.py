@@ -55,6 +55,6 @@ async def main_model(location:str=Form(...),years_to_retire: int = Form(...),sal
         print("\nTHIS IS JSON_MAIN: \n",Json_Main)
         json_data = {'location': location, 'years_to_retire': years_to_retire, 'salary': salary, 'investment_amount': investment_amount, 'current_savings': current_savings, 'debt': debt, 'other_expenses': other_expenses, 'number_of_dependents': number_of_dependents, 'current_invested_amount': current_invested_amount, 'bank': bank} 
         ans = await model_predict(json_data,Json_Main)
-        return JSONResponse(content={'low_json':ans[0],'high_json':ans[1]},status_code=200)
+        return JSONResponse(content={'low_json':ans[0],'mid_json':ans[1], 'high_json':ans[2]},status_code=200)
     except Exception as e:
         return JSONResponse(content={'message':f'failure while trying {str(e)}', 'success': False}, status_code=500)

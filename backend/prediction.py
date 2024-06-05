@@ -1,6 +1,7 @@
 import joblib
 from tensorflow.keras.models import load_model
 import pandas as pd
+import numpy as np
 import re
 from stock_clustering import stock_clustering
 import json
@@ -10,6 +11,11 @@ import copy
 low_percent = None
 mid_percent = None
 high_percent = None
+
+scaler = joblib.load('scaler.pkl')
+model_high = joblib.load('model_high.pkl')
+model_mid = joblib.load('model_mid.pkl')
+model_low = joblib.load('model_low.pkl')
 
 async def display_results(low_pred, mid_pred, high_pred):
     try:
@@ -59,18 +65,44 @@ async def model_predict(employee_json, realtime_json):
         # Display the prediction results
         ans = await display_results(predicted_low[0], predicted_mid[0], predicted_high[0])
 
-
         low_percent = ans[0]
         mid_percent = ans[1]
         high_percent = ans[2]
+
+        inp = np.array([[years_to_retire, investment_amount]])
+        scaled_inp = scaler.transform(inp)
+
+        goal_low = model_low.predict(scaled_inp)
+        goal_low = np.expm1(goal_low)
+        goal_low = float(goal_low[0])
+        # low_json['goal_low'] = goal_low
+        print(f"\n\n\nGoal low: {goal_low}\n")
+
+        goal_mid = model_mid.predict(scaled_inp)
+        goal_mid = np.expm1(goal_mid)
+        goal_mid = float(goal_mid[0])
+        # mid_json['goal_mid'] = goal_mid
+        print(f"\n\n\nGoal mid: {goal_mid}\nType of: {type(goal_mid)}")
+
+        goal_high = model_high.predict(scaled_inp)
+        goal_high = np.expm1(goal_high)
+        goal_high = float(goal_high[0])
+        # high_json['goal_high'] = goal_high
+        print(f"\n\n\nGoal high: {goal_high}\n")
+
+
         print("This is realtime_json in model_predict\n",realtime_json["stock"])
         categorized_stocks = await stock_cluster_gen(float(investment_amount/2),realtime_json["stock"])
         print("\nThese are categorized stocks in model_predict in prediction.py: \n",categorized_stocks)
-        low_json = await dealing_low(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks))
+        low_json = await dealing_low(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_low)
         print("\nThese are categorized stocks in model_predict in prediction.py after jsonlow: \n",categorized_stocks)
-        high_json =  await dealing_high(investment_amount,years_to_retire,bank,realtime_json, copy.deepcopy(categorized_stocks))
+        mid_json = await dealing_mid(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_mid)
+        print("\nThese are categorized stocks in model_predict in prediction.py after jsonlow: \n",categorized_stocks)
+        high_json =  await dealing_high(investment_amount,years_to_retire,bank,realtime_json, copy.deepcopy(categorized_stocks), goal_high)
+
         fin_resp = []
         fin_resp.append(low_json)
+        fin_resp.append(mid_json)
         fin_resp.append(high_json)
         return fin_resp
     except Exception as e:
@@ -291,7 +323,7 @@ async def gold_give(gold_price,years,investment_price):
     except Exception as e:
         print(f"error occurred in gold_give fn {str(e)}")
 
-async def dealing_low(investment_amount,years,bank,realtime_json,categorized_stocks):
+async def dealing_low(investment_amount,years,bank,realtime_json,categorized_stocks, goal):
     try:
         global low_percent
         low_amounts = {
@@ -379,15 +411,119 @@ async def dealing_low(investment_amount,years,bank,realtime_json,categorized_sto
             "gold_percent": gold_percent_div,
             "bond": bond_data,
             "bond_amount": low_amounts["s6"],
-            "bond_percent": bond_percent_div
+            "bond_percent": bond_percent_div,
+            "goal": goal
         }
 
         return low_json
     except Exception as e:
         print(f"error occured while running dealing_low function {str(e)}")   
         return {"response":f"error occured while running dealing_low function {str(e)}"}
-    
-async def dealing_high(investment_amount,years,bank,realtime_json, categorized_stocks):
+
+async def dealing_mid(investment_amount,years,bank,realtime_json,categorized_stocks, goal):
+    try:
+        global mid_percent
+        mid_amounts = {
+            's1': float(investment_amount*(float(mid_percent["s1"])))/100,
+            's2': float(investment_amount*(float(mid_percent["s2"])))/100,
+            's3': float(investment_amount*(float(mid_percent["s3"])))/100,
+            's4': float(investment_amount*(float(mid_percent["s4"])))/100,
+            's5': float(investment_amount*(float(mid_percent["s5"])))/100,
+            's6':float(investment_amount*(float(mid_percent["s6"])))/100
+        }
+        print("befor changes:\n",mid_amounts)
+        stock_data,stock_maxprice,stock_quantity = await stock_values_giver(mid_amounts["s1"],categorized_stocks)
+        property_data,property_maxemi = await shortlist_properties(realtime_json["property"],mid_amounts["s4"])
+        bond_data,bond_maxprice,bond_quantity = await shortlist_bonds(realtime_json["bond"],mid_amounts["s6"])
+        gold_data,gold_quantity = await gold_give(realtime_json["gold"],years,mid_amounts["s5"])
+        
+
+        if stock_data is None:
+            mid_amounts["s3"]=mid_amounts["s3"]+(mid_amounts['s1']/2)
+            mid_amounts["s2"]=mid_amounts["s2"]+(mid_amounts['s1']/2)
+            mid_amounts["s1"] = 0
+            print("Stock is not supported here so adding it's amount to RD")
+        else:
+            stock_difference_amount = mid_amounts["s1"] - (stock_quantity*stock_maxprice)
+            mid_amounts["s3"]=mid_amounts["s3"]+(stock_difference_amount/2)
+            mid_amounts["s2"]=mid_amounts["s2"]+(stock_difference_amount/2)
+            mid_amounts["s1"]=mid_amounts["s1"]-stock_difference_amount
+
+        if property_data is None:
+            mid_amounts["s3"]=mid_amounts["s3"]+(mid_amounts['s4']/2)
+            mid_amounts["s2"]=mid_amounts["s2"]+(mid_amounts['s4']/2)
+            mid_amounts["s4"] = 0
+            print("Property is not supported here so adding it's amount to RD")
+        else:
+            property_difference_amount = mid_amounts["s4"] - (property_maxemi)
+            mid_amounts["s3"]=mid_amounts["s3"]+(property_difference_amount/2)
+            mid_amounts["s2"]=mid_amounts["s2"]+(property_difference_amount/2)
+            mid_amounts["s4"]=mid_amounts["s4"]-property_difference_amount
+
+        if bond_data is None:
+            mid_amounts["s3"]=mid_amounts["s3"]+(mid_amounts['s6']/2)
+            mid_amounts["s2"]=mid_amounts["s2"]+(mid_amounts['s6']/2)
+            mid_amounts["s6"] = 0
+            print("Bond is not supported here so adding it's amount to RD")
+        else:
+            bond_difference_amount = mid_amounts["s6"] - (bond_quantity*bond_maxprice)
+            mid_amounts["s3"] = mid_amounts["s3"]+(bond_difference_amount/2)
+            mid_amounts["s2"] = mid_amounts["s2"]+(bond_difference_amount/2)
+            mid_amounts["s6"] = mid_amounts["s6"]-bond_difference_amount
+
+        if gold_data is None: 
+            mid_amounts["s3"]=mid_amounts["s3"]+(mid_amounts['s5']/2)
+            mid_amounts["s2"]=mid_amounts["s2"]+(mid_amounts['s5']/2)
+            mid_amounts["s5"] = 0
+            print("Gold is not supported here so adding it's amount to RD")
+        else:
+            gold_difference_amount = mid_amounts["s5"] - (gold_quantity*realtime_json["gold"])
+            mid_amounts["s3"] = mid_amounts["s3"]+(gold_difference_amount/2)
+            mid_amounts["s2"] = mid_amounts["s2"]+(gold_difference_amount/2)
+            mid_amounts["s5"] = mid_amounts["s5"]-gold_difference_amount
+
+        recurrent_data = await recurrent_deposit_give(mid_amounts["s3"],years,bank,realtime_json["recurrent_deposit"])
+        crypto_data = await crypto_values_giver(realtime_json["crypto"],mid_amounts["s2"])
+
+
+        print("after changes:\n",mid_amounts)
+
+        stock_percent_div = float(mid_amounts["s1"]/investment_amount)*100
+        crypto_percent_div = float(mid_amounts["s2"]/investment_amount)*100
+        recurrent_percent_div = float(mid_amounts["s3"]/investment_amount)*100
+        property_percent_div = float(mid_amounts["s4"]/investment_amount)*100
+        gold_percent_div = float(mid_amounts["s5"]/investment_amount)*100
+        bond_percent_div = float(mid_amounts["s6"]/investment_amount)*100
+
+        mid_json = {
+            "stock": stock_data,
+            "stock_amount": mid_amounts["s1"],
+            "stock_percent": stock_percent_div,
+            "crypto": crypto_data,
+            "crypto_amount": mid_amounts["s2"],
+            "crypto_percent": crypto_percent_div,
+            "recurrent": recurrent_data,
+            "recurrent_amount": mid_amounts["s3"],
+            "recurrent_percent": recurrent_percent_div,
+            "property": property_data,
+            "property_amount": mid_amounts["s4"],
+            "property_percent": property_percent_div,
+            "gold": gold_data,
+            "gold_amount": mid_amounts["s5"],        
+            "gold_percent": gold_percent_div,
+            "bond": bond_data,
+            "bond_amount": mid_amounts["s6"],
+            "bond_percent": bond_percent_div,
+            "goal": goal
+        }
+
+        return mid_json
+    except Exception as e:
+        print(f"error occured while running dealing_low function {str(e)}")   
+        return {"response":f"error occured while running dealing_low function {str(e)}"}
+
+  
+async def dealing_high(investment_amount,years,bank,realtime_json, categorized_stocks, goal):
     try:
         global high_percent
 
@@ -482,7 +618,8 @@ async def dealing_high(investment_amount,years,bank,realtime_json, categorized_s
             "gold_percent": gold_percent_div,
             "bond": bond_data,
             "bond_amount": high_amounts["s6"],
-            "bond_percent": bond_percent_div
+            "bond_percent": bond_percent_div,
+            "goal": goal
         }
         
         return high_json
