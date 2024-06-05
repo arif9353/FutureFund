@@ -87,16 +87,18 @@ async def stock_cluster_gen(investment_amount, stock_data):
         clusters_df,all_recommend_stocks = await stock_clustering(affordable_stocks)
         cluster_json = clusters_df.to_json()
         cluster_dict = json.loads(cluster_json)
-
-
+        print(f"\n\n\nThis is Clustering_json: {cluster_dict}\n\n")
+        stocks_recommendation = []
         for stock in all_recommend_stocks:
             stock_name = stock['name']
             if stock_name in cluster_dict:
                 stock['category'] = cluster_dict[stock_name]
+                stocks_recommendation.append(stock)
         print("These are categorized stocks\n:", all_recommend_stocks)
-        if not all_recommend_stocks:
+        if not stocks_recommendation:
             return None
-        return all_recommend_stocks
+        stocks_recommendation.reset
+        return stocks_recommendation
     except Exception as e:
         print(f"error ocurred in stock_cluster_gen fn {str(e)}")
 
@@ -104,9 +106,10 @@ async def stock_values_giver(investment_amount, stock_data):
     try:
         affordable_stocks = []
         for stock in stock_data:
-            if investment_amount >= float(stock['price'].replace(',', '')):
-                affordable_stocks.append(stock)
-
+            if stock:
+                if investment_amount >= float(stock['price'].replace(',', '')):
+                    affordable_stocks.append(stock)
+        print(f"\n\nStock Data from Stock values giver: \n{stock_data}")
         categorized_stocks = {'High':[],'Medium':[],'Low':[]}
         
         count_high= 0
@@ -116,36 +119,37 @@ async def stock_values_giver(investment_amount, stock_data):
         quantity = 0
 
         for stock in affordable_stocks:
-            stock_category = stock.get('category')
-            stock_price = float(stock['price'].replace(',', ''))
+            if stock:
+                stock_category = stock.get('category')
+                stock_price = float(stock['price'].replace(',', ''))
 
-            if stock_category == "high":
-                if count_high < 3:
-                    curr_quantity = int(investment_amount / stock_price)
-                    stock["quantity"] = curr_quantity
-                    if stock_price > max_price:
-                        max_price = stock_price
-                        quantity = curr_quantity
-                    categorized_stocks['High'].append(stock)
-                    count_high += 1
-            elif stock_category == "mid":               
-                if count_mid < 3:
-                    curr_quantity = int(investment_amount / stock_price)
-                    stock["quantity"] = curr_quantity 
-                    if stock_price > max_price:
-                        max_price = stock_price
-                        quantity = curr_quantity
-                    categorized_stocks['Medium'].append(stock)
-                    count_mid += 1
+                if stock_category == "high":
+                    if count_high < 3:
+                        curr_quantity = int(investment_amount / stock_price)
+                        stock["quantity"] = curr_quantity
+                        if stock_price > max_price:
+                            max_price = stock_price
+                            quantity = curr_quantity
+                        categorized_stocks['High'].append(stock)
+                        count_high += 1
+                elif stock_category == "mid":               
+                    if count_mid < 3:
+                        curr_quantity = int(investment_amount / stock_price)
+                        stock["quantity"] = curr_quantity 
+                        if stock_price > max_price:
+                            max_price = stock_price
+                            quantity = curr_quantity
+                        categorized_stocks['Medium'].append(stock)
+                        count_mid += 1
 
-            elif stock_category == "low":
-                if count_low < 3:
-                    curr_quantity = int(investment_amount / stock_price)
-                    stock["quantity"] = curr_quantity
-                    if stock_price > max_price:
-                        max_price = stock_price
-                        quantity = curr_quantity
-                    categorized_stocks['Low'].append(stock)
+                elif stock_category == "low":
+                    if count_low < 3:
+                        curr_quantity = int(investment_amount / stock_price)
+                        stock["quantity"] = curr_quantity
+                        if stock_price > max_price:
+                            max_price = stock_price
+                            quantity = curr_quantity
+                        categorized_stocks['Low'].append(stock)
                     count_low += 1
         print("\nThis is categorized stocks:\n",categorized_stocks)
         if not categorized_stocks["High"] and not categorized_stocks["Medium"] and not categorized_stocks["Low"]:
@@ -302,6 +306,7 @@ async def dealing_low(investment_amount,years,bank,realtime_json,categorized_sto
         }
         print("befor changes:\n",low_amounts)
         print("investement for stocks:\n",low_amounts["s1"])
+        print(f"categorized_stocks from dealing_low:\n{categorized_stocks}")
         stock_data,stock_maxprice,stock_quantity = await stock_values_giver(low_amounts["s1"],categorized_stocks)
         crypto_data = await crypto_values_giver(realtime_json["crypto"],low_amounts["s2"])
         property_data,property_maxemi = await shortlist_properties(realtime_json["property"],low_amounts["s4"])
