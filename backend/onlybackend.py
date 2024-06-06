@@ -14,9 +14,12 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
+Json_Main = None
+
 @app.get('/fetchdata')
 async def fetch_data():
     try:
+        global Json_Main
         print("fetching data")
         #location="Delhi"
         #average_cpi = 0.046433252043303265
@@ -29,25 +32,26 @@ async def fetch_data():
         bond_data = await get_bonds_data('https://www.indiabonds.com/search/?limit=100&switch_one=radio-grid')
         #property_data = await property_json(location, average_cpi, years)
         stock_main_data = await get_stock_data_main('https://m.moneycontrol.com/more_market.php')
-        json_main = {
+        Json_Main = {
             "stock": stock_main_data,
             "crypto":crypto_data[1],
             "recurrent_deposit": recurrent_deposit_data,
             "gold":gold_data,
             "bond":bond_data[1],
         }
-        return JSONResponse(content={'stock_data': stock_data, 'crypto_data': crypto_data[0], 'recurrent_deposit': recurrent_deposit_data, 'gold_data': gold_data,'bond_data': bond_data[0], 'details':json_main,'success': True}, status_code=200)
+        return JSONResponse(content={'stock_data': stock_data, 'crypto_data': crypto_data[0], 'recurrent_deposit': recurrent_deposit_data, 'gold_data': gold_data,'bond_data': bond_data[0], 'details':Json_Main,'success': True}, status_code=200)
     except Exception as e:
         return JSONResponse(content={'message':'failure while trying', 'success': False}, status_code=500)
     
 #'stock_data': stock_data, 'crypto_data': crypto_data, 'recurrent_deposit': recurrent_deposit_data, 'gold_data': gold_data,'bond_data': bond_data,          
 
 @app.post('/model')
-async def main_model(request:Request):
+async def main_model(location:str=Form(...),years_to_retire: int = Form(...),salary: float=Form(...),investment_amount: float=Form(...),current_savings: float=Form(...),debt: float=Form(...),other_expenses: float=Form(...),number_of_dependents: int=Form(...),current_invested_amount: float=Form(...),bank: str=Form(...)):
     try:
-        data = await request.json()
-        json_data = {'location': data["location"], 'years_to_retire': data["years_to_retire"], 'salary': data["salary"], 'investment_amount': data["investment_amount"], 'current_savings': data["current_savings"], 'debt': data["debt"], 'other_expenses': data["other_expenses"], 'number_of_dependents': data["number_of_dependents"], 'current_invested_amount': data["current_invested_amount"], 'bank': data["bank"]} 
-        ans = await model_predict(json_data,data["details"])
+        global Json_Main
+        print("\nTHIS IS JSON_MAIN: \n",Json_Main)
+        json_data = {'location': location, 'years_to_retire': years_to_retire, 'salary': salary, 'investment_amount': investment_amount, 'current_savings': current_savings, 'debt': debt, 'other_expenses': other_expenses, 'number_of_dependents': number_of_dependents, 'current_invested_amount': current_invested_amount, 'bank': bank} 
+        ans = await model_predict(json_data,Json_Main)
         return JSONResponse(content={'low_json':ans[0],'mid_json':ans[1],'high_json':ans[2]},status_code=200)
     except Exception as e:
         return JSONResponse(content={'message':f'failure while trying {str(e)}', 'success': False}, status_code=500)

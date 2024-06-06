@@ -7,16 +7,7 @@ from stock_clustering import stock_clustering
 import json
 from gold import get_gold_for_main
 import copy
-from stock_gen import stock_cluster_gen, stock_values_giver
 
-low_percent = None
-mid_percent = None
-high_percent = None
-
-scaler = joblib.load('scaler.pkl')
-model_high = joblib.load('model_high.pkl')
-model_mid = joblib.load('model_mid.pkl')
-model_low = joblib.load('model_low.pkl')
 
 async def display_results(low_pred, mid_pred, high_pred):
     try:
@@ -40,7 +31,6 @@ async def display_results(low_pred, mid_pred, high_pred):
 
 async def model_predict(employee_json, realtime_json):
     try:
-        global low_percent, high_percent, mid_percent
         years_to_retire = employee_json["years_to_retire"]
         salary = employee_json["salary"]
         investment_amount = employee_json["investment_amount"]
@@ -69,7 +59,10 @@ async def model_predict(employee_json, realtime_json):
         low_percent = ans[0]
         mid_percent = ans[1]
         high_percent = ans[2]
-
+        scaler = joblib.load('scaler.pkl')
+        model_high = joblib.load('model_high.pkl')
+        model_mid = joblib.load('model_mid.pkl')
+        model_low = joblib.load('model_low.pkl')
         inp = np.array([[years_to_retire, investment_amount]])
         scaled_inp = scaler.transform(inp)
 
@@ -77,29 +70,24 @@ async def model_predict(employee_json, realtime_json):
         goal_low = np.expm1(goal_low)
         goal_low = float(goal_low[0])
         # low_json['goal_low'] = goal_low
-        print(f"\n\n\nGoal low: {goal_low}\n")
+        print(f"\nGoal low: {goal_low}")
 
         goal_mid = model_mid.predict(scaled_inp)
         goal_mid = np.expm1(goal_mid)
         goal_mid = float(goal_mid[0])
         # mid_json['goal_mid'] = goal_mid
-        print(f"\n\n\nGoal mid: {goal_mid}\nType of: {type(goal_mid)}")
+        print(f"\nGoal mid: {goal_mid}\nType of: {type(goal_mid)}")
 
         goal_high = model_high.predict(scaled_inp)
         goal_high = np.expm1(goal_high)
         goal_high = float(goal_high[0])
         # high_json['goal_high'] = goal_high
-        print(f"\n\n\nGoal high: {goal_high}\n")
+        print(f"\nGoal high: {goal_high}")
 
-
-        print("This is realtime_json in model_predict\n",realtime_json["stock"])
         categorized_stocks = await stock_cluster_gen(float(investment_amount/2),realtime_json["stock"])
-        print("\nThese are categorized stocks in model_predict in prediction.py: \n",categorized_stocks)
-        low_json = await dealing_low(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_low)
-        print("\nThese are categorized stocks in model_predict in prediction.py after jsonlow: \n",categorized_stocks)
-        mid_json = await dealing_mid(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_mid)
-        print("\nThese are categorized stocks in model_predict in prediction.py after jsonlow: \n",categorized_stocks)
-        high_json =  await dealing_high(investment_amount,years_to_retire,bank,realtime_json, copy.deepcopy(categorized_stocks), goal_high)
+        low_json = await dealing_low(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_low, low_percent)
+        mid_json = await dealing_mid(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_mid, mid_percent)
+        high_json =  await dealing_high(investment_amount,years_to_retire,bank,realtime_json, copy.deepcopy(categorized_stocks), goal_high, high_percent)
 
         fin_resp = []
         fin_resp.append(low_json)
@@ -109,6 +97,7 @@ async def model_predict(employee_json, realtime_json):
     except Exception as e:
         print(f"error occurred in model_predict function: {str(e)}")
         return {"response": f"error occurred in model_predict function: {str(e)}"}
+    
 
 async def stock_cluster_gen(investment_amount, stock_data):
     try:
@@ -139,7 +128,6 @@ async def stock_values_giver(investment_amount, stock_data):
             if stock:
                 if investment_amount >= float(stock['price'].replace(',', '')):
                     affordable_stocks.append(stock)
-        print(f"\n\nStock Data from Stock values giver: \n{stock_data}")
         categorized_stocks = {'High':[],'Medium':[],'Low':[]}
         
         count_high= 0
@@ -181,7 +169,6 @@ async def stock_values_giver(investment_amount, stock_data):
                             quantity = curr_quantity
                         categorized_stocks['Low'].append(stock)
                     count_low += 1
-        print("\nThis is categorized stocks in stock_values_giver:\n",categorized_stocks)
         if not categorized_stocks["High"] and not categorized_stocks["Medium"] and not categorized_stocks["Low"]:
             return None,None,None
         return categorized_stocks,max_price,quantity
@@ -265,14 +252,16 @@ async def recurrent_deposit_give(investment_amount,years,bank,recurrent_deposit_
     except Exception as e:
         print(f"error while running recurrent_deposit_give function {str(e)}")
 
-async def shortlist_properties(property_data, max_estimated_emi):
+async def shortlist_properties(max_estimated_emi):
     try:
+        with open('properties.json', 'r') as f:
+            property_data = json.load(f)
+        property_data = property_data["property"]
         shortlisted_properties = [property for property in property_data if property['estimated_emi'] <= max_estimated_emi]
+        print("\n\nShortlisted_properties are:\n",shortlisted_properties)
 
-        a=None
-        b=None
         if not shortlisted_properties:
-            return a,b
+            return None,None
         max = 0
         for property in shortlisted_properties:
             if property['estimated_emi'] >= max:
@@ -322,75 +311,87 @@ async def gold_give(gold_price,years,investment_price):
     except Exception as e:
         print(f"error occurred in gold_give fn {str(e)}")
 
-async def dealing_low(investment_amount,years,bank,realtime_json,categorized_stocks, goal):
+async def dealing_low(investment_amount,years,bank,realtime_json,categorized_stocks,goal,low_percent):
     try:
-        global low_percent
         low_amounts = {
-            's1': float(investment_amount*(float(low_percent["s1"])))/100,
-            's2': float(investment_amount*(float(low_percent["s2"])))/100,
-            's3': float(investment_amount*(float(low_percent["s3"])))/100,
-            's4': float(investment_amount*(float(low_percent["s4"])))/100,
-            's5': float(investment_amount*(float(low_percent["s5"])))/100,
-            's6':float(investment_amount*(float(low_percent["s6"])))/100
+            's1': round(float(investment_amount * float(low_percent["s1"])) /100 ,2),
+            's2': round(float(investment_amount * float(low_percent["s2"])) /100, 2),
+            's3': round(float(investment_amount * float(low_percent["s3"])) /100, 2),
+            's4': round(float(investment_amount * float(low_percent["s4"])) /100, 2),
+            's5': round(float(investment_amount * float(low_percent["s5"])) /100, 2),
+            's6': round(float(investment_amount * float(low_percent["s6"])) /100, 2)
         }
+
+        # Adjust amounts to ensure they sum up to the original investment amount
+        total_amount = sum(low_amounts.values())
+        amount_difference = round(investment_amount - total_amount, 2)
+        low_amounts["s3"] += amount_difference  # Adjust recurrent amount to make the sum exact
+
         print("befor changes:\n",low_amounts)
-        stock_data,stock_maxprice,stock_quantity = await stock_values_giver(low_amounts["s1"],categorized_stocks)
-        crypto_data = await crypto_values_giver(realtime_json["crypto"],low_amounts["s2"])
-        property_data,property_maxemi = await shortlist_properties(realtime_json["property"],low_amounts["s4"])
+
+        stock_data, stock_maxprice, stock_quantity = await stock_values_giver(low_amounts["s1"], categorized_stocks)
+        crypto_data = await crypto_values_giver(realtime_json["crypto"], low_amounts["s2"])
+        property_data,property_maxemi = await shortlist_properties(low_amounts["s4"])
         bond_data,bond_maxprice,bond_quantity = await shortlist_bonds(realtime_json["bond"],low_amounts["s6"])
         gold_data,gold_quantity = await gold_give(realtime_json["gold"],years,low_amounts["s5"])
         
 
         if stock_data is None:
-            low_amounts["s3"]=low_amounts["s3"]+low_amounts['s1']
+            low_amounts["s3"] = round((low_amounts["s3"]+low_amounts['s1']), 2)
             low_amounts["s1"] = 0
             print("Stock is not supported here so adding it's amount to RD")
         else:
-            stock_difference_amount = low_amounts["s1"] - (stock_quantity*stock_maxprice)
-            low_amounts["s3"]=low_amounts["s3"]+stock_difference_amount
-            low_amounts["s1"]=low_amounts["s1"]-stock_difference_amount
+            stock_difference_amount = round((low_amounts["s1"] - (stock_quantity*stock_maxprice)),2)
+            low_amounts["s3"] = round((low_amounts["s3"]+stock_difference_amount),2)
+            low_amounts["s1"] = low_amounts["s1"]-stock_difference_amount
 
         if crypto_data is None:
-            low_amounts["s3"]=low_amounts["s3"]+low_amounts['s2']
+            low_amounts["s3"] = round((low_amounts["s3"]+low_amounts['s2']),2)
             low_amounts["s2"] = 0
 
         if property_data is None:
-            low_amounts["s3"]=low_amounts["s3"]+low_amounts['s4']
+            low_amounts["s3"] = round((low_amounts["s3"]+low_amounts['s4']),2)
             low_amounts["s4"] = 0
             print("Property is not supported here so adding it's amount to RD")
         else:
-            property_difference_amount = low_amounts["s4"] - (property_maxemi)
-            low_amounts["s3"]=low_amounts["s3"]+property_difference_amount
-            low_amounts["s4"]=low_amounts["s4"]-property_difference_amount
+            property_difference_amount = round((low_amounts["s4"] - (property_maxemi)),2)
+            low_amounts["s3"] = round((low_amounts["s3"]+property_difference_amount),2)
+            low_amounts["s4"] = low_amounts["s4"]-property_difference_amount
 
         if bond_data is None:
-            low_amounts["s3"]=low_amounts["s3"]+low_amounts['s6']
+            low_amounts["s3"] = round((low_amounts["s3"]+low_amounts['s6']),2)
             low_amounts["s6"] = 0
             print("Bond is not supported here so adding it's amount to RD")
         else:
-            bond_difference_amount = low_amounts["s6"] - (bond_quantity*bond_maxprice)
-            low_amounts["s3"] = low_amounts["s3"]+bond_difference_amount
+            bond_difference_amount = round((low_amounts["s6"] - (bond_quantity*bond_maxprice)),2)
+            low_amounts["s3"] = round((low_amounts["s3"]+bond_difference_amount),2)
             low_amounts["s6"] = low_amounts["s6"]-bond_difference_amount
 
         if gold_data is None: 
-            low_amounts["s3"]=low_amounts["s3"]+low_amounts['s5']
+            low_amounts["s3"] = round((low_amounts["s3"]+low_amounts['s5']),2)
             low_amounts["s5"] = 0
             print("Gold is not supported here so adding it's amount to RD")
         else:
-            gold_difference_amount = low_amounts["s5"] - (gold_quantity*realtime_json["gold"])
-            low_amounts["s3"] = low_amounts["s3"]+gold_difference_amount
+            gold_difference_amount = round((low_amounts["s5"] - (gold_quantity*realtime_json["gold"])),2)
+            low_amounts["s3"] = round((low_amounts["s3"]+gold_difference_amount),2)
             low_amounts["s5"] = low_amounts["s5"]-gold_difference_amount
 
         recurrent_data = await recurrent_deposit_give(low_amounts["s3"],years,bank,realtime_json["recurrent_deposit"])
 
         print("after changes:\n",low_amounts)
 
-        stock_percent_div = float(low_amounts["s1"]/investment_amount)*100
-        crypto_percent_div = float(low_amounts["s2"]/investment_amount)*100
-        recurrent_percent_div = float(low_amounts["s3"]/investment_amount)*100
-        property_percent_div = float(low_amounts["s4"]/investment_amount)*100
-        gold_percent_div = float(low_amounts["s5"]/investment_amount)*100
-        bond_percent_div = float(low_amounts["s6"]/investment_amount)*100
+        stock_percent_div = round((float(low_amounts["s1"]/investment_amount)*100),2)
+        crypto_percent_div = round((float(low_amounts["s2"]/investment_amount)*100),2)
+        recurrent_percent_div = round((float(low_amounts["s3"]/investment_amount)*100),2)
+        property_percent_div = round((float(low_amounts["s4"]/investment_amount)*100),2)
+        gold_percent_div = round((float(low_amounts["s5"]/investment_amount)*100),2)
+        bond_percent_div = round((float(low_amounts["s6"]/investment_amount)*100),2)
+
+        # Adjust percentages to ensure they sum up to 100%
+        total_percent = stock_percent_div + crypto_percent_div + recurrent_percent_div + property_percent_div + gold_percent_div + bond_percent_div
+        percent_difference = round(100 - total_percent, 2)
+        recurrent_percent_div += percent_difference  # Adjust recurrent percentage to make the sum exact
+        recurrent_percent_div = round(recurrent_percent_div,2)
 
         low_json = {
             "stock": stock_data,
@@ -411,88 +412,107 @@ async def dealing_low(investment_amount,years,bank,realtime_json,categorized_sto
             "bond": bond_data,
             "bond_amount": low_amounts["s6"],
             "bond_percent": bond_percent_div,
-            "goal": goal
+            "goal_savings": goal
         }
 
+        # Recalculate total amounts to ensure they sum up to investment amount
+        total_amount = sum([low_json[key + "_amount"] for key in ["stock", "crypto", "recurrent", "property", "gold", "bond"]])
+        amount_difference = round(investment_amount - total_amount, 2)
+        low_json["recurrent_amount"] += amount_difference  # Adjust recurrent amount to make the sum exact
+        low_json["recurrent_amount"] = round(low_json["recurrent_amount"],2)
+        
         return low_json
     except Exception as e:
         print(f"error occured while running dealing_low function {str(e)}")   
         return {"response":f"error occured while running dealing_low function {str(e)}"}
 
-async def dealing_mid(investment_amount,years,bank,realtime_json,categorized_stocks, goal):
+
+async def dealing_mid(investment_amount, years, bank, realtime_json, categorized_stocks, goal, mid_percent):
     try:
-        global mid_percent
         mid_amounts = {
-            's1': float(investment_amount*(float(mid_percent["s1"])))/100,
-            's2': float(investment_amount*(float(mid_percent["s2"])))/100,
-            's3': float(investment_amount*(float(mid_percent["s3"])))/100,
-            's4': float(investment_amount*(float(mid_percent["s4"])))/100,
-            's5': float(investment_amount*(float(mid_percent["s5"])))/100,
-            's6':float(investment_amount*(float(mid_percent["s6"])))/100
+            's1': round(float(investment_amount * float(mid_percent["s1"])) / 100, 2),
+            's2': round(float(investment_amount * float(mid_percent["s2"])) / 100, 2),
+            's3': round(float(investment_amount * float(mid_percent["s3"])) / 100, 2),
+            's4': round(float(investment_amount * float(mid_percent["s4"])) / 100, 2),
+            's5': round(float(investment_amount * float(mid_percent["s5"])) / 100, 2),
+            's6': round(float(investment_amount * float(mid_percent["s6"])) / 100, 2)
         }
-        print("befor changes:\n",mid_amounts)
-        stock_data,stock_maxprice,stock_quantity = await stock_values_giver(mid_amounts["s1"],categorized_stocks)
-        property_data,property_maxemi = await shortlist_properties(realtime_json["property"],mid_amounts["s4"])
-        bond_data,bond_maxprice,bond_quantity = await shortlist_bonds(realtime_json["bond"],mid_amounts["s6"])
-        gold_data,gold_quantity = await gold_give(realtime_json["gold"],years,mid_amounts["s5"])
+
+        # Adjust amounts to ensure they sum up to the original investment amount
+        total_amount = sum(mid_amounts.values())
+        amount_difference = round(investment_amount - total_amount, 2)
+        mid_amounts["s3"] += amount_difference  # Adjust recurrent amount to make the sum exact
+
+        print("Before changes:\n", mid_amounts)
         
+        stock_data, stock_maxprice, stock_quantity = await stock_values_giver(mid_amounts["s1"], categorized_stocks)
+        property_data, property_maxemi = await shortlist_properties(mid_amounts["s4"])
+        bond_data, bond_maxprice, bond_quantity = await shortlist_bonds(realtime_json["bond"], mid_amounts["s6"])
+        gold_data, gold_quantity = await gold_give(realtime_json["gold"], years, mid_amounts["s5"])
 
         if stock_data is None:
-            mid_amounts["s3"]=mid_amounts["s3"]+(mid_amounts['s1']/2)
-            mid_amounts["s2"]=mid_amounts["s2"]+(mid_amounts['s1']/2)
+            mid_amounts["s3"] += round(mid_amounts['s1'] / 2, 2)
+            mid_amounts["s2"] += round(mid_amounts['s1'] / 2, 2)
             mid_amounts["s1"] = 0
-            print("Stock is not supported here so adding it's amount to RD")
+            print("Stock is not supported here so adding its amount to RD")
         else:
-            stock_difference_amount = mid_amounts["s1"] - (stock_quantity*stock_maxprice)
-            mid_amounts["s3"]=mid_amounts["s3"]+(stock_difference_amount/2)
-            mid_amounts["s2"]=mid_amounts["s2"]+(stock_difference_amount/2)
-            mid_amounts["s1"]=mid_amounts["s1"]-stock_difference_amount
+            stock_difference_amount = round(mid_amounts["s1"] - (stock_quantity * stock_maxprice), 2)
+            mid_amounts["s3"] += round(stock_difference_amount / 2, 2)
+            mid_amounts["s2"] += round(stock_difference_amount / 2, 2)
+            mid_amounts["s1"] -= stock_difference_amount
 
         if property_data is None:
-            mid_amounts["s3"]=mid_amounts["s3"]+(mid_amounts['s4']/2)
-            mid_amounts["s2"]=mid_amounts["s2"]+(mid_amounts['s4']/2)
+            mid_amounts["s3"] += round(mid_amounts['s4'] / 2, 2)
+            mid_amounts["s2"] += round(mid_amounts['s4'] / 2, 2)
             mid_amounts["s4"] = 0
-            print("Property is not supported here so adding it's amount to RD")
+            print("Property is not supported here so adding its amount to RD")
         else:
-            property_difference_amount = mid_amounts["s4"] - (property_maxemi)
-            mid_amounts["s3"]=mid_amounts["s3"]+(property_difference_amount/2)
-            mid_amounts["s2"]=mid_amounts["s2"]+(property_difference_amount/2)
-            mid_amounts["s4"]=mid_amounts["s4"]-property_difference_amount
+            property_difference_amount = round(mid_amounts["s4"] - property_maxemi, 2)
+            mid_amounts["s3"] += round(property_difference_amount / 2, 2)
+            mid_amounts["s2"] += round(property_difference_amount / 2, 2)
+            mid_amounts["s4"] -= property_difference_amount
 
         if bond_data is None:
-            mid_amounts["s3"]=mid_amounts["s3"]+(mid_amounts['s6']/2)
-            mid_amounts["s2"]=mid_amounts["s2"]+(mid_amounts['s6']/2)
+            mid_amounts["s3"] += round(mid_amounts['s6'] / 2, 2)
+            mid_amounts["s2"] += round(mid_amounts['s6'] / 2, 2)
             mid_amounts["s6"] = 0
-            print("Bond is not supported here so adding it's amount to RD")
+            print("Bond is not supported here so adding its amount to RD")
         else:
-            bond_difference_amount = mid_amounts["s6"] - (bond_quantity*bond_maxprice)
-            mid_amounts["s3"] = mid_amounts["s3"]+(bond_difference_amount/2)
-            mid_amounts["s2"] = mid_amounts["s2"]+(bond_difference_amount/2)
-            mid_amounts["s6"] = mid_amounts["s6"]-bond_difference_amount
+            bond_difference_amount = round(mid_amounts["s6"] - (bond_quantity * bond_maxprice), 2)
+            mid_amounts["s3"] += round(bond_difference_amount / 2, 2)
+            mid_amounts["s2"] += round(bond_difference_amount / 2, 2)
+            mid_amounts["s6"] -= bond_difference_amount
 
-        if gold_data is None: 
-            mid_amounts["s3"]=mid_amounts["s3"]+(mid_amounts['s5']/2)
-            mid_amounts["s2"]=mid_amounts["s2"]+(mid_amounts['s5']/2)
+        if gold_data is None:
+            mid_amounts["s3"] += round(mid_amounts['s5'] / 2, 2)
+            mid_amounts["s2"] += round(mid_amounts['s5'] / 2, 2)
             mid_amounts["s5"] = 0
-            print("Gold is not supported here so adding it's amount to RD")
+            print("Gold is not supported here so adding its amount to RD")
         else:
-            gold_difference_amount = mid_amounts["s5"] - (gold_quantity*realtime_json["gold"])
-            mid_amounts["s3"] = mid_amounts["s3"]+(gold_difference_amount/2)
-            mid_amounts["s2"] = mid_amounts["s2"]+(gold_difference_amount/2)
-            mid_amounts["s5"] = mid_amounts["s5"]-gold_difference_amount
+            gold_difference_amount = round(mid_amounts["s5"] - (gold_quantity * realtime_json["gold"]), 2)
+            mid_amounts["s3"] += round(gold_difference_amount / 2, 2)
+            mid_amounts["s2"] += round(gold_difference_amount / 2, 2)
+            mid_amounts["s5"] -= gold_difference_amount
 
-        recurrent_data = await recurrent_deposit_give(mid_amounts["s3"],years,bank,realtime_json["recurrent_deposit"])
-        crypto_data = await crypto_values_giver(realtime_json["crypto"],mid_amounts["s2"])
+        recurrent_data = await recurrent_deposit_give(mid_amounts["s3"], years, bank, realtime_json["recurrent_deposit"])
+        crypto_data = await crypto_values_giver(realtime_json["crypto"], mid_amounts["s2"])
+
+        print("After changes:\n", mid_amounts)
+
+        stock_percent_div = round(mid_amounts["s1"] / investment_amount * 100, 2)
+        crypto_percent_div = round(mid_amounts["s2"] / investment_amount * 100, 2)
+        recurrent_percent_div = round(mid_amounts["s3"] / investment_amount * 100, 2)
+        property_percent_div = round(mid_amounts["s4"] / investment_amount * 100, 2)
+        gold_percent_div = round(mid_amounts["s5"] / investment_amount * 100, 2)
+        bond_percent_div = round(mid_amounts["s6"] / investment_amount * 100, 2)
+
+        # Adjust percentages to ensure they sum up to 100%
+        total_percent = stock_percent_div + crypto_percent_div + recurrent_percent_div + property_percent_div + gold_percent_div + bond_percent_div
+        percent_difference = round(100 - total_percent, 2)
+        recurrent_percent_div += percent_difference  # Adjust recurrent percentage to make the sum exact
+        recurrent_percent_div = round(recurrent_percent_div,2)
 
 
-        print("after changes:\n",mid_amounts)
-
-        stock_percent_div = float(mid_amounts["s1"]/investment_amount)*100
-        crypto_percent_div = float(mid_amounts["s2"]/investment_amount)*100
-        recurrent_percent_div = float(mid_amounts["s3"]/investment_amount)*100
-        property_percent_div = float(mid_amounts["s4"]/investment_amount)*100
-        gold_percent_div = float(mid_amounts["s5"]/investment_amount)*100
-        bond_percent_div = float(mid_amounts["s6"]/investment_amount)*100
 
         mid_json = {
             "stock": stock_data,
@@ -513,90 +533,104 @@ async def dealing_mid(investment_amount,years,bank,realtime_json,categorized_sto
             "bond": bond_data,
             "bond_amount": mid_amounts["s6"],
             "bond_percent": bond_percent_div,
-            "goal": goal
+            "goal_savings": goal
         }
+
+        # Recalculate total amounts to ensure they sum up to investment amount
+        total_amount = sum([mid_json[key + "_amount"] for key in ["stock", "crypto", "recurrent", "property", "gold", "bond"]])
+        amount_difference = round(investment_amount - total_amount, 2)
+        mid_json["recurrent_amount"] += amount_difference  # Adjust recurrent amount to make the sum exact
+        mid_json["recurrent_amount"] = round(mid_json["recurrent_amount"],2)
 
         return mid_json
     except Exception as e:
-        print(f"error occured while running dealing_low function {str(e)}")   
-        return {"response":f"error occured while running dealing_low function {str(e)}"}
- 
-async def dealing_high(investment_amount,years,bank,realtime_json, categorized_stocks, goal):
-    try:
-        global high_percent
+        print(f"Error occurred while running dealing_mid function: {str(e)}")   
+        return {"response": f"Error occurred while running dealing_mid function: {str(e)}"}
 
+
+
+async def dealing_high(investment_amount,years,bank,realtime_json, categorized_stocks,goal,high_percent):
+    try:
         high_amounts = {
-            's1': float(investment_amount*(float(high_percent["s1"])))/100,
-            's2': float(investment_amount*(float(high_percent["s2"])))/100,
-            's3': float(investment_amount*(float(high_percent["s3"])))/100,
-            's4': float(investment_amount*(float(high_percent["s4"])))/100,
-            's5': float(investment_amount*(float(high_percent["s5"])))/100,
-            's6':float(investment_amount*(float(high_percent["s6"])))/100
+            's1': round((float(investment_amount*(float(high_percent["s1"])))/100),2),
+            's2': round((float(investment_amount*(float(high_percent["s2"])))/100),2),
+            's3': round((float(investment_amount*(float(high_percent["s3"])))/100),2),
+            's4': round((float(investment_amount*(float(high_percent["s4"])))/100),2),
+            's5': round((float(investment_amount*(float(high_percent["s5"])))/100),2),
+            's6': round((float(investment_amount*(float(high_percent["s6"])))/100),2)
         }
 
+        # Adjust amounts to ensure they sum up to the original investment amount
+        total_amount = sum(high_amounts.values())
+        amount_difference = round(investment_amount - total_amount, 2)
+        high_amounts["s3"] += amount_difference  # Adjust recurrent amount to make the sum exact
+
         print("before changes:\n",high_amounts)
-        print("investment for stocks in high\n",high_amounts["s1"])
+
         stock_data,stock_maxprice,stock_quantity = await stock_values_giver(high_amounts["s1"],categorized_stocks)
         recurrent_data = await recurrent_deposit_give(high_amounts["s3"],years,bank,realtime_json["recurrent_deposit"])
-        property_data,property_maxemi = await shortlist_properties(realtime_json["property"],high_amounts["s4"])
+        property_data,property_maxemi = await shortlist_properties(high_amounts["s4"])
         bond_data,bond_maxprice,bond_quantity = await shortlist_bonds(realtime_json["bond"],high_amounts["s6"])
-        print("gold data in high")
-        print(realtime_json["gold"])
-        print(years)
-        print(high_amounts["s5"])
+
         gold_data,gold_quantity = await gold_give(realtime_json["gold"],years,high_amounts["s5"])
         
 
         if stock_data is None:
-            high_amounts["s2"]=high_amounts["s2"]+high_amounts['s1']
+            high_amounts["s2"] = round((high_amounts["s2"]+high_amounts['s1']),2)
             high_amounts["s1"] = 0
             print("Stock is not supported here so adding it's amount to RD")
         else:
-            stock_difference_amount = high_amounts["s1"] - (stock_quantity*stock_maxprice)
-            high_amounts["s2"]=high_amounts["s2"]+stock_difference_amount
-            high_amounts["s1"]=high_amounts["s1"]-stock_difference_amount
+            stock_difference_amount = round((high_amounts["s1"] - (stock_quantity*stock_maxprice)),2)
+            high_amounts["s2"] = round((high_amounts["s2"]+stock_difference_amount),2)
+            high_amounts["s1"] = high_amounts["s1"]-stock_difference_amount
         
         if recurrent_data is None:
-            high_amounts["s2"]=high_amounts["s2"]+high_amounts['s3']
+            high_amounts["s2"] = round((high_amounts["s2"]+high_amounts['s3']),2)
             high_amounts["s3"] = 0
         
         if property_data is None:
-            high_amounts["s2"]=high_amounts["s2"]+high_amounts['s4']
+            high_amounts["s2"] = round((high_amounts["s2"]+high_amounts['s4']),2)
             high_amounts["s4"] = 0
             print("Property is not supported here so adding it's amount to RD")
         else:
-            property_difference_amount = high_amounts["s4"] - (property_maxemi)
-            high_amounts["s2"]=high_amounts["s2"]+property_difference_amount
-            high_amounts["s4"]=high_amounts["s4"]-property_difference_amount
+            property_difference_amount = round((high_amounts["s4"] - (property_maxemi)),2)
+            high_amounts["s2"] = round((high_amounts["s2"]+property_difference_amount),2)
+            high_amounts["s4"] = high_amounts["s4"]-property_difference_amount
         
         if bond_data is None:
-            high_amounts["s2"]=high_amounts["s2"]+high_amounts['s6']
+            high_amounts["s2"] = round((high_amounts["s2"]+high_amounts['s6']),2)
             high_amounts["s6"] = 0
             print("Bond is not supported here so adding it's amount to RD")
         else:
-            bond_difference_amount = high_amounts["s6"] - (bond_quantity*bond_maxprice)
-            high_amounts["s2"] = high_amounts["s2"]+bond_difference_amount
+            bond_difference_amount = round((high_amounts["s6"] - (bond_quantity*bond_maxprice)),2)
+            high_amounts["s2"] = round((high_amounts["s2"]+bond_difference_amount),2)
             high_amounts["s6"] = high_amounts["s6"]-bond_difference_amount
         
         if gold_data is None: 
-            high_amounts["s2"]=high_amounts["s2"]+high_amounts['s5']
+            high_amounts["s2"] = round((high_amounts["s2"]+high_amounts['s5']),2)
             high_amounts["s5"] = 0
             print("Gold is not supported here so adding it's amount to RD")
         else:
-            gold_difference_amount = high_amounts["s5"] - (gold_quantity*realtime_json["gold"])
-            high_amounts["s2"] = high_amounts["s2"]+gold_difference_amount
+            gold_difference_amount = round((high_amounts["s5"] - (gold_quantity*realtime_json["gold"])),2)
+            high_amounts["s2"] = round((high_amounts["s2"]+gold_difference_amount),2)
             high_amounts["s5"] = high_amounts["s5"]-gold_difference_amount
         
         crypto_data = await crypto_values_giver(realtime_json["crypto"],high_amounts["s2"])
         
         print("after changes:\n",high_amounts)
 
-        stock_percent_div = float(high_amounts["s1"]/investment_amount)*100
-        crypto_percent_div = float(high_amounts["s2"]/investment_amount)*100
-        recurrent_percent_div = float(high_amounts["s3"]/investment_amount)*100
-        property_percent_div = float(high_amounts["s4"]/investment_amount)*100
-        gold_percent_div = float(high_amounts["s5"]/investment_amount)*100
-        bond_percent_div = float(high_amounts["s6"]/investment_amount)*100
+        stock_percent_div = round((float(high_amounts["s1"]/investment_amount)*100),2)
+        crypto_percent_div = round((float(high_amounts["s2"]/investment_amount)*100),2)
+        recurrent_percent_div = round((float(high_amounts["s3"]/investment_amount)*100),2)
+        property_percent_div = round((float(high_amounts["s4"]/investment_amount)*100),2)
+        gold_percent_div = round((float(high_amounts["s5"]/investment_amount)*100),2)
+        bond_percent_div = round((float(high_amounts["s6"]/investment_amount)*100),2)
+
+        # Adjust percentages to ensure they sum up to 100%
+        total_percent = stock_percent_div + crypto_percent_div + recurrent_percent_div + property_percent_div + gold_percent_div + bond_percent_div
+        percent_difference = round(100 - total_percent, 2)
+        recurrent_percent_div += percent_difference  # Adjust recurrent percentage to make the sum exact
+        recurrent_percent_div = round(recurrent_percent_div,2)
 
         high_json = {
             "stock": stock_data,
@@ -617,9 +651,14 @@ async def dealing_high(investment_amount,years,bank,realtime_json, categorized_s
             "bond": bond_data,
             "bond_amount": high_amounts["s6"],
             "bond_percent": bond_percent_div,
-            "goal": goal
+            "goal_savings":goal
         }
-        
+
+        # Recalculate total amounts to ensure they sum up to investment amount
+        total_amount = sum([high_json[key + "_amount"] for key in ["stock", "crypto", "recurrent", "property", "gold", "bond"]])
+        amount_difference = round(investment_amount - total_amount, 2)
+        high_json["recurrent_amount"] += amount_difference  # Adjust recurrent amount to make the sum exact
+        high_json["recurrent_amount"] = round(high_json["recurrent_amount"],2)
         return high_json
     except Exception as e:
         print(f"error occured while running dealing_high function {str(e)}")   
