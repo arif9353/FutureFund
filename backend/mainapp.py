@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from get_investment_data import get_bonds_data, get_stock_data, get_crypto_data, get_bank_names_for_RD, get_gold_data, get_stock_data_main
 from property import property_json
 from prediction import model_predict
+import json
 app = FastAPI()
 
 app.add_middleware(
@@ -31,7 +32,9 @@ async def fetch_data():
         #gold_data = await get_gold_data()
         gold_data = 18010.96
         bond_data = await get_bonds_data('https://www.indiabonds.com/search/?limit=100&switch_one=radio-grid')
-        property_data = await property_json(location, average_cpi, years)
+        # property_data = await property_json(location, average_cpi, years)
+        with open('properties.json', 'r') as f:
+            property_data = json.load(f)
         stock_main_data = await get_stock_data_main('https://m.moneycontrol.com/more_market.php')
         Json_Main = {
             "stock": stock_main_data,
