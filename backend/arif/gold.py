@@ -13,16 +13,15 @@ ALPHA_VANTAGE_API = os.getenv("ALPHA_VANTAGE_API")
 EXCHANGE_RATE_API = os.getenv("EXCHANGE_RATE_API")
 
 # Fetch historical gold prices (using GLD ETF as a proxy)
-gold_data = yf.download('GLD', start='2010-01-01', end='2024-05-24')
-print(gold_data.head())
+gold_data = yf.download('GLD', start='2010-01-01', end='2024-05-24', interval='1mo')
 
 # Handle missing values
 gold_data = gold_data.dropna()
 
 # Create relevant features
-gold_data['MA_10'] = gold_data['Close'].rolling(window=10).mean()
-gold_data['MA_50'] = gold_data['Close'].rolling(window=50).mean()
-gold_data['Volatility'] = gold_data['Close'].rolling(window=10).std()
+gold_data['MA_2'] = gold_data['Close'].rolling(window=2).mean()
+gold_data['MA_5'] = gold_data['Close'].rolling(window=5).mean()
+gold_data['Volatility'] = gold_data['Close'].rolling(window=2).std()
 gold_data['Return'] = gold_data['Close'].pct_change()
 
 # Drop rows with NaN values created by rolling window calculations
@@ -30,7 +29,7 @@ gold_data = gold_data.dropna()
 print(gold_data.head())
 
 # Define features and target
-features = ['MA_10', 'MA_50', 'Volatility', 'Return']
+features = ['MA_2', 'MA_5', 'Volatility', 'Return']
 X = gold_data[features]
 y = gold_data['Close']
 
@@ -98,13 +97,13 @@ def predict_next_n_days(n_days):
     usd_to_inr = fetch_usd_to_inr_rate()
 
     for _ in range(n_days):
-        ma_10 = last_row['MA_10']
-        ma_50 = last_row['MA_50']
+        ma_2 = last_row['MA_2']
+        ma_5 = last_row['MA_5']
         volatility = last_row['Volatility']
         return_pct = last_row['Return']
         
         # Prepare the input data for prediction
-        input_data = pd.DataFrame([[ma_10, ma_50, volatility, return_pct]], columns=features)
+        input_data = pd.DataFrame([[ma_2, ma_5, volatility, return_pct]], columns=features)
         input_data_scaled = scaler.transform(input_data)
 
         # Predict future gold price (next closing price)
@@ -117,14 +116,14 @@ def predict_next_n_days(n_days):
         extended_close = pd.concat([gold_data['Close'], pd.Series([future_price])])
         
         last_row['Close'] = future_price
-        last_row['MA_10'] = extended_close.rolling(window=10).mean().iloc[-1]
-        last_row['MA_50'] = extended_close.rolling(window=50).mean().iloc[-1]
-        last_row['Volatility'] = extended_close.rolling(window=10).std().iloc[-1]
+        last_row['MA_2'] = extended_close.rolling(window=2).mean().iloc[-1]
+        last_row['MA_5'] = extended_close.rolling(window=5).mean().iloc[-1]
+        last_row['Volatility'] = extended_close.rolling(window=2).std().iloc[-1]
         last_row['Return'] = future_price / gold_data['Close'].iloc[-1] - 1
 
     return predictions
 
 # Example usage
-future_gold_prices = predict_next_n_days(100)
+future_gold_prices = predict_next_n_days(10)
 if future_gold_prices:
-    print(f"Predicted future gold prices for the next 10 days: {future_gold_prices}")
+    print(f"Predicted future gold prices for the next 10 months: {future_gold_prices}")

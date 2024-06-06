@@ -28,9 +28,10 @@ async def fetch_usd_to_inr_rate():
 
 async def get_gold_data():
     try:    
+        
         # Replace with your actual Alpha Vantage API key
         symbol = 'GLD'  # GLD is an ETF that tracks the price of gold
-        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey={ALPHA_VANTAGE_API}'
+        url = f'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&apikey=QYHRK01Q1ORWYPSJ'
 
         response = requests.get(url)
         data = response.json()
@@ -40,11 +41,20 @@ async def get_gold_data():
             latest_data = data['Time Series (1min)'][latest_time]
             latest_price = float(latest_data['4. close'])
             usd_to_inr = await fetch_usd_to_inr_rate()
-            latest_price_inr = usd_to_inr * latest_price
-            return latest_price_inr
+            latest_price = latest_price * usd_to_inr
+            print("\nThe leatest price is: ", latest_price)
+            print("\n")
+            """
+        latest_price=215.3
+        latest_price = latest_price*83.4319
+        print("\nThe leatest price is: ", latest_price)
+        return latest_price
+        """
+            return latest_price
         else:
             print(f"Error fetching data: {data}")
             return None
+        
     except Exception as e:
         print(f"Error fetching gold value: {str(e)}")
 
@@ -144,12 +154,14 @@ async def get_crypto_data():
             name: details for name, details in merged_data.items()
             if details.get('technicalRating') in ['Bullish', 'Very Bullish'] and details.get('profit_percentage', 0) > 0
         }
-        sorted_data = sorted(filtered_data.items(), key=lambda x: x[1]['profit_amount'], reverse=True)
+        sorted_data = sorted(filtered_data.items(), key=lambda x: x[1]['profit_percentage'], reverse=True)
 
         # Return only currencyName and lastPrice
-        result = [{'name': details['currencyName'], 'last_price': details['lastPrice'], 'expected_price': details['R2'], 'logourl': details['logoUrl']} for tag, details in sorted_data]
-        
-        return result[:25]
+        result = [{'name': details['currencyName'], 'last_price': details['lastPrice'], 'expected_price': details['R2'], 'logourl': details['logoUrl'],'changePercent':details['changePercent'],'profit_amount':details['profit_amount'],'profit_percentage':details['profit_percentage']} for tag, details in sorted_data]
+        answer=[]
+        answer.append(result[:25])
+        answer.append(result)
+        return answer
     except Exception as e:
         print(f"An error occurred while getting filtered and sorted crypto data: {str(e)}")
         return f"An error occurred while getting filtered and sorted crypto data: {str(e)}"
@@ -236,15 +248,16 @@ async def parse_stock_advice(soup):
                         profit_percent = (revenue / stock_price_float) * 100
                     else:
                         profit_percent = 0.0
-                    data.append({
-                        'name': stock_name,
-                        'price': stock_price,
-                        'recommendation': recommendation_trimmed,
-                        'target_price': target_value,
-                        'source': source,
-                        'revenue': revenue,
-                        'profit_percent': profit_percent
-                    })      
+                    if profit_percent >0.0:
+                        data.append({
+                            'name': stock_name,
+                            'price': stock_price,
+                            'recommendation': recommendation_trimmed,
+                            'target_price': target_value,
+                            'source': source,
+                            'revenue': revenue,
+                            'profit_percent': profit_percent
+                        })      
         else:
             print('No news list found in the soup')
 
@@ -464,7 +477,50 @@ async def get_bonds_data(url):
             final_answer.append(bond)
         
         final_answer.sort(key=lambda x: float(x['bond_profit'].replace('₹', '').replace(',', '').strip()), reverse=True)
-        return final_answer[:25]
+        answer = []
+        answer.append(final_answer[:25])
+        answer.append(final_answer)
+        return answer
     except Exception as e:
         print(f"Error fetching bond details: {str(e)}")
         return f"Error fetching bond details: {str(e)}"
+    
+
+
+
+async def get_stock_data_main(base_url):
+    try:
+        # Initialize data list
+        data = []
+        
+        # Initial parameters for the AJAX request
+        params = {
+            'sec': 'stk_adv',
+            'ajax': 1,
+            'start': 1,
+            'limit': 50
+        }
+
+        while True:
+            response = requests.get(base_url, params=params)
+            if response.status_code != 200:
+                print(f"Failed to retrieve data from AJAX request: {response.status_code}")
+                break
+            
+            soup = BeautifulSoup(response.content, 'html.parser')
+            additional_data = await parse_stock_advice(soup)
+            if not additional_data:
+                break
+            
+            data.extend(additional_data)
+            
+            # Update the 'start' parameter to get the next set of data
+            params['start'] += params['limit']
+            
+            time.sleep(2)  # Delay between requests to mimic user behavior
+        sorted_data = sorted(data, key=lambda x: x['profit_percent'], reverse=True)
+        return sorted_data
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return {'An error occurred while trying to get the stock data: {e}'}
