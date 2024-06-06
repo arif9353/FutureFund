@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { set } from "firebase/database";
 
-const genAI = new GoogleGenerativeAI("AIzaSyBX16wrIG9mPvTXSc9iDA35v70phX7qgqg");
+const genAI = new GoogleGenerativeAI("AIzaSyAsi474NfYaPT1nBU24huFKWQtghZ0R74c");
 
 async function runPrompt(valueOfPrompt: string, previousChats: string[]) {
     // For text-only input, use the gemini-pro model

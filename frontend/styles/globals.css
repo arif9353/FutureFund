@@ -21,20 +21,29 @@ body {
 
 *::-webkit-scrollbar {
     width: 5px;
+    border-radius: 9999px;
+
     /* Adjust the width of the scrollbar as needed */
 }
 
 *::-webkit-scrollbar-track {
     background-color: #00000000;
     /* Black background for the scrollbar track */
+    border-radius: 9999px;
+
 }
 
 *::-webkit-scrollbar-thumb {
     background-color: #fff;
-    border-radius: 999999;
+    border-radius: 9999px;
     /* White color for the scrollbar thumb */
 }
 
+.gradient-text-ai {
+    background: linear-gradient(45deg, #9fabe8, #807bd7, #fcacac, #ec917d, #eba17c, #efc994, #f9e2a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 
 /* Chatbot CSS below*/

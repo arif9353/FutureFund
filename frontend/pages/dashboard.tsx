@@ -35,7 +35,7 @@ export default function Dashboard() {
                         <div className="flex flex-row flex-wrap gap-6 justify-center">
 
                             <button
-                                onClick={() => router.push("/investments")}
+                                onClick={() => router.push("/invest")}
                                 className="bg-[#2a2c34] text-left text-sm py-4 px-5 rounded-md hover:bg-secondary h-[200px] pc:w-[350px] mob:w-[90%] flex flex-col justify-between">
                                 <div>
                                     <span className="text-lg font-semibold">Investments Allocation</span>
@@ -80,9 +80,9 @@ export default function Dashboard() {
                                 </span>
                             </button>
 
-                            <button 
-                            onClick={() => router.push("/profile")}
-                            className="bg-[#2a2c34] text-left text-sm py-4 px-5 rounded-md hover:bg-secondary h-[200px] pc:w-[350px] mob:w-[90%] flex flex-col justify-between">
+                            {/* <button
+                                onClick={() => router.push("/profile")}
+                                className="bg-[#2a2c34] text-left text-sm py-4 px-5 rounded-md hover:bg-secondary h-[200px] pc:w-[350px] mob:w-[90%] flex flex-col justify-between">
                                 <div>
                                     <span className="text-lg font-semibold">Profile Management</span>
                                     <span className="block text-xs mt-1">Manage user account and settings.</span>
@@ -90,7 +90,7 @@ export default function Dashboard() {
                                 <span className="self-end">
                                     <HiOutlineUser size={"20px"} />
                                 </span>
-                            </button>
+                            </button> */}
 
                         </div>
                     </div>

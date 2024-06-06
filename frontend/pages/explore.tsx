@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import { static_data } from "@/_components/static_stock_data";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { SlSizeFullscreen } from "react-icons/sl";
+import { API_URL } from "@/_components/utils";
 export default function Explore() {
 
     const [data, setData] = useState(static_data)
     console.log(data)
     useEffect(() => {
-        // axios.get('http://localhost:8000/fetchdata/')
+        // axios.get(`${API_URL}/fetchdata/`)
         //     .then(res => {
         //         console.log(res.data)
         //         setData(res.data)
