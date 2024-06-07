@@ -22,7 +22,7 @@ body {
 *::-webkit-scrollbar {
     width: 5px;
     border-radius: 9999px;
-
+    height: 5px;
     /* Adjust the width of the scrollbar as needed */
 }
 
@@ -41,11 +41,15 @@ body {
 
 .gradient-text-ai {
     background: linear-gradient(45deg, #9fabe8, #807bd7, #fcacac, #ec917d, #eba17c, #efc994, #f9e2a8);
+    background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-
+th{
+    text-align: left;
+    padding-bottom: 10px;
+}
 /* Chatbot CSS below*/
 html,
 body {

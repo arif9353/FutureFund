@@ -33,7 +33,7 @@ export default function Top_Nav() {
                     {location === "/dashboard" && <img src="/images/logo.png" alt="" className="max-h-[65%] mob:hidden" />}
                     {location === "/dashboard" && <img src="/images/logo_no_text.png" alt="" className="max-h-[65%] pc:hidden" />}
 
-                    {location !== "/dashboard" && <Link href="/dashboard" className="p-1 px-3 text-white bg-transparent hover:bg-[#ffffff10] rounded-[4px] flex items-center gap-2 "><FaArrowLeft />Dashboard</Link>}
+                    {location !== "/dashboard" && <Link href="/dashboard" className="p-2 px-5 text-white bg-transparent hover:bg-[#ffffff10] rounded-[499999px] flex items-center gap-2 "><FaArrowLeft />Dashboard</Link>}
                 </div>
                 {location === "/dashboard" && <div className="flex items-center ">
                     <div onClick={() => setIsDropdownOpen(!isDropdownOpen)}

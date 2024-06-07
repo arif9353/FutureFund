@@ -2,13 +2,13 @@
 import Top_Nav from "@/_components/Top_Nav";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { static_data } from "@/_components/static_stock_data";
+import { stock_data_static } from "@/_components/static_stock_data";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { API_URL } from "@/_components/utils";
 export default function Explore() {
 
-    const [data, setData] = useState(static_data)
+    const [data, setData] = useState(stock_data_static)
     console.log(data)
     useEffect(() => {
         // axios.get(`${API_URL}/fetchdata/`)

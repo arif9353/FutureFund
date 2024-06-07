@@ -1,4 +1,4 @@
-export const static_data = {
+export const stock_data_static = {
     "stock_data": [
         {
             "name": "HCL Tech",
