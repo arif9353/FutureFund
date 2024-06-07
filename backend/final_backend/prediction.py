@@ -40,8 +40,8 @@ async def model_predict(employee_json, realtime_json):
         current_invested_amount = employee_json["current_invested_amount"]
         bank = employee_json["bank"]
 
-        loaded_model = load_model('./investment_recommendation_mih.h5')
-        preprocessor = joblib.load('./preprocessor_pipeline.pkl')
+        loaded_model = load_model('./new_better_allocation.h5')
+        preprocessor = joblib.load('./scaler_for_new_allocation.pkl')
 
         features = ['years_to_retire', 'salary', 'investment_amount', 'current_savings', 'debt',
                     'other_expenses', 'number_of_dependents', 'current_invested_amount']
@@ -58,36 +58,53 @@ async def model_predict(employee_json, realtime_json):
         low_percent = ans[0]
         mid_percent = ans[1]
         high_percent = ans[2]
-        scaler = joblib.load('scaler.pkl')
-        model_high = joblib.load('model_high.pkl')
-        model_mid = joblib.load('model_mid.pkl')
-        model_low = joblib.load('model_low.pkl')
-        inp = np.array([[years_to_retire, investment_amount]])
-        scaled_inp = scaler.transform(inp)
+        scaler = joblib.load('scaler_for_goal.pkl')
+        model_high = joblib.load('new_model_high.pkl')
+        model_mid = joblib.load('new_model_mid.pkl')
+        model_low = joblib.load('new_model_low.pkl')
 
-        goal_low = model_low.predict(scaled_inp)
+
+        categorized_stocks = await stock_cluster_gen(float(investment_amount/2),realtime_json["stock_data"])
+        low_json = await dealing_low(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), low_percent)
+        mid_json = await dealing_mid(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), mid_percent)
+        high_json =  await dealing_high(investment_amount,years_to_retire,bank,realtime_json, copy.deepcopy(categorized_stocks), high_percent)
+        
+        profit_low = low_json["overall_profit"]
+        print("\nProfit for low:\n",profit_low)
+        input_fun_low = [years_to_retire, investment_amount, debt, profit_low, current_savings]
+        scaled_inp_low = scaler.fit_transform([input_fun_low])
+
+        goal_low = model_low.predict(scaled_inp_low)
         goal_low = np.expm1(goal_low)
         goal_low = float(goal_low[0])
         # low_json['goal_low'] = goal_low
         print(f"\nGoal low: {goal_low}")
 
-        goal_mid = model_mid.predict(scaled_inp)
+        profit_mid = mid_json["overall_profit"]
+        print("\nProfit for mid:\n",profit_mid)
+        input_fun_mid = [years_to_retire, investment_amount, debt, profit_mid, current_savings]
+        scaled_inp_mid = scaler.fit_transform([input_fun_mid])
+
+        goal_mid = model_mid.predict(scaled_inp_mid)
         goal_mid = np.expm1(goal_mid)
         goal_mid = float(goal_mid[0])
         # mid_json['goal_mid'] = goal_mid
         print(f"\nGoal mid: {goal_mid}\nType of: {type(goal_mid)}")
 
-        goal_high = model_high.predict(scaled_inp)
+        profit_high = high_json["overall_profit"]
+        print("\nProfit for high:\n",profit_high)
+        input_fun_high = [years_to_retire, investment_amount, debt, profit_high, current_savings]
+        scaled_inp_high = scaler.fit_transform([input_fun_high])
+
+        goal_high = model_high.predict(scaled_inp_high)
         goal_high = np.expm1(goal_high)
         goal_high = float(goal_high[0])
         # high_json['goal_high'] = goal_high
         print(f"\nGoal high: {goal_high}")
 
-        categorized_stocks = await stock_cluster_gen(float(investment_amount/2),realtime_json["stock_data"])
-        low_json = await dealing_low(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_low, low_percent)
-        mid_json = await dealing_mid(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_mid, mid_percent)
-        high_json =  await dealing_high(investment_amount,years_to_retire,bank,realtime_json, copy.deepcopy(categorized_stocks), goal_high, high_percent)
-
+        low_json["goal_savings"] = goal_low
+        mid_json["goal_savings"] = goal_mid
+        high_json["goal_savings"] = goal_high
         fin_resp = []
         fin_resp.append(low_json)
         fin_resp.append(mid_json)
