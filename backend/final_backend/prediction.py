@@ -39,7 +39,7 @@ async def model_predict(employee_json, realtime_json):
         number_of_dependents = employee_json["number_of_dependents"]
         current_invested_amount = employee_json["current_invested_amount"]
         bank = employee_json["bank"]
-        realtime_json = json.loads(realtime_json)
+
         loaded_model = load_model('./investment_recommendation_mih.h5')
         preprocessor = joblib.load('./preprocessor_pipeline.pkl')
 
@@ -83,7 +83,7 @@ async def model_predict(employee_json, realtime_json):
         # high_json['goal_high'] = goal_high
         print(f"\nGoal high: {goal_high}")
 
-        categorized_stocks = await stock_cluster_gen(float(investment_amount/2),realtime_json["stock"])
+        categorized_stocks = await stock_cluster_gen(float(investment_amount/2),realtime_json["stock_data"])
         low_json = await dealing_low(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_low, low_percent)
         mid_json = await dealing_mid(investment_amount, years_to_retire, bank, realtime_json, copy.deepcopy(categorized_stocks), goal_mid, mid_percent)
         high_json =  await dealing_high(investment_amount,years_to_retire,bank,realtime_json, copy.deepcopy(categorized_stocks), goal_high, high_percent)
