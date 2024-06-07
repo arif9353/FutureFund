@@ -37,11 +37,11 @@ async def fetch_data():
         with open('properties.json', 'r') as f:
             property_data = json.load(f)
         json_main = {
-            "stock": stock_main_data,
-            "crypto":crypto_data[1],
+            "stock_data": stock_main_data,
+            "crypto_data":crypto_data[1],
             "recurrent_deposit": recurrent_deposit_data,
-            "gold":gold_data,
-            "bond":bond_data[1],
+            "gold_data":gold_data,
+            "bond_data":bond_data[1],
         }
         return JSONResponse(content={'stock_data': stock_data, 'crypto_data': crypto_data[0], 'recurrent_deposit': recurrent_deposit_data, 'gold_data': gold_data,'bond_data': bond_data[0], 'details':json_main,'property_data':property_data["property"][:25], 'success': True}, status_code=200)
     except Exception as e:
