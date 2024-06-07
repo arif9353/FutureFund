@@ -164,29 +164,31 @@ body {
 
 .chatpage .dark.inputChat input {
     border: 1px solid white;
+    background-color: #101010;
+    color: white;
 }
 
 .chatpage .dark.inputChat {
-    background: linear-gradient(to top, #101010, #00000000);
+    background: linear-gradient(to top, #101010, #10101081);
 }
 
 .chatpage .dark.inputChat form button {
     border: 1px solid white;
     border-left: none;
+    background: #e0e0e0;
+    color: black;
 
 }
 
 .chatpage form button {
-    /* position: absolute;
-  right: 0px; */
-    height: 40px;
+
     outline: none;
     border: none;
     background-color: #303030;
     color: white;
     padding: 0px 20px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
     border: 1px solid black;
     border-left: none;
     font-weight: 600;
@@ -198,13 +200,12 @@ body {
 
 .chatpage input {
     width: 100%;
-    height: 40px;
     outline: none;
     border: none;
-    padding: 10px;
+    padding: 10px 20px;
     font-size: 14px;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
     border: 1px solid black;
     color: black;
 }

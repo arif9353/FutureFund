@@ -16,3 +16,8 @@ export const allocationDataRecoil = atom({
     default: static_investment_data,
 });
 //location, years_to_retire, salary, investment_amount, current_savings, debt, other_expenses, number_of_dependents, current_invested_amount, bank
+
+export const chatsRecoilState = atom({
+    key: "chatsRecoilState",
+    default: [],
+})

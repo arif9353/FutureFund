@@ -81,7 +81,7 @@ export default function Invest() {
                     ))}
                     <button
                         onClick={() => { setFormData({}) }}
-                        className='mb-4 text-sm text-center w-full bg-[#ffffff10] rounded-md mt-4 py-2'>Reset Details</button>
+                        className='mb-4 text-sm text-center w-full  bg-[#8b454576] rounded-md mt-4 py-2'>Reset Details</button>
                 </div>
                 <button className="mob:block pc:hidden left-1 z-10 text-white font-bold rounded" onClick={() => setSidebarOpen(!sidebarOpen)}>
                     {<IoIosMenu size={"26px"} />}
@@ -159,7 +159,7 @@ const RiskDetails = ({ title, color, data }: { title: string, color: string, dat
         ],
     };
     return (
-        <div className={`w-full flex mob:flex-col justify-start pc:gap-x-[2%] pc:gap-y-4 pc:flex-wrap mob:justify-center gap-2 mb-14 ${title != "High Risk" &&" border-b border-b-[#ffffff35]"} pb-10`}>
+        <div className={`w-full flex mob:flex-col justify-start pc:gap-x-[2%] pc:gap-y-4 pc:flex-wrap mob:justify-center gap-2 mb-14 ${title != "High Risk" && " border-b border-b-[#ffffff35]"} pb-10`}>
             <h1 className={`w-full mb-2 ${color} font-semibold`}>{title}
                 <span className='ml-4 font-normal text-white mob:block mob:ml-0 mob:mt-2'>
                     <span className='text-white opacity-40 font-extrabold'>
@@ -186,8 +186,14 @@ const RiskDetails = ({ title, color, data }: { title: string, color: string, dat
                     </>}
             </div>
             <div className='w-[40%] flex justify-center mob:w-full mt-5'>
-                <div className='w-[300px] h-[300px]'>
-                    <Pie data={pieData} />
+                <div className='w-[300px] h-[300px] '>
+                    <Pie data={pieData} options={{
+                        plugins: {
+                            legend: {
+                                onClick: () => { }, // Disable legend click.
+                            }
+                        }
+                    }} />
                 </div>
             </div>
         </div>

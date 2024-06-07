@@ -6,6 +6,10 @@ import Top_Nav from "@/_components/Top_Nav";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { set } from "firebase/database";
+import { VscSend } from "react-icons/vsc";
+import { RiSendPlaneFill } from "react-icons/ri";
+import { chatsRecoilState } from "@/_recoil/cosmic";
+import { useRecoilState } from "recoil";
 
 const genAI = new GoogleGenerativeAI("AIzaSyAsi474NfYaPT1nBU24huFKWQtghZ0R74c");
 
@@ -26,14 +30,17 @@ async function runPrompt(valueOfPrompt: string, previousChats: string[]) {
 }
 
 function ChatBot() {
+
+    const [chats, setChats] = useRecoilState<any>(chatsRecoilState);
     useEffect(() => {
-        setChats([
-            {
-                content: `Hello, I am FutureFund AI, how may I assist you today ?`,
-                role: "assistant",
-            },
-        ]);
-        // eslint-disable-next-line
+        if (chats?.length === 0) {
+            setChats([
+                {
+                    content: `Hello, I am FutureFund AI, how may I assist you today ?`,
+                    role: "assistant",
+                },
+            ]);
+        }        // eslint-disable-next-line
     }, [auth?.currentUser?.displayName]);
 
     const theme = "dark";
@@ -55,7 +62,7 @@ function ChatBot() {
 
 
     const [message, setMessage] = useState("");
-    const [chats, setChats] = useState<any>([]);
+
     const [isTyping, setIsTyping] = useState(false);
     const chatContainerRef = useRef<any>(null);
 
@@ -65,7 +72,7 @@ function ChatBot() {
         if (!discDisplayed) {
             setDiscDisplayed(true);
             toast('Please Note:  All the chats are temporary and will not be saved for privacy reasons.', {
-                duration: 5000,
+                duration: 2000,
                 icon: '🔒',
                 position: 'bottom-right',
             });
@@ -142,7 +149,9 @@ function ChatBot() {
                                 autoComplete="off"
                                 onChange={(e) => setMessage(e.target.value)}
                             />
-                            <button type="submit"> Send</button>
+                            <button type="submit">
+                                <RiSendPlaneFill color="#000" size={"20px"} />
+                            </button>
                         </form>
                     </div>
                 </main>

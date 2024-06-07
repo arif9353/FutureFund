@@ -33,12 +33,17 @@ const InvestmentForm = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        const requiredFields = ['salary', 'investment_amount', 'current_savings', 'debt', 'other_expenses', 'number_of_dependents', 'current_invested_amount', 'bank', 'years_to_retire'];
+        const requiredFields = ['salary', 'investment_amount', 'current_savings', 'debt', 'other_expenses', 'number_of_dependents', 'current_invested_amount', 'bank'];
         const isAnyFieldEmpty = requiredFields.some(field => !localFormData[field]);
 
         if (isAnyFieldEmpty) {
             toast.error('Please fill in all fields');
-            console.log("Hello NAN")
+
+            return;
+        }
+
+        if(!localFormData?.years_to_retire){
+            toast.error('Please select years to retire');
 
             return;
         }
@@ -50,14 +55,10 @@ const InvestmentForm = () => {
 
         if (isAnyFieldNotNumber) {
             toast.error('Please enter valid numbers for salary, investment amount, current savings, debt, other expenses, number of dependents, and current invested amount');
-            console.log("Hello NAN")
             return;
         }
-        console.log("Hello NAN")
 
         // All validations passed, call api and finally  set the form data
-
-        console.log("making api call")
 
         if (localFormData) {
             setLoading(true)
@@ -131,8 +132,9 @@ const InvestmentForm = () => {
     if (loading) {
         return (
             <>
-                <div className='h-[calc(100vh-80px)] w-[100vw] flex justify-center items-center'>
+                <div className='h-[calc(100vh-120px)] w-[100vw] flex flex-col justify-center items-center'>
                     <PuffLoader color="#ffffff" />
+                    <p>AI Allocation in Process</p>
                 </div>
             </>
         )
@@ -191,7 +193,7 @@ const InvestmentForm = () => {
                     <input
                         className="appearance-auto block w-full border border-red-700 rounded leading-tight focus:outline-none focus:bg-[#ffffff10] focus:border-blue-500 mb-3 h-1 mt-3"
                         type="range"
-                        min="0"
+                        min="1"
                         max="50"
                         name="years_to_retire"
                         value={localFormData.years_to_retire || 0}

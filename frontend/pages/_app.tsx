@@ -1,3 +1,4 @@
+import FixedChatBot from "@/_components/FloatingChatBot";
 import { API_URL } from "@/_components/utils";
 import "@/styles/globals.css";
 import axios from "axios";
@@ -30,6 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Future Fund</title>
       </Head>
       <Toaster toastOptions={{ duration: 1200 }} />
+      <FixedChatBot/>
       <Component {...pageProps} />
     </RecoilRoot>
   </>;
