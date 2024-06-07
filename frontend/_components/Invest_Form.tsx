@@ -42,7 +42,8 @@ const InvestmentForm = () => {
         }
         console.log("Hello NAN")
 
-        // All validations passed, set the form data
+        // All validations passed, call api and finally  set the form data
+        
         // axios.post(`${API_URL}/fetchdata/`)
         //     .then(res => {
         //         console.log(res.data)
