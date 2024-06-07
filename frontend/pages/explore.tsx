@@ -9,7 +9,6 @@ import { API_URL } from "@/_components/utils";
 export default function Explore() {
 
     const [data, setData] = useState(stock_data_static)
-    console.log(data)
     useEffect(() => {
         // axios.get(`${API_URL}/fetchdata/`)
         //     .then(res => {
@@ -38,7 +37,6 @@ export default function Explore() {
                                 <p className={`w-[30%] flex flex-row-reverse font-medium`}>Price (₹) </p>
                             </div>
                             {data && data?.stock_data?.map((stock, index) => {
-                                console.log(stock)
                                 return (
                                     <>
                                         <div key={index} className={"w-full h-[50px] font-medium text-white flex justify-between items-center px-4 py-8 relative"

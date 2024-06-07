@@ -55,7 +55,7 @@ export default function FixedChatBot() {
         if (!message) return;
         setIsTyping(true);
         let msgs = [...chats];
-        msgs.push({ role: "user", content: message });
+        msgs = [...msgs,{ role: "user", content: message } ];
         setChats([...msgs]);
         setMessage("");
         try {
@@ -63,7 +63,7 @@ export default function FixedChatBot() {
                 message,
                 msgs.filter(x => x.role === "user").map(chat => chat.content)
             );
-            msgs.push({ role: "assistant", content: response });
+            msgs = [...msgs,{ role: "assistant", content: response } ];
             setChats(msgs);
         } catch (error) {
             console.error("Error generating response:", error);

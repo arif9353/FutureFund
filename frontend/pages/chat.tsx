@@ -87,7 +87,7 @@ function ChatBot() {
         setIsTyping(true);
 
         let msgs = [...chats];
-        msgs.push({ role: "user", content: message });
+        msgs = [...msgs,{ role: "user", content: message } ];
         setChats(msgs);
 
         setMessage("");
@@ -97,7 +97,7 @@ function ChatBot() {
                 message,
                 msgs.filter((x) => x.role === "user").map((chat: any) => chat.content)
             );
-            msgs.push({ role: "assistant", content: response });
+            msgs = [...msgs,{ role: "assistant", content: response } ];
             setChats(msgs);
         } catch (error) {
             console.error("Error generating response:", error);
