@@ -24,10 +24,10 @@ async def dealing_low(investment_amount,years,bank,realtime_json,categorized_sto
         print("befor changes:\n",low_amounts)
 
         stock_data, stock_maxprice, stock_quantity, stock_max_profit, stock_profit_quantity = await stock_values_giver(low_amounts["s1"], categorized_stocks)
-        crypto_data, crypto_max_profit, crypto_max_quantity = await crypto_values_giver(realtime_json["crypto"], low_amounts["s2"])
+        crypto_data, crypto_max_profit, crypto_max_quantity = await crypto_values_giver(realtime_json["crypto_data"], low_amounts["s2"])
         property_data,property_maxemi, property_max_profit = await shortlist_properties(low_amounts["s4"])
-        bond_data, bond_maxprice, bond_quantity = await shortlist_bonds(realtime_json["bond"],low_amounts["s6"])
-        gold_data,gold_quantity = await gold_give(realtime_json["gold"],years,low_amounts["s5"])
+        bond_data, bond_maxprice, bond_quantity = await shortlist_bonds(realtime_json["bond_data"],low_amounts["s6"])
+        gold_data,gold_quantity = await gold_give(realtime_json["gold_data"],years,low_amounts["s5"])
         
 
         if stock_data is None:
@@ -66,7 +66,7 @@ async def dealing_low(investment_amount,years,bank,realtime_json,categorized_sto
             low_amounts["s5"] = 0
             print("Gold is not supported here so adding it's amount to RD")
         else:
-            gold_difference_amount = round((low_amounts["s5"] - (gold_quantity*realtime_json["gold"])),2)
+            gold_difference_amount = round((low_amounts["s5"] - (gold_quantity*realtime_json["gold_data"])),2)
             low_amounts["s3"] = round((low_amounts["s3"]+gold_difference_amount),2)
             low_amounts["s5"] = low_amounts["s5"]-gold_difference_amount
 
@@ -162,8 +162,8 @@ async def dealing_mid(investment_amount, years, bank, realtime_json, categorized
         
         stock_data, stock_maxprice, stock_quantity, stock_max_profit, stock_profit_quantity = await stock_values_giver(mid_amounts["s1"], categorized_stocks)
         property_data, property_maxemi, property_max_profit = await shortlist_properties(mid_amounts["s4"])
-        bond_data, bond_maxprice, bond_quantity = await shortlist_bonds(realtime_json["bond"], mid_amounts["s6"])
-        gold_data, gold_quantity = await gold_give(realtime_json["gold"], years, mid_amounts["s5"])
+        bond_data, bond_maxprice, bond_quantity = await shortlist_bonds(realtime_json["bond_data"], mid_amounts["s6"])
+        gold_data, gold_quantity = await gold_give(realtime_json["gold_data"], years, mid_amounts["s5"])
         print("\n\nproperty_max_emi is:\n\n",property_maxemi)
         if stock_data is None:
             mid_amounts["s3"] += round(mid_amounts['s1'] / 2, 2)
@@ -204,13 +204,13 @@ async def dealing_mid(investment_amount, years, bank, realtime_json, categorized
             mid_amounts["s5"] = 0
             print("Gold is not supported here so adding its amount to RD")
         else:
-            gold_difference_amount = round(mid_amounts["s5"] - (gold_quantity * realtime_json["gold"]), 2)
+            gold_difference_amount = round(mid_amounts["s5"] - (gold_quantity * realtime_json["gold_data"]), 2)
             mid_amounts["s3"] += round(gold_difference_amount / 2, 2)
             mid_amounts["s2"] += round(gold_difference_amount / 2, 2)
             mid_amounts["s5"] -= gold_difference_amount
 
         recurrent_data = await recurrent_deposit_give(mid_amounts["s3"], years, bank, realtime_json["recurrent_deposit"])
-        crypto_data,crypto_max_profit,crypto_max_quantity = await crypto_values_giver(realtime_json["crypto"], mid_amounts["s2"])
+        crypto_data,crypto_max_profit,crypto_max_quantity = await crypto_values_giver(realtime_json["crypto_data"], mid_amounts["s2"])
 
         print("After changes:\n", mid_amounts)
 
@@ -304,9 +304,9 @@ async def dealing_high(investment_amount,years,bank,realtime_json, categorized_s
         stock_data,stock_maxprice,stock_quantity, stock_max_profit, stock_profit_quantity = await stock_values_giver(high_amounts["s1"],categorized_stocks)
         recurrent_data = await recurrent_deposit_give(high_amounts["s3"],years,bank,realtime_json["recurrent_deposit"])
         property_data,property_maxemi, property_max_profit = await shortlist_properties(high_amounts["s4"])
-        bond_data,bond_maxprice,bond_quantity = await shortlist_bonds(realtime_json["bond"],high_amounts["s6"])
+        bond_data,bond_maxprice,bond_quantity = await shortlist_bonds(realtime_json["bond_data"],high_amounts["s6"])
 
-        gold_data,gold_quantity = await gold_give(realtime_json["gold"],years,high_amounts["s5"])
+        gold_data,gold_quantity = await gold_give(realtime_json["gold_data"],years,high_amounts["s5"])
         
 
         if stock_data is None:
@@ -345,11 +345,11 @@ async def dealing_high(investment_amount,years,bank,realtime_json, categorized_s
             high_amounts["s5"] = 0
             print("Gold is not supported here so adding it's amount to RD")
         else:
-            gold_difference_amount = round((high_amounts["s5"] - (gold_quantity*realtime_json["gold"])),2)
+            gold_difference_amount = round((high_amounts["s5"] - (gold_quantity*realtime_json["gold_data"])),2)
             high_amounts["s2"] = round((high_amounts["s2"]+gold_difference_amount),2)
             high_amounts["s5"] = high_amounts["s5"]-gold_difference_amount
         
-        crypto_data, crypto_max_profit, crypto_max_quantity = await crypto_values_giver(realtime_json["crypto"],high_amounts["s2"])
+        crypto_data, crypto_max_profit, crypto_max_quantity = await crypto_values_giver(realtime_json["crypto_data"],high_amounts["s2"])
         
         print("after changes:\n",high_amounts)
 
