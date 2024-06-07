@@ -50,19 +50,6 @@ export default function FixedChatBot() {
     const chatContainerRef = useRef<any>(null);
     const [discDisplayed, setDiscDisplayed] = useState(false);
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async user => {
-            if (!user && !redirected) {
-                await auth.signOut();
-                toast(' ⓘ  Please Login to access.');
-                setRedirected(true);
-                router.push('/login');
-            }
-        });
-
-        return () => unsubscribe();
-    }, [redirected]);
-
     const chat = async (e: any, message: any) => {
         e.preventDefault();
         if (!message) return;
@@ -112,14 +99,14 @@ export default function FixedChatBot() {
         };
     }, [isOpen]);
 
-    if (location === "/login" || location === "/register" || location === "/chat") {
+    if (location === "/login" || location === "/register" || location === "/chat" || location === "/") {
         return null;
     }
 
     return (
         <>
             <button
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() =>{ if(!isOpen) setIsOpen(true)}}
                 className="fixed bottom-4 right-4 bg-slate-200 text-white p-4 rounded-full shadow-lg hover:bg-slate-100"
             >
                 {isOpen ? <IoMdClose color="black" size={24} /> : <RiChat3Fill size={24} color="black" />}
