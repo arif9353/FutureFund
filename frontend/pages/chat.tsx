@@ -18,9 +18,9 @@ async function runPrompt(valueOfPrompt: string, previousChats: string[]) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     let prompt =
-        `(Pretend you are a chatbot by FutureFund - AI Based Investment Allocation Engine , you can talk only talk about Investments, Stocks, Retirement Planning, Mutual Funds, things like these , don't mention your name until asked, try to talk about indian financial stuffs more, give short chat response), and give response to the text : '${valueOfPrompt}' , and don't answer for any questions which are not related to finance or investments, etc. tell them strictly that you are a not trained for these questions. 
-    These are the context, please condsider them wisely while responding\n` +
-        previousChats.join("\n");
+    `(Pretend you are a chatbot : FutureFund - AI Based Investment Helper , you can talk about Any Stocks, Any Crypto, Gold ETF, Retirement Planning, Mutual Funds, RDs, Any finance related things like these , don't mention your name until asked, try to talk about financial stuffs more, majorly try indian finance, give short chat response), and give response to the text : '${valueOfPrompt}' , and don't answer for any questions which are not related to finance or investments, etc. tell them strictly that you are a not trained for these questions. 
+These are the context, please condsider them wisely while responding\n` +
+    previousChats.join("\n");
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
