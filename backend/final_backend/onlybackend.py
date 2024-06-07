@@ -53,12 +53,11 @@ async def fetch_data():
 #'stock_data': stock_data, 'crypto_data': crypto_data, 'recurrent_deposit': recurrent_deposit_data, 'gold_data': gold_data,'bond_data': bond_data,          
 
 @app.post('/model')
-async def main_model(location:str=Form(...),years_to_retire: int = Form(...),salary: float=Form(...),investment_amount: float=Form(...),current_savings: float=Form(...),debt: float=Form(...),other_expenses: float=Form(...),number_of_dependents: int=Form(...),current_invested_amount: float=Form(...),bank: str=Form(...)):
+async def main_model(details:str=Form(...),years_to_retire: str = Form(...),salary: str=Form(...),investment_amount: str=Form(...),current_savings: str=Form(...),debt: str=Form(...),other_expenses: str=Form(...),number_of_dependents: str=Form(...),current_invested_amount: str=Form(...),bank: str=Form(...)):
     try:
         global Json_Main
-        print("\nTHIS IS JSON_MAIN: \n",Json_Main)
-        json_data = {'location': location, 'years_to_retire': years_to_retire, 'salary': salary, 'investment_amount': investment_amount, 'current_savings': current_savings, 'debt': debt, 'other_expenses': other_expenses, 'number_of_dependents': number_of_dependents, 'current_invested_amount': current_invested_amount, 'bank': bank} 
-        ans = await model_predict(json_data,Json_Main)
+        json_data = {'years_to_retire': int(years_to_retire), 'salary': float(salary), 'investment_amount': float(investment_amount), 'current_savings': float(current_savings), 'debt': float(debt), 'other_expenses': float(other_expenses), 'number_of_dependents': int(number_of_dependents), 'current_invested_amount': float(current_invested_amount), 'bank': bank} 
+        ans = await model_predict(json_data,details)
         return JSONResponse(content={'low_json':ans[0],'mid_json':ans[1],'high_json':ans[2]},status_code=200)
     except Exception as e:
         return JSONResponse(content={'message':f'failure while trying {str(e)}', 'success': False}, status_code=500)

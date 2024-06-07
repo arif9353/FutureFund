@@ -5,6 +5,7 @@ import numpy as np
 import copy
 from dealing_allocation import dealing_low,dealing_high,dealing_mid
 from stock import stock_cluster_gen
+import json
 
 
 async def display_results(low_pred, mid_pred, high_pred):
@@ -38,7 +39,7 @@ async def model_predict(employee_json, realtime_json):
         number_of_dependents = employee_json["number_of_dependents"]
         current_invested_amount = employee_json["current_invested_amount"]
         bank = employee_json["bank"]
-
+        realtime_json = json.loads(realtime_json)
         loaded_model = load_model('./investment_recommendation_mih.h5')
         preprocessor = joblib.load('./preprocessor_pipeline.pkl')
 

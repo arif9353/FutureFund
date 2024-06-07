@@ -53,7 +53,7 @@ async def fetch_data():
 async def main_model(request:Request):
     try:
         data = await request.json()
-        json_data = {'years_to_retire': data["years_to_retire"], 'salary': data["salary"], 'investment_amount': data["investment_amount"], 'current_savings': data["current_savings"], 'debt': data["debt"], 'other_expenses': data["other_expenses"], 'number_of_dependents': data["number_of_dependents"], 'current_invested_amount': data["current_invested_amount"], 'bank': data["bank"]} 
+        json_data = {'years_to_retire': int(data["years_to_retire"]), 'salary': float(data["salary"]), 'investment_amount': float(data["investment_amount"]), 'current_savings': float(data["current_savings"]), 'debt': float(data["debt"]), 'other_expenses': float(data["other_expenses"]), 'number_of_dependents': int(data["number_of_dependents"]), 'current_invested_amount': float(data["current_invested_amount"]), 'bank': data["bank"]} 
         ans = await model_predict(json_data,data["details"])
         return JSONResponse(content={'low_json':ans[0],'mid_json':ans[1],'high_json':ans[2]},status_code=200)
     except Exception as e:
