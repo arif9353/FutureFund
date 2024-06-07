@@ -292,7 +292,7 @@ export const static_investment_data = {
         "bond_percent": 9.242546666666666,
         "goal_savings": 900000
     },
-    "medium_json": {
+    "mid_json": {
         "stock": {
             "High": [
                 {

@@ -88,8 +88,9 @@ async def predict_next_n_days(n_days):
         mse = mean_squared_error(y_test, y_pred)
 
         # Fetch real-time gold data
-        gold_price = await fetch_real_time_gold_price_alpha_vantage()
-        #gold_price = 18010.96
+        # gold_price = await fetch_real_time_gold_price_alpha_vantage()
+        gold_price = 18010.96
+        #!!
         if gold_price is None:
             return None
         # Copy the last row of the gold_data DataFrame to use for prediction

@@ -131,9 +131,8 @@ const InvestmentForm = () => {
     if (loading) {
         return (
             <>
-                <div className='h-[90vh] w-[90vw] flex justify-center items-center'>
+                <div className='h-[calc(100vh-80px)] w-[100vw] flex justify-center items-center'>
                     <PuffLoader color="#ffffff" />
-                    
                 </div>
             </>
         )
@@ -197,6 +196,7 @@ const InvestmentForm = () => {
                         name="years_to_retire"
                         value={localFormData.years_to_retire || 0}
                         onChange={handleChange}
+                        required
                     />
                     <p className='text-slate-400 text-xs'>*Slide to select years to retire</p>
                 </div>

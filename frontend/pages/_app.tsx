@@ -10,15 +10,33 @@ import { RecoilRoot } from "recoil";
 export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
-    axios.get(`${API_URL}/fetchdata/`)
-      .then(res => {
-        console.log(":::result", res.data)
-        localStorage.setItem("details", JSON.stringify(res.data))
-        localStorage.setItem("stock_data", JSON.stringify(res.data))
-      }).catch(err => {
-        console.error(err)
-      })
-  }, [])
+    const fetchData = async () => {
+      const stockData = localStorage.getItem('stock_data');
+      const lastFetchedTime = localStorage.getItem('last_fetched_time');
+      const thirtyMinutes = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+      if (stockData && lastFetchedTime) {
+        const timeElapsed = Date.now() - parseInt(lastFetchedTime, 10);
+        if (timeElapsed < thirtyMinutes) {
+          // Data is recent, no need to call the API
+          console.log('Using cached data');
+          return;
+        }
+      }
+
+      try {
+        const res = await axios.get(`${API_URL}/fetchdata/`);
+        console.log(":::result", res.data);
+        localStorage.setItem("details", JSON.stringify(res.data));
+        localStorage.setItem("stock_data", JSON.stringify(res.data));
+        localStorage.setItem("last_fetched_time", Date.now().toString());
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return <>
     <RecoilRoot>

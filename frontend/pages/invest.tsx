@@ -7,6 +7,9 @@ import { useRecoilState } from 'recoil';
 import { PopupDataRecoil, allocationDataRecoil, investmentFormDataRecoil } from '@/_recoil/cosmic';
 import InvestmentForm from '@/_components/Invest_Form';
 import DetailsPopup from '@/_components/DetailsPopup';
+import { formatIndianPrice } from '@/_components/utils';
+import { Pie } from 'react-chartjs-2';
+import 'chart.js/auto';
 
 export default function Invest() {
     const [data, setData] = useRecoilState(allocationDataRecoil);
@@ -66,7 +69,7 @@ export default function Invest() {
                 className="flex flex-col pc:flex-row pc:min-h-[calc(100vh-70px)] mob:min-h-[calc(100vh-70px)] text-white p-4 gap-4">
                 <div ref={sidebarRef}
 
-                    className={`fixed inset-0 z-40 w-64 bg-[#1d1f24]  rounded-lg p-4 pb-1 transition-transform duration-500 ease-in-out transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} pc:relative pc:translate-x-0`}>
+                    className={`fixed inset-0 z-40 w-64 bg-[#1d1f24]  mob:border-r mob:border-r-[#ffffff50] mob:shadow-2xl pc:rounded-lg p-4 pb-1 transition-transform duration-500 ease-in-out transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} pc:relative pc:translate-x-0`}>
 
                     <span className='block text-sm'>Details</span>
                     <hr className='my-3' />
@@ -86,7 +89,7 @@ export default function Invest() {
                 <div className="flex-1 pc:p-4 mob:p-2 rounded-lg">
                     <div className='overflow-y-scroll max-h-full'>
                         <RiskDetails title="Low Risk" color="text-green-300" data={data.low_json} />
-                        <RiskDetails title="Medium Risk" color="text-orange-300" data={data.medium_json} />
+                        <RiskDetails title="Medium Risk" color="text-orange-300" data={data.mid_json} />
                         <RiskDetails title="High Risk" color="text-red-400" data={data.high_json} />
                     </div>
                 </div>
@@ -131,25 +134,62 @@ const RiskDetails = ({ title, color, data }: { title: string, color: string, dat
         }
     }
 
+    const pieData = {
+        labels: fields.map(field => field.name),
+        datasets: [
+            {
+                data: fields.map(field => data[field.percent]),
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#FF9F40',
+                    '#4BC0C0',
+                    '#9966FF',
+                ],
+                hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#FF9F40',
+                    '#4BC0C0',
+                    '#9966FF',
+                ],
+            },
+        ],
+    };
     return (
-        <div className='w-full flex flex-wrap justify-between mob:justify-center gap-2 mb-5'>
-            <h1 className={`w-full mb-4 ${color} font-semibold`}>{title}
+        <div className={`w-full flex mob:flex-col justify-start pc:gap-x-[2%] pc:gap-y-4 pc:flex-wrap mob:justify-center gap-2 mb-14 ${title != "High Risk" &&" border-b border-b-[#ffffff35]"} pb-10`}>
+            <h1 className={`w-full mb-2 ${color} font-semibold`}>{title}
                 <span className='ml-4 font-normal text-white mob:block mob:ml-0 mob:mt-2'>
                     <span className='text-white opacity-40 font-extrabold'>
                         |
                     </span>
-                    &nbsp;&nbsp; Goal Savings : {data?.goal_savings}</span>
+                    &nbsp;&nbsp; Goal Savings :  <span className='text-blue-400 text-bold mx-3'>{formatIndianPrice(data?.goal_savings)}</span> INR</span>
             </h1>
-            {fields.map(({ name, percent, amount }) => (
-                <div onClick={() => {
-                    handleOnClickofDiv(name, title)
-                }}
-                    key={name} className='h-[150px] w-[150px] bg-[#1d1f24] rounded-md text-sm flex flex-col p-4 items-start gap-3'>
-                    {name}
-                    <h2>{data[percent]?.toFixed(1)} %</h2>
-                    <h2>{data[amount]?.toFixed(1)} ₹</h2>
+            <div className='flex flex-wrap gap-4 w-[40%] mob:w-full mob:justify-center'>
+                {data &&
+                    <>
+                        {fields.map(({ name, percent, amount }) => {
+                            if (data[percent] != 0.00)
+                                return (
+                                    <div onClick={() => {
+                                        handleOnClickofDiv(name, title)
+                                    }}
+                                        key={name} className='h-[150px] w-[150px] bg-[#1d1f24] rounded-md text-sm flex flex-col p-4 items-start gap-3'>
+                                        {name}
+                                        <h2>{data[percent]} %</h2>
+                                        <h2>{data[amount]?.toFixed(2)} ₹</h2>
+                                    </div>
+                                )
+                        })}
+                    </>}
+            </div>
+            <div className='w-[40%] flex justify-center mob:w-full mt-5'>
+                <div className='w-[300px] h-[300px]'>
+                    <Pie data={pieData} />
                 </div>
-            ))}
+            </div>
         </div>
     );
 }

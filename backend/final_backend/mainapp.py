@@ -30,8 +30,8 @@ async def fetch_data():
         crypto_data = await get_crypto_data()
         stock_data, stock_main_data = await get_stock_data('https://m.moneycontrol.com/more_market.php')
         recurrent_deposit_data = await get_bank_names_for_RD()
-        gold_data = await fetch_real_time_gold_price_alpha_vantage()
-        #gold_data = 18010.96
+        # gold_data = await fetch_real_time_gold_price_alpha_vantage()
+        gold_data = 18010.96
         bond_data = await get_bonds_data('https://www.indiabonds.com/search/?limit=100&switch_one=radio-grid')
         #property_data = await property_json(location, average_cpi, years)
         with open('properties.json', 'r') as f:
