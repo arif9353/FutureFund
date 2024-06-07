@@ -1,7 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState, useRef, useEffect } from "react";
 import { auth } from "@/firebase/firebase_store";
-import Top_Nav from "@/_components/Top_Nav";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import { RiSendPlaneFill, RiChat3Fill } from "react-icons/ri";
@@ -11,13 +10,13 @@ import { chatsRecoilState } from "@/_recoil/cosmic";
 
 const genAI = new GoogleGenerativeAI("AIzaSyAsi474NfYaPT1nBU24huFKWQtghZ0R74c");
 
-async function runPrompt(valueOfPrompt: string, previousChats: string[]) {
+async function runPrompt(valueOfPrompt: any, previousChats: any) {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     let prompt =
-    `(Pretend you are a chatbot : FutureFund - AI Based Investment Helper , you can talk about Any Stocks, Any Crypto, Gold ETF, Retirement Planning, Mutual Funds, RDs, Any finance related things like these , don't mention your name until asked, try to talk about financial stuffs more, majorly try indian finance, give short chat response), and give response to the text : '${valueOfPrompt}' , and don't answer for any questions which are not related to finance or investments, etc. tell them strictly that you are a not trained for these questions. 
-These are the context, please condsider them wisely while responding\n` +
-    previousChats.join("\n");
+        `(Pretend you are a chatbot: FutureFund - AI Based Investment Helper, you can talk about Any Stocks, Any Crypto, Gold ETF, Retirement Planning, Mutual Funds, RDs, Any finance related things like these, don't mention your name until asked, try to talk about financial stuffs more, majorly try Indian finance, give short chat response), and give response to the text: '${valueOfPrompt}', and don't answer for any questions which are not related to finance or investments, etc. tell them strictly that you are not trained for these questions. 
+These are the context, please consider them wisely while responding\n` +
+        previousChats.join("\n");
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
@@ -30,15 +29,14 @@ export default function FixedChatBot() {
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
     const location = router.pathname;
-
+    const chatbotRef = useRef<any>(null);
     const [chats, setChats] = useRecoilState<any>(chatsRecoilState);
-
 
     useEffect(() => {
         if (chats?.length === 0) {
             setChats([
                 {
-                    content: `Hello, I am FutureFund AI, how may I assist you today ?`,
+                    content: `Hello, I am FutureFund AI, how may I assist you today?`,
                     role: "assistant",
                 },
             ]);
@@ -46,7 +44,7 @@ export default function FixedChatBot() {
     }, [auth?.currentUser?.displayName]);
 
     const theme = "dark";
-    const [redirected, setRedirected] = useState<boolean>(false);
+    const [redirected, setRedirected] = useState(false);
     const [message, setMessage] = useState("");
     const [isTyping, setIsTyping] = useState(false);
     const chatContainerRef = useRef<any>(null);
@@ -76,7 +74,7 @@ export default function FixedChatBot() {
         try {
             const response = await runPrompt(
                 message,
-                msgs.filter((x) => x.role === "user").map((chat: any) => chat.content)
+                msgs.filter(x => x.role === "user").map(chat => chat.content)
             );
             msgs.push({ role: "assistant", content: response });
             setChats(msgs);
@@ -88,35 +86,53 @@ export default function FixedChatBot() {
 
     useEffect(() => {
         if (chatContainerRef.current) {
-            chatContainerRef.current.scrollTop =
-                chatContainerRef.current.scrollHeight;
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
         }
     }, [chats]);
 
     useEffect(() => {
         if (location === "/login" || location === "/register" || location === "/chat") {
-            setIsOpen(false)
+            setIsOpen(false);
         }
-    }, [location])
+    }, [location]);
+
+    useEffect(() => {
+        function handleClickOutside(event: any) {
+            if (chatbotRef.current && !chatbotRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        }
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
 
     if (location === "/login" || location === "/register" || location === "/chat") {
-
-        return <></>;
+        return null;
     }
+
     return (
         <>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-4 right-4 bg-slate-200 text-white p-4 rounded-full shadow-lg hover:bg-slate-100 "
+                className="fixed bottom-4 right-4 bg-slate-200 text-white p-4 rounded-full shadow-lg hover:bg-slate-100"
             >
                 {isOpen ? <IoMdClose color="black" size={24} /> : <RiChat3Fill size={24} color="black" />}
             </button>
             {isOpen && (
-                <div className={` fixed bottom-20 right-4 bg-[#2a2c34] border rounded-lg shadow-lg p-4 w-[400px] max-w-[90vw] z-[9999]`}>
+                <div
+                    ref={chatbotRef}
+                    className="fixed bottom-20 right-4 bg-[#2a2c34] border rounded-lg shadow-lg p-4 w-[400px] max-w-[90vw] z-[9999]"
+                >
                     <main>
                         <section
                             ref={chatContainerRef}
-                            className={`allChatsContainer text-white max-h-[350px] overflow-y-auto`}
+                            className="allChatsContainer text-white max-h-[350px] overflow-y-auto"
                         >
                             {chats && chats.length
                                 ? chats.map((chat: any, index: number) => (
@@ -133,8 +149,8 @@ export default function FixedChatBot() {
                                 </p>
                             )}
                         </section>
-                        <div className={``}>
-                            <form action="" className="flex " onSubmit={(e) => chat(e, message)}>
+                        <div>
+                            <form action="" className="flex" onSubmit={(e) => chat(e, message)}>
                                 <input
                                     type="text"
                                     name="message"

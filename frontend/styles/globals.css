@@ -169,7 +169,7 @@ body {
 }
 
 .chatpage .dark.inputChat {
-    background: linear-gradient(to top, #101010, #10101081);
+    background: linear-gradient(to top, #101010, #00000000);
 }
 
 .chatpage .dark.inputChat form button {
