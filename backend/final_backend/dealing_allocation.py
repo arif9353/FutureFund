@@ -5,7 +5,7 @@ from recurrent_deposit import calculate_rd_maturity, recurrent_deposit_give
 from bonds import shortlist_bonds
 from property import shortlist_properties
 
-async def dealing_low(investment_amount,years,bank,realtime_json,categorized_stocks,goal,low_percent):
+async def dealing_low(investment_amount,years,bank,realtime_json,categorized_stocks,low_percent):
     try:
         low_amounts = {
             's1': round(float(investment_amount * float(low_percent["s1"])) /100 ,2),
@@ -126,7 +126,6 @@ async def dealing_low(investment_amount,years,bank,realtime_json,categorized_sto
             "bond": bond_data,
             "bond_amount": low_amounts["s6"],
             "bond_percent": bond_percent_div,
-            "goal_savings": goal,
             "overall_profit": overall_profit
         }
 
@@ -142,7 +141,7 @@ async def dealing_low(investment_amount,years,bank,realtime_json,categorized_sto
         return {"response":f"error occured while running dealing_low function {str(e)}"}
 
 
-async def dealing_mid(investment_amount, years, bank, realtime_json, categorized_stocks, goal, mid_percent):
+async def dealing_mid(investment_amount, years, bank, realtime_json, categorized_stocks, mid_percent):
     try:
         mid_amounts = {
             's1': round(float(investment_amount * float(mid_percent["s1"])) / 100, 2),
@@ -266,7 +265,6 @@ async def dealing_mid(investment_amount, years, bank, realtime_json, categorized
             "bond": bond_data,
             "bond_amount": mid_amounts["s6"],
             "bond_percent": bond_percent_div,
-            "goal_savings": goal,
             "overall_profit": overall_profit
         }
 
@@ -283,7 +281,7 @@ async def dealing_mid(investment_amount, years, bank, realtime_json, categorized
 
 
 
-async def dealing_high(investment_amount,years,bank,realtime_json, categorized_stocks,goal,high_percent):
+async def dealing_high(investment_amount,years,bank,realtime_json, categorized_stocks,high_percent):
     try:
         high_amounts = {
             's1': round((float(investment_amount*(float(high_percent["s1"])))/100),2),
@@ -405,7 +403,6 @@ async def dealing_high(investment_amount,years,bank,realtime_json, categorized_s
             "bond": bond_data,
             "bond_amount": high_amounts["s6"],
             "bond_percent": bond_percent_div,
-            "goal_savings":goal,
             "overall_profit": overall_profit
         }
 
