@@ -1,5 +1,5 @@
 import { investmentFormDataRecoil } from '@/_recoil/cosmic';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { FaMapMarkerAlt, FaDollarSign, FaBuilding, FaUser } from 'react-icons/fa';
 import { HiOutlineSparkles } from 'react-icons/hi2';
@@ -16,6 +16,14 @@ const InvestmentForm = () => {
             [name]: value,
         }));
     };
+
+    const [detailsObj, setDetailsObj] = useState({})
+    useEffect(()=>{
+        "use client";
+        let x = localStorage.getItem("details")
+
+        setDetailsObj(JSON.parse(x))
+    },[])
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -44,13 +52,18 @@ const InvestmentForm = () => {
 
         // All validations passed, call api and finally  set the form data
         
-        // axios.post(`${API_URL}/fetchdata/`)
-        //     .then(res => {
-        //         console.log(res.data)
-        //         setData(res.data)
-        //     }).catch(err => {
-        //         console.error(err)
-        //     })
+        console.log("making api call")
+        axios.post(`${API_URL}/model/`,{
+            ...localFormData,
+            details : 
+
+        })
+            .then(res => {
+                console.log(":::result" ,res.data)
+                setData(res.data)
+            }).catch(err => {
+                console.error(err)
+            })
 
         setFormData(localFormData);
     };
