@@ -1,13 +1,16 @@
-import { investmentFormDataRecoil } from '@/_recoil/cosmic';
+import { allocationDataRecoil, investmentFormDataRecoil } from '@/_recoil/cosmic';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { FaMapMarkerAlt, FaDollarSign, FaBuilding, FaUser } from 'react-icons/fa';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 import toast from 'react-hot-toast';
+import axios from 'axios';
+import { API_URL } from './utils';
 
 const InvestmentForm = () => {
     const [formData, setFormData] = useRecoilState<any>(investmentFormDataRecoil);
     const [localFormData, setLocalFormData] = useState(formData);
+    const [_, setData] = useRecoilState(allocationDataRecoil);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -18,12 +21,12 @@ const InvestmentForm = () => {
     };
 
     const [detailsObj, setDetailsObj] = useState({})
-    useEffect(()=>{
+    useEffect(() => {
         "use client";
-        let x = localStorage.getItem("details")
+        let x: any = localStorage.getItem("details")
 
         setDetailsObj(JSON.parse(x))
-    },[])
+    }, [])
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -51,21 +54,22 @@ const InvestmentForm = () => {
         console.log("Hello NAN")
 
         // All validations passed, call api and finally  set the form data
-        
-        console.log("making api call")
-        axios.post(`${API_URL}/model/`,{
-            ...localFormData,
-            details : 
 
-        })
-            .then(res => {
-                console.log(":::result" ,res.data)
-                setData(res.data)
+        console.log("making api call")
+
+        if (localFormData) {
+            axios.post(`${API_URL}/model/`, {
+                ...localFormData,
+                details: detailsObj
+            }).then(res => {
+                console.log(":::result", res.data)
+                setData(res?.data)
+                setFormData(localFormData);
             }).catch(err => {
                 console.error(err)
             })
+        }
 
-        setFormData(localFormData);
     };
 
     const bankOptions = {

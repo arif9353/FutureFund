@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
     axios.get(`${API_URL}/fetchdata/`)
       .then(res => {
         console.log(":::result", res.data)
+        localStorage.setItem("details", JSON.stringify(res.data))
       }).catch(err => {
         console.error(err)
       })
