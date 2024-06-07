@@ -14,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
       .then(res => {
         console.log(":::result", res.data)
         localStorage.setItem("details", JSON.stringify(res.data))
+        localStorage.setItem("stock_data", JSON.stringify(res.data))
       }).catch(err => {
         console.error(err)
       })

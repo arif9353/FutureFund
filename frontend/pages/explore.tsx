@@ -18,6 +18,10 @@ export default function Explore() {
         //     }).catch(err => {
         //         console.error(err)
         //     })
+
+        "use client";
+        let x : any = JSON.parse(localStorage.getItem("stock_data") as any);
+        setData(x)
     }, [])
 
     return (

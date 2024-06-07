@@ -1,16 +1,18 @@
 import { allocationDataRecoil, investmentFormDataRecoil } from '@/_recoil/cosmic';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { FaMapMarkerAlt, FaDollarSign, FaBuilding, FaUser } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaRupeeSign, FaBuilding, FaUser } from 'react-icons/fa';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { API_URL } from './utils';
+import { PuffLoader } from 'react-spinners';
 
 const InvestmentForm = () => {
     const [formData, setFormData] = useRecoilState<any>(investmentFormDataRecoil);
     const [localFormData, setLocalFormData] = useState(formData);
     const [_, setData] = useRecoilState(allocationDataRecoil);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -58,6 +60,7 @@ const InvestmentForm = () => {
         console.log("making api call")
 
         if (localFormData) {
+            setLoading(true)
             axios.post(`${API_URL}/model/`, {
                 ...localFormData,
                 details: detailsObj
@@ -67,6 +70,8 @@ const InvestmentForm = () => {
                 setFormData(localFormData);
             }).catch(err => {
                 console.error(err)
+            }).finally(() => {
+                setLoading(false)
             })
         }
 
@@ -99,13 +104,13 @@ const InvestmentForm = () => {
     };
 
     const inputFields = [
-        { label: 'Salary', name: 'salary', icon: <FaDollarSign /> },
-        { label: 'Investment Amount', name: 'investment_amount', icon: <FaDollarSign /> },
-        { label: 'Current Savings', name: 'current_savings', icon: <FaDollarSign /> },
-        { label: 'Debt', name: 'debt', icon: <FaDollarSign /> },
-        { label: 'Other Expenses', name: 'other_expenses', icon: <FaDollarSign /> },
+        { label: 'Salary', name: 'salary', icon: <FaRupeeSign /> },
+        { label: 'Investment Amount', name: 'investment_amount', icon: <FaRupeeSign /> },
+        { label: 'Current Savings', name: 'current_savings', icon: <FaRupeeSign /> },
+        { label: 'Debt', name: 'debt', icon: <FaRupeeSign /> },
+        { label: 'Other Expenses', name: 'other_expenses', icon: <FaRupeeSign /> },
         { label: 'Number of Dependents', name: 'number_of_dependents', icon: <FaUser /> },
-        { label: 'Current Invested Amount', name: 'current_invested_amount', icon: <FaDollarSign /> },
+        { label: 'Current Invested Amount', name: 'current_invested_amount', icon: <FaRupeeSign /> },
     ];
 
     const locationOptions = [
@@ -122,6 +127,17 @@ const InvestmentForm = () => {
         { value: 'ghaziabad', label: 'Ghaziabad' },
         { value: 'faridabad', label: 'Faridabad' },
     ];
+
+    if (loading) {
+        return (
+            <>
+                <div className='h-[90vh] w-[90vw] flex justify-center items-center'>
+                    <PuffLoader color="#ffffff" />
+                    
+                </div>
+            </>
+        )
+    }
 
     return (
         <form className="w-full max-w-lg mx-auto space-y-6 p-6 bg-[#1d1f24] rounded-lg shadow-md" onSubmit={handleSubmit}>

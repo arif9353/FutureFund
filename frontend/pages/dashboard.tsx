@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebase_store";
 import toast from "react-hot-toast";
 import Side_Nav_Dashboard from "@/_components/Side_Nav_Dashboard";
-import { HiOutlineChartBar, HiOutlineCurrencyDollar, HiOutlineSparkles, HiOutlineUser } from "react-icons/hi2";
+import { HiOutlineBanknotes, HiOutlineChartBar, HiOutlineCurrencyDollar, HiOutlineSparkles, HiOutlineUser } from "react-icons/hi2";
 import { HiOutlineChat } from "react-icons/hi";
 
 export default function Dashboard() {
@@ -76,7 +76,7 @@ export default function Dashboard() {
                                     <span className="block text-xs mt-1">Check out Real-time stock values.</span>
                                 </div>
                                 <span className="self-end">
-                                    <HiOutlineCurrencyDollar size={"20px"} />
+                                    <HiOutlineBanknotes size={"20px"} />
                                 </span>
                             </button>
 
@@ -95,6 +95,7 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
+                
             </div>
         </>
     );
