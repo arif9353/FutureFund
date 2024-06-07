@@ -11,7 +11,8 @@
             "location": "Jahangirpuri",
             "goal_price": 4880642.64,
             "profit": 1780642.6399999997,
-            "profit_percentage": 57.44008516129031
+            "profit_percentage": 57.44008516129031,
+            "place": "Delhi"
         },
         {
             "title": "Metro Apartment  Jahangir Puri",
@@ -24,7 +25,8 @@
             "location": "Jahangir Puri",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Delhi"
         },
         {
             "title": "Azadpur",
@@ -37,7 +39,8 @@
             "location": "Azadpur",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Delhi"
         },
         {
             "title": "Jahangirpuri",
@@ -50,7 +53,8 @@
             "location": "Jahangirpuri",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Delhi"
         },
         {
             "title": "Jahangirpuri",
@@ -63,7 +67,8 @@
             "location": "Jahangirpuri",
             "goal_price": 5825283.15,
             "profit": 2125283.1500000004,
-            "profit_percentage": 57.44008513513514
+            "profit_percentage": 57.44008513513514,
+            "place": "Delhi"
         },
         {
             "title": "Standalone Building    Adarsh Nagar",
@@ -76,7 +81,8 @@
             "location": "Adarsh Nagar",
             "goal_price": 10469765.66,
             "profit": 3819765.66,
-            "profit_percentage": 57.44008511278196
+            "profit_percentage": 57.44008511278196,
+            "place": "Delhi"
         },
         {
             "title": "Standalone Building    Adarsh Nagar",
@@ -89,7 +95,8 @@
             "location": "Adarsh Nagar",
             "goal_price": 10469765.66,
             "profit": 3819765.66,
-            "profit_percentage": 57.44008511278196
+            "profit_percentage": 57.44008511278196,
+            "place": "Delhi"
         },
         {
             "title": "Kewal Park",
@@ -102,7 +109,8 @@
             "location": "Kewal Park",
             "goal_price": 7084803.83,
             "profit": 2584803.83,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Delhi"
         },
         {
             "title": "Adarsh Nagar",
@@ -115,20 +123,8 @@
             "location": "Adarsh Nagar",
             "goal_price": 29913616.17,
             "profit": 10913616.170000002,
-            "profit_percentage": 57.44008510526317
-        },
-        {
-            "title": "Meerut Wale",
-            "price": 21000000,
-            "rate": "11667",
-            "address": "Independent House, meerut wala sweets",
-            "area": 1800,
-            "estimated_emi": 12000,
-            "bhk": 4,
-            "location": "Meerut Wale",
-            "goal_price": 33062417.87,
-            "profit": 12062417.870000001,
-            "profit_percentage": 57.4400850952381
+            "profit_percentage": 57.44008510526317,
+            "place": "Delhi"
         },
         {
             "title": "Adarsh Nagar",
@@ -141,7 +137,8 @@
             "location": "Adarsh Nagar",
             "goal_price": 8974084.85,
             "profit": 3274084.8499999996,
-            "profit_percentage": 57.4400850877193
+            "profit_percentage": 57.4400850877193,
+            "place": "Delhi"
         },
         {
             "title": "Dda  Jahangirpuri",
@@ -154,7 +151,8 @@
             "location": "Jahangirpuri",
             "goal_price": 10233605.53,
             "profit": 3733605.5299999993,
-            "profit_percentage": 57.44008507692306
+            "profit_percentage": 57.44008507692306,
+            "place": "Delhi"
         },
         {
             "title": "Mahendra Park",
@@ -167,7 +165,8 @@
             "location": "Mahendra Park",
             "goal_price": 11808006.38,
             "profit": 4308006.380000001,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place": "Delhi"
         },
         {
             "title": "Satkamal  Azadpur",
@@ -180,7 +179,8 @@
             "location": "Azadpur",
             "goal_price": 13382407.23,
             "profit": 4882407.23,
-            "profit_percentage": 57.440085058823534
+            "profit_percentage": 57.440085058823534,
+            "place": "Delhi"
         },
         {
             "title": "Azadpur",
@@ -193,7 +193,8 @@
             "location": "Azadpur",
             "goal_price": 6297603.4,
             "profit": 2297603.4000000004,
-            "profit_percentage": 57.44008500000001
+            "profit_percentage": 57.44008500000001,
+            "place": "Delhi"
         },
         {
             "title": "Adarsh Nagar",
@@ -206,7 +207,8 @@
             "location": "Adarsh Nagar",
             "goal_price": 6297603.4,
             "profit": 2297603.4000000004,
-            "profit_percentage": 57.44008500000001
+            "profit_percentage": 57.44008500000001,
+            "place": "Delhi"
         },
         {
             "title": "Adarsh Nagar",
@@ -219,7 +221,8 @@
             "location": "Adarsh Nagar",
             "goal_price": 3148801.7,
             "profit": 1148801.7000000002,
-            "profit_percentage": 57.44008500000001
+            "profit_percentage": 57.44008500000001,
+            "place": "Delhi"
         },
         {
             "title": "Standalone Building    Azadpur",
@@ -232,7 +235,8 @@
             "location": "Azadpur",
             "goal_price": 7872004.25,
             "profit": 2872004.25,
-            "profit_percentage": 57.440084999999996
+            "profit_percentage": 57.440084999999996,
+            "place": "Delhi"
         },
         {
             "title": "Jahangirpuri",
@@ -245,7 +249,8 @@
             "location": "Jahangirpuri",
             "goal_price": 2204161.19,
             "profit": 804161.19,
-            "profit_percentage": 57.440084999999996
+            "profit_percentage": 57.440084999999996,
+            "place": "Delhi"
         },
         {
             "title": "Standalone Building    Jahangirpuri",
@@ -258,20 +263,8 @@
             "location": "Jahangirpuri",
             "goal_price": 7872004.25,
             "profit": 2872004.25,
-            "profit_percentage": 57.440084999999996
-        },
-        {
-            "title": "Jahangirpuri",
-            "price": 600000,
-            "rate": "1333",
-            "address": "standalone building, Mahendra Park,    near  Police Station Mahendra Park",
-            "area": 450,
-            "estimated_emi": 3438,
-            "bhk": 1,
-            "location": "Jahangirpuri",
-            "goal_price": 944640.51,
-            "profit": 344640.51,
-            "profit_percentage": 57.440084999999996
+            "profit_percentage": 57.440084999999996,
+            "place": "Delhi"
         },
         {
             "title": "Jahangirpuri",
@@ -284,7 +277,8 @@
             "location": "Jahangirpuri",
             "goal_price": 1259520.68,
             "profit": 459520.67999999993,
-            "profit_percentage": 57.440084999999996
+            "profit_percentage": 57.440084999999996,
+            "place": "Delhi"
         },
         {
             "title": "Jahangirpuri",
@@ -297,7 +291,8 @@
             "location": "Jahangirpuri",
             "goal_price": 4408322.38,
             "profit": 1608322.38,
-            "profit_percentage": 57.440084999999996
+            "profit_percentage": 57.440084999999996,
+            "place": "Delhi"
         },
         {
             "title": "Aryavat Apartment  Jahangirpuri",
@@ -310,7 +305,8 @@
             "location": "Jahangirpuri",
             "goal_price": 2833921.53,
             "profit": 1033921.5299999998,
-            "profit_percentage": 57.44008499999998
+            "profit_percentage": 57.44008499999998,
+            "place": "Delhi"
         },
         {
             "title": "Dda  Jahangirpuri",
@@ -323,7 +319,8 @@
             "location": "Jahangirpuri",
             "goal_price": 1968001.06,
             "profit": 718001.06,
-            "profit_percentage": 57.4400848
+            "profit_percentage": 57.4400848,
+            "place": "Delhi"
         },
         {
             "title": "Jp Codename Lottery  Thane",
@@ -336,7 +333,8 @@
             "location": "Thane",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Mumbai"
         },
         {
             "title": "Jp Codename Lottery  Thane",
@@ -349,7 +347,8 @@
             "location": "Thane",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Mumbai"
         },
         {
             "title": "Unnati Woods   Thane West",
@@ -362,7 +361,8 @@
             "location": "Thane",
             "goal_price": 9761285.28,
             "profit": 3561285.2799999993,
-            "profit_percentage": 57.44008516129031
+            "profit_percentage": 57.44008516129031,
+            "place": "Mumbai"
         },
         {
             "title": "Cosmos Jewles, Thane West  Cosmos Jewels",
@@ -375,7 +375,8 @@
             "location": "Cosmos Jewels",
             "goal_price": 16846089.11,
             "profit": 6146089.109999999,
-            "profit_percentage": 57.440085140186916
+            "profit_percentage": 57.440085140186916,
+            "place": "Mumbai"
         },
         {
             "title": "Runwal Estate  Chs  Thane West",
@@ -388,7 +389,8 @@
             "location": "Chs",
             "goal_price": 18105609.79,
             "profit": 6605609.789999999,
-            "profit_percentage": 57.44008513043477
+            "profit_percentage": 57.44008513043477,
+            "place": "Mumbai"
         },
         {
             "title": "Runwal Eirene Part 1  Thane West",
@@ -401,7 +403,8 @@
             "location": "Thane",
             "goal_price": 12910086.98,
             "profit": 4710086.98,
-            "profit_percentage": 57.44008512195122
+            "profit_percentage": 57.44008512195122,
+            "place": "Mumbai"
         },
         {
             "title": "Trinity Hills  Haware City, Thane West",
@@ -414,7 +417,8 @@
             "location": "Haware City, Thane",
             "goal_price": 19680010.64,
             "profit": 7180010.640000001,
-            "profit_percentage": 57.440085120000006
+            "profit_percentage": 57.440085120000006,
+            "place": "Mumbai"
         },
         {
             "title": "Acme Dandelia  Thane",
@@ -427,7 +431,8 @@
             "location": "Thane",
             "goal_price": 19680010.64,
             "profit": 7180010.640000001,
-            "profit_percentage": 57.440085120000006
+            "profit_percentage": 57.440085120000006,
+            "place": "Mumbai"
         },
         {
             "title": "Purushottam Plaza  Kasarvadavali",
@@ -440,7 +445,8 @@
             "location": "Kasarvadavali",
             "goal_price": 26764814.47,
             "profit": 9764814.469999999,
-            "profit_percentage": 57.44008511764706
+            "profit_percentage": 57.44008511764706,
+            "place": "Mumbai"
         },
         {
             "title": "Bank Auction Property - Shree Siddhivinayak Chsl  Thane West",
@@ -453,7 +459,8 @@
             "location": "Thane",
             "goal_price": 13539847.32,
             "profit": 4939847.32,
-            "profit_percentage": 57.44008511627907
+            "profit_percentage": 57.44008511627907,
+            "place": "Mumbai"
         },
         {
             "title": "Jp Codename Lottery  Thane",
@@ -466,7 +473,8 @@
             "location": "Thane",
             "goal_price": 6769923.66,
             "profit": 2469923.66,
-            "profit_percentage": 57.44008511627907
+            "profit_percentage": 57.44008511627907,
+            "place": "Mumbai"
         },
         {
             "title": "Bank Auction Property -mulberry Chsl  Thane West",
@@ -479,7 +487,8 @@
             "location": "Thane",
             "goal_price": 27709454.98,
             "profit": 10109454.98,
-            "profit_percentage": 57.440085113636364
+            "profit_percentage": 57.440085113636364,
+            "place": "Mumbai"
         },
         {
             "title": "Sita Smruti  Dadar West",
@@ -492,7 +501,8 @@
             "location": "Dadar",
             "goal_price": 42508822.98,
             "profit": 15508822.979999997,
-            "profit_percentage": 57.440085111111095
+            "profit_percentage": 57.440085111111095,
+            "place": "Mumbai"
         },
         {
             "title": "Rustomjee Urbania Azziano  Thane West",
@@ -505,7 +515,8 @@
             "location": "Thane",
             "goal_price": 21884171.83,
             "profit": 7984171.829999998,
-            "profit_percentage": 57.44008510791365
+            "profit_percentage": 57.44008510791365,
+            "place": "Mumbai"
         },
         {
             "title": "Hubtown Greenwoods F Wing, Mumbai  Thane West",
@@ -518,7 +529,8 @@
             "location": "Thane",
             "goal_price": 22828812.34,
             "profit": 8328812.34,
-            "profit_percentage": 57.44008510344828
+            "profit_percentage": 57.44008510344828,
+            "place": "Mumbai"
         },
         {
             "title": "West View    Thane West",
@@ -531,7 +543,8 @@
             "location": "Thane",
             "goal_price": 31488017.02,
             "profit": 11488017.02,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Mumbai"
         },
         {
             "title": "Vijay Nagari Annex  Thane West",
@@ -544,7 +557,8 @@
             "location": "Thane",
             "goal_price": 17318409.36,
             "profit": 6318409.359999999,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Mumbai"
         },
         {
             "title": "Rustomjee Urbania Athena  Thane West",
@@ -557,7 +571,8 @@
             "location": "Thane",
             "goal_price": 27866895.06,
             "profit": 10166895.059999999,
-            "profit_percentage": 57.44008508474575
+            "profit_percentage": 57.44008508474575,
+            "place": "Mumbai"
         },
         {
             "title": "Amravan Chs  Borivali West",
@@ -570,7 +585,8 @@
             "location": "Borivali",
             "goal_price": 18892810.21,
             "profit": 6892810.210000001,
-            "profit_percentage": 57.44008508333334
+            "profit_percentage": 57.44008508333334,
+            "place": "Mumbai"
         },
         {
             "title": "Akash Apartment  Thane West",
@@ -583,7 +599,8 @@
             "location": "Thane",
             "goal_price": 9603845.19,
             "profit": 3503845.1899999995,
-            "profit_percentage": 57.440085081967204
+            "profit_percentage": 57.440085081967204,
+            "place": "Mumbai"
         },
         {
             "title": "Lodha Splendora  Bhayanderpada",
@@ -596,7 +613,8 @@
             "location": "Bhayanderpada",
             "goal_price": 20467211.06,
             "profit": 7467211.059999999,
-            "profit_percentage": 57.44008507692306
+            "profit_percentage": 57.44008507692306,
+            "place": "Mumbai"
         },
         {
             "title": "Bank Auction Property - Casa Univis  Thane West",
@@ -609,7 +627,8 @@
             "location": "Thane",
             "goal_price": 15251221.04,
             "profit": 5564221.039999999,
-            "profit_percentage": 57.44008506245483
+            "profit_percentage": 57.44008506245483,
+            "place": "Mumbai"
         },
         {
             "title": "Thane",
@@ -622,7 +641,8 @@
             "location": "Thane",
             "goal_price": 13067527.06,
             "profit": 4767527.0600000005,
-            "profit_percentage": 57.440085060240975
+            "profit_percentage": 57.440085060240975,
+            "place": "Mumbai"
         },
         {
             "title": "Brahmand Phase 6  Universal High School, Thane",
@@ -635,7 +655,8 @@
             "location": "Universal High School, Thane",
             "goal_price": 13382407.23,
             "profit": 4882407.23,
-            "profit_percentage": 57.440085058823534
+            "profit_percentage": 57.440085058823534,
+            "place": "Mumbai"
         },
         {
             "title": "Rosa Gardenia  Thane West",
@@ -648,7 +669,8 @@
             "location": "Thane",
             "goal_price": 16531208.93,
             "profit": 6031208.93,
-            "profit_percentage": 57.44008504761905
+            "profit_percentage": 57.44008504761905,
+            "place": "Mumbai"
         },
         {
             "title": "Unique Residency  Pune",
@@ -661,7 +683,8 @@
             "location": "Pune",
             "goal_price": 2361601.28,
             "profit": 861601.2799999998,
-            "profit_percentage": 57.44008533333332
+            "profit_percentage": 57.44008533333332,
+            "place": "Pune"
         },
         {
             "title": "Unique Residency  Pune",
@@ -674,7 +697,8 @@
             "location": "Pune",
             "goal_price": 2361601.28,
             "profit": 861601.2799999998,
-            "profit_percentage": 57.44008533333332
+            "profit_percentage": 57.44008533333332,
+            "place": "Pune"
         },
         {
             "title": "Sai Suvidha Complex Alephata  Alephata",
@@ -687,7 +711,8 @@
             "location": "Alephata",
             "goal_price": 2676481.45,
             "profit": 976481.4500000002,
-            "profit_percentage": 57.44008529411766
+            "profit_percentage": 57.44008529411766,
+            "place": "Pune"
         },
         {
             "title": "Sai Suvidha Complex Alephata  Alephata",
@@ -700,7 +725,8 @@
             "location": "Alephata",
             "goal_price": 2676481.45,
             "profit": 976481.4500000002,
-            "profit_percentage": 57.44008529411766
+            "profit_percentage": 57.44008529411766,
+            "place": "Pune"
         },
         {
             "title": "Swapnlok Society, Gopalwadi Road Daund  Pune",
@@ -713,7 +739,8 @@
             "location": "Pune",
             "goal_price": 2991361.62,
             "profit": 1091361.62,
-            "profit_percentage": 57.440085263157904
+            "profit_percentage": 57.440085263157904,
+            "place": "Pune"
         },
         {
             "title": "Swapnlok Society, Gopalwadi Road Daund  Pune",
@@ -726,7 +753,8 @@
             "location": "Pune",
             "goal_price": 2991361.62,
             "profit": 1091361.62,
-            "profit_percentage": 57.440085263157904
+            "profit_percentage": 57.440085263157904,
+            "place": "Pune"
         },
         {
             "title": "Vaishnav Sadan  Pune",
@@ -739,7 +767,8 @@
             "location": "Pune",
             "goal_price": 3936002.13,
             "profit": 1436002.13,
-            "profit_percentage": 57.44008519999999
+            "profit_percentage": 57.44008519999999,
+            "place": "Pune"
         },
         {
             "title": "Vaishnav Sadan  Pune",
@@ -752,7 +781,8 @@
             "location": "Pune",
             "goal_price": 3936002.13,
             "profit": 1436002.13,
-            "profit_percentage": 57.44008519999999
+            "profit_percentage": 57.44008519999999,
+            "place": "Pune"
         },
         {
             "title": "Siddhi Vinayak Carona  Viman Nagar",
@@ -765,7 +795,8 @@
             "location": "Viman Nagar",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Pune"
         },
         {
             "title": "Siddhi Vinayak Carona  Viman Nagar",
@@ -778,7 +809,8 @@
             "location": "Viman Nagar",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Pune"
         },
         {
             "title": "Nanded City Asawari   Asawari B",
@@ -791,7 +823,8 @@
             "location": "Asawari B",
             "goal_price": 11650566.3,
             "profit": 4250566.300000001,
-            "profit_percentage": 57.44008513513514
+            "profit_percentage": 57.44008513513514,
+            "place": "Pune"
         },
         {
             "title": "Nanded City Asawari   Asawari B",
@@ -804,7 +837,8 @@
             "location": "Asawari B",
             "goal_price": 11650566.3,
             "profit": 4250566.300000001,
-            "profit_percentage": 57.44008513513514
+            "profit_percentage": 57.44008513513514,
+            "place": "Pune"
         },
         {
             "title": "Chandan Nagar,",
@@ -817,7 +851,8 @@
             "location": "Chandan Nagar,",
             "goal_price": 12595206.81,
             "profit": 4595206.8100000005,
-            "profit_percentage": 57.44008512500001
+            "profit_percentage": 57.44008512500001,
+            "place": "Pune"
         },
         {
             "title": "Satyam Apartment  Viman Nagar",
@@ -830,7 +865,8 @@
             "location": "Viman Nagar",
             "goal_price": 12595206.81,
             "profit": 4595206.8100000005,
-            "profit_percentage": 57.44008512500001
+            "profit_percentage": 57.44008512500001,
+            "place": "Pune"
         },
         {
             "title": "Viman Nagar",
@@ -843,7 +879,8 @@
             "location": "Viman Nagar",
             "goal_price": 94464051.06,
             "profit": 34464051.06,
-            "profit_percentage": 57.440085100000005
+            "profit_percentage": 57.440085100000005,
+            "place": "Pune"
         },
         {
             "title": "Viman Nagar",
@@ -856,7 +893,8 @@
             "location": "Viman Nagar",
             "goal_price": 94464051.06,
             "profit": 34464051.06,
-            "profit_percentage": 57.440085100000005
+            "profit_percentage": 57.440085100000005,
+            "place": "Pune"
         },
         {
             "title": "Pleasant Avenue, Viman Nagar Central, Pun  Viman Nagar Central, Pun",
@@ -869,7 +907,8 @@
             "location": "Viman Nagar Central, Pun",
             "goal_price": 15744008.51,
             "profit": 5744008.51,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Pune"
         },
         {
             "title": "Pleasant Avenue, Viman Nagar Central, Pun  Viman Nagar Central, Pun",
@@ -882,7 +921,8 @@
             "location": "Viman Nagar Central, Pun",
             "goal_price": 15744008.51,
             "profit": 5744008.51,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Pune"
         },
         {
             "title": "Raj Apartment  Wadgaon Sheri",
@@ -895,7 +935,8 @@
             "location": "Wadgaon Sheri",
             "goal_price": 15744008.51,
             "profit": 5744008.51,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Pune"
         },
         {
             "title": "Raj Apartment  Wadgaon Sheri",
@@ -908,7 +949,8 @@
             "location": "Wadgaon Sheri",
             "goal_price": 15744008.51,
             "profit": 5744008.51,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Pune"
         },
         {
             "title": "Pune",
@@ -921,7 +963,8 @@
             "location": "Pune",
             "goal_price": 17318409.36,
             "profit": 6318409.359999999,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Pune"
         },
         {
             "title": "Apartment  Wadgaon Sheri",
@@ -934,7 +977,8 @@
             "location": "Wadgaon Sheri",
             "goal_price": 8659204.68,
             "profit": 3159204.6799999997,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Pune"
         },
         {
             "title": "Neco Garden Socei  Viman Nagar",
@@ -947,7 +991,8 @@
             "location": "Viman Nagar",
             "goal_price": 17318409.36,
             "profit": 6318409.359999999,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Pune"
         },
         {
             "title": "Apartment  Wadgaon Sheri",
@@ -960,7 +1005,8 @@
             "location": "Wadgaon Sheri",
             "goal_price": 8659204.68,
             "profit": 3159204.6799999997,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Pune"
         },
         {
             "title": "Pune",
@@ -973,7 +1019,8 @@
             "location": "Pune",
             "goal_price": 17318409.36,
             "profit": 6318409.359999999,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Pune"
         },
         {
             "title": "Pearl Tuscany  Somasundarapalya",
@@ -986,7 +1033,8 @@
             "location": "Somasundarapalya",
             "goal_price": 9131524.94,
             "profit": 3331524.9399999995,
-            "profit_percentage": 57.44008517241378
+            "profit_percentage": 57.44008517241378,
+            "place": "Bengaluru"
         },
         {
             "title": "Harshitha Arcade  Somasundarapalya",
@@ -999,7 +1047,8 @@
             "location": "Somasundarapalya",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Bengaluru"
         },
         {
             "title": "Prestige Ferns Residency  Tower 14 Prestige Ferns Residency, Millennium Ave, Eastwood Twp, Haralur, Bengaluru, Karnataka 560102, India",
@@ -1012,7 +1061,8 @@
             "location": "Tower 14 Prestige Ferns Residency, Millennium Ave,wood Twp, Haralur, Bengaluru, Karnataka 560102, India",
             "goal_price": 28339215.32,
             "profit": 10339215.32,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Bengaluru"
         },
         {
             "title": "Sai Poorna Heights  Somasundarapalya",
@@ -1025,7 +1075,8 @@
             "location": "Somasundarapalya",
             "goal_price": 14169607.66,
             "profit": 5169607.66,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Bengaluru"
         },
         {
             "title": "Pjc Royale Arcadia  Pjc Royale Arcadia",
@@ -1038,7 +1089,8 @@
             "location": "Pjc Royale Arcadia",
             "goal_price": 29913616.17,
             "profit": 10913616.170000002,
-            "profit_percentage": 57.44008510526317
+            "profit_percentage": 57.44008510526317,
+            "place": "Bengaluru"
         },
         {
             "title": "Unitech Pearl  Hsr Layout",
@@ -1051,7 +1103,8 @@
             "location": "Hsr Layout",
             "goal_price": 15744008.51,
             "profit": 5744008.51,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Bengaluru"
         },
         {
             "title": "Nd Sepal Apartments  Nd Sepal Apartments",
@@ -1064,7 +1117,8 @@
             "location": "Nd Sepal Apartments",
             "goal_price": 15744008.51,
             "profit": 5744008.51,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Bengaluru"
         },
         {
             "title": "Svamitva Soul Spring Phase 1  Hsr Layout",
@@ -1077,7 +1131,8 @@
             "location": "Hsr Layout",
             "goal_price": 33849619.87,
             "profit": 12349618.869999997,
-            "profit_percentage": 57.44008509580998
+            "profit_percentage": 57.44008509580998,
+            "place": "Bengaluru"
         },
         {
             "title": "Salarpuria Sattva Serenity, Bangalore  Hsr Friends Park",
@@ -1090,7 +1145,8 @@
             "location": "Hsr Friends Park",
             "goal_price": 34636818.72,
             "profit": 12636818.719999999,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Bengaluru"
         },
         {
             "title": "Srishti  Hsr Layout",
@@ -1103,7 +1159,8 @@
             "location": "Hsr Layout",
             "goal_price": 53529628.93,
             "profit": 19529628.93,
-            "profit_percentage": 57.44008508823529
+            "profit_percentage": 57.44008508823529,
+            "place": "Bengaluru"
         },
         {
             "title": "Nd Sepal  Hsr Layout",
@@ -1116,7 +1173,8 @@
             "location": "Hsr Layout",
             "goal_price": 18892810.21,
             "profit": 6892810.210000001,
-            "profit_percentage": 57.44008508333334
+            "profit_percentage": 57.44008508333334,
+            "place": "Bengaluru"
         },
         {
             "title": "Mangam Pride Apartments, 2nd Sector  Hsr Layout",
@@ -1129,7 +1187,8 @@
             "location": "Hsr Layout",
             "goal_price": 29441295.91,
             "profit": 10741295.91,
-            "profit_percentage": 57.44008508021391
+            "profit_percentage": 57.44008508021391,
+            "place": "Bengaluru"
         },
         {
             "title": "Nagarjuna Greenridge Apartments  Hsr Layout",
@@ -1142,7 +1201,8 @@
             "location": "Hsr Layout",
             "goal_price": 25111693.57,
             "profit": 9161693.57,
-            "profit_percentage": 57.440085078369904
+            "profit_percentage": 57.440085078369904,
+            "place": "Bengaluru"
         },
         {
             "title": "Ncc Urban Nagarjuna Greenridge  Hsr Layout",
@@ -1155,7 +1215,8 @@
             "location": "Hsr Layout",
             "goal_price": 30700816.59,
             "profit": 11200816.59,
-            "profit_percentage": 57.440085076923076
+            "profit_percentage": 57.440085076923076,
+            "place": "Bengaluru"
         },
         {
             "title": "Aratt Royal Manor, Hsr Layout  Hsr Layout",
@@ -1168,7 +1229,8 @@
             "location": "Hsr Layout",
             "goal_price": 23616012.76,
             "profit": 8616012.760000002,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place": "Bengaluru"
         },
         {
             "title": "Cheri Residency  Cheri Residency",
@@ -1181,7 +1243,8 @@
             "location": "Cheri Residency",
             "goal_price": 11808006.38,
             "profit": 4308006.380000001,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place": "Bengaluru"
         },
         {
             "title": "Yd Lotus Pond  Bangalore One",
@@ -1194,7 +1257,8 @@
             "location": "Bangalore One",
             "goal_price": 13382407.23,
             "profit": 4882407.23,
-            "profit_percentage": 57.440085058823534
+            "profit_percentage": 57.440085058823534,
+            "place": "Bengaluru"
         },
         {
             "title": "Dream Homes Our Place Apartments, Hsr Layout  Hsr Layout",
@@ -1207,7 +1271,8 @@
             "location": "Hsr Layout",
             "goal_price": 14012167.57,
             "profit": 5112167.57,
-            "profit_percentage": 57.44008505617978
+            "profit_percentage": 57.44008505617978,
+            "place": "Bengaluru"
         },
         {
             "title": "Dream Homes Our Place Apartments  Hsr Layout",
@@ -1220,7 +1285,8 @@
             "location": "Hsr Layout",
             "goal_price": 14327047.74,
             "profit": 5227047.74,
-            "profit_percentage": 57.44008505494506
+            "profit_percentage": 57.44008505494506,
+            "place": "Bengaluru"
         },
         {
             "title": "Nsr Brindavan Annex, Hsr Layout  Hsr Layout",
@@ -1233,7 +1299,8 @@
             "location": "Hsr Layout",
             "goal_price": 14641927.91,
             "profit": 5341927.91,
-            "profit_percentage": 57.44008505376345
+            "profit_percentage": 57.44008505376345,
+            "place": "Bengaluru"
         },
         {
             "title": "Aakruthi Silverline  Hsr Layout",
@@ -1246,7 +1313,8 @@
             "location": "Hsr Layout",
             "goal_price": 14956808.08,
             "profit": 5456808.08,
-            "profit_percentage": 57.44008505263159
+            "profit_percentage": 57.44008505263159,
+            "place": "Bengaluru"
         },
         {
             "title": "Gated Community Villa Smart Homes  Hosur",
@@ -1259,7 +1327,8 @@
             "location": "Hosur",
             "goal_price": 13626439.36,
             "profit": 4971439.359999999,
-            "profit_percentage": 57.44008503755054
+            "profit_percentage": 57.44008503755054,
+            "place": "Chennai"
         },
         {
             "title": "Pallikaranai",
@@ -1272,7 +1341,8 @@
             "location": "Pallikaranai",
             "goal_price": 8501764.6,
             "profit": 3101764.5999999996,
-            "profit_percentage": 57.440085185185175
+            "profit_percentage": 57.440085185185175,
+            "place": "Chennai"
         },
         {
             "title": "Chennai South",
@@ -1285,7 +1355,8 @@
             "location": "Chennai South",
             "goal_price": 9131524.94,
             "profit": 3331524.9399999995,
-            "profit_percentage": 57.44008517241378
+            "profit_percentage": 57.44008517241378,
+            "place": "Chennai"
         },
         {
             "title": "Ps Contruction  Pallikaranai",
@@ -1298,7 +1369,8 @@
             "location": "Pallikaranai",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Chennai"
         },
         {
             "title": "Surya  Pallikaranai",
@@ -1311,7 +1383,8 @@
             "location": "Pallikaranai",
             "goal_price": 4880642.64,
             "profit": 1780642.6399999997,
-            "profit_percentage": 57.44008516129031
+            "profit_percentage": 57.44008516129031,
+            "place": "Chennai"
         },
         {
             "title": "Arun Excello Narmada Apartments  Chennai South",
@@ -1324,7 +1397,8 @@
             "location": "Chennai South",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Chennai"
         },
         {
             "title": "Ozone Greens Perumbakkam,  Perumbakkam",
@@ -1337,7 +1411,8 @@
             "location": "Perumbakkam",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Chennai"
         },
         {
             "title": "Gp Foundation Prasanna Homes -  Pallikaranai",
@@ -1350,7 +1425,8 @@
             "location": "Pallikaranai",
             "goal_price": 6455043.49,
             "profit": 2355043.49,
-            "profit_percentage": 57.44008512195122
+            "profit_percentage": 57.44008512195122,
+            "place": "Chennai"
         },
         {
             "title": "Ke Ap  Chennai South",
@@ -1363,7 +1439,8 @@
             "location": "Chennai South",
             "goal_price": 19680010.64,
             "profit": 7180010.640000001,
-            "profit_percentage": 57.440085120000006
+            "profit_percentage": 57.440085120000006,
+            "place": "Chennai"
         },
         {
             "title": "Ke Ap  Chennai South",
@@ -1376,7 +1453,8 @@
             "location": "Chennai South",
             "goal_price": 19680010.64,
             "profit": 7180010.640000001,
-            "profit_percentage": 57.440085120000006
+            "profit_percentage": 57.440085120000006,
+            "place": "Chennai"
         },
         {
             "title": "Jalladianpet",
@@ -1389,7 +1467,8 @@
             "location": "Jalladianpet",
             "goal_price": 13224967.15,
             "profit": 4824967.15,
-            "profit_percentage": 57.44008511904762
+            "profit_percentage": 57.44008511904762,
+            "place": "Chennai"
         },
         {
             "title": "Ganesh Enclave, Pallikaranai  Pallikaranai",
@@ -1402,7 +1481,8 @@
             "location": "Pallikaranai",
             "goal_price": 6769923.66,
             "profit": 2469923.66,
-            "profit_percentage": 57.44008511627907
+            "profit_percentage": 57.44008511627907,
+            "place": "Chennai"
         },
         {
             "title": "Pallikaranai",
@@ -1415,7 +1495,8 @@
             "location": "Pallikaranai",
             "goal_price": 14169607.66,
             "profit": 5169607.66,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Chennai"
         },
         {
             "title": "Sumangali  Jalladiampet, Pallikaranai",
@@ -1428,7 +1509,8 @@
             "location": "Jalladiampet, Pallikaranai",
             "goal_price": 7084803.83,
             "profit": 2584803.83,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Chennai"
         },
         {
             "title": "Gated Community Villa Casagrand Flagship Villa  Pallikaranai",
@@ -1441,7 +1523,8 @@
             "location": "Pallikaranai",
             "goal_price": 50615412.96,
             "profit": 18466412.96,
-            "profit_percentage": 57.44008510373574
+            "profit_percentage": 57.44008510373574,
+            "place": "Chennai"
         },
         {
             "title": "Ozone Greens Perumbakkam, Perumbakkam  Perumbakkam",
@@ -1454,7 +1537,8 @@
             "location": "Perumbakkam",
             "goal_price": 15744008.51,
             "profit": 5744008.51,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Chennai"
         },
         {
             "title": "Casagrand Flagship  Pallikaranai",
@@ -1467,7 +1551,8 @@
             "location": "Pallikaranai",
             "goal_price": 9953362.18,
             "profit": 3631362.1799999997,
-            "profit_percentage": 57.440085099652
+            "profit_percentage": 57.440085099652,
+            "place": "Chennai"
         },
         {
             "title": "Gated Community Villa Casagrand Flagship Villa  Pallikaranai",
@@ -1480,7 +1565,8 @@
             "location": "Pallikaranai",
             "goal_price": 31802897.19,
             "profit": 11602897.190000001,
-            "profit_percentage": 57.440085099009906
+            "profit_percentage": 57.440085099009906,
+            "place": "Chennai"
         },
         {
             "title": "Sumangali  Pallikaranai",
@@ -1493,7 +1579,8 @@
             "location": "Pallikaranai",
             "goal_price": 8659204.68,
             "profit": 3159204.6799999997,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Chennai"
         },
         {
             "title": "Ozone Greens   Perumbakkam",
@@ -1506,7 +1593,8 @@
             "location": "Perumbakkam",
             "goal_price": 12752646.89,
             "profit": 4652646.890000001,
-            "profit_percentage": 57.44008506172841
+            "profit_percentage": 57.44008506172841,
+            "place": "Chennai"
         },
         {
             "title": "Ozone Greens Perumbakkam  Perumbakkam",
@@ -1519,7 +1607,8 @@
             "location": "Perumbakkam",
             "goal_price": 14956808.08,
             "profit": 5456808.08,
-            "profit_percentage": 57.44008505263159
+            "profit_percentage": 57.44008505263159,
+            "place": "Chennai"
         },
         {
             "title": "Chennai South",
@@ -1532,7 +1621,8 @@
             "location": "Chennai South",
             "goal_price": 16531208.93,
             "profit": 6031208.93,
-            "profit_percentage": 57.44008504761905
+            "profit_percentage": 57.44008504761905,
+            "place": "Chennai"
         },
         {
             "title": "Casagrand Flagship  Pallikaranai",
@@ -1545,7 +1635,8 @@
             "location": "Pallikaranai",
             "goal_price": 14958382.48,
             "profit": 5457382.48,
-            "profit_percentage": 57.44008504367962
+            "profit_percentage": 57.44008504367962,
+            "place": "Chennai"
         },
         {
             "title": "Eden Castle  Pallikaranai",
@@ -1558,7 +1649,8 @@
             "location": "Pallikaranai",
             "goal_price": 5982723.23,
             "profit": 2182723.2300000004,
-            "profit_percentage": 57.44008500000001
+            "profit_percentage": 57.44008500000001,
+            "place": "Chennai"
         },
         {
             "title": "Prasanna Homes  Pallikaranai",
@@ -1571,7 +1663,8 @@
             "location": "Pallikaranai",
             "goal_price": 6297603.4,
             "profit": 2297603.4000000004,
-            "profit_percentage": 57.44008500000001
+            "profit_percentage": 57.44008500000001,
+            "place":"Chennai"
         },
         {
             "title": "Gp Foundation Prasanna Homes  Pallikaranai",
@@ -1584,7 +1677,8 @@
             "location": "Pallikaranai",
             "goal_price": 5982723.23,
             "profit": 2182723.2300000004,
-            "profit_percentage": 57.44008500000001
+            "profit_percentage": 57.44008500000001,
+            "place":"Chennai"
         },
         {
             "title": "Maruti Housing Colony,   Maruti Vihar,sector 28",
@@ -1597,7 +1691,8 @@
             "location": "Maruti Vihar,sector 28",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place":"Gurugram"
         },
         {
             "title": "Signature Global Grand Iva Sector 103  Sector 103",
@@ -1610,7 +1705,8 @@
             "location": "Sector 103",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place":"Gurugram"
         },
         {
             "title": "Signature Global Grand Iva   Sector 103",
@@ -1623,7 +1719,8 @@
             "location": "Sector 103",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place":"Gurugram"
         },
         {
             "title": "Apartment  M G Metro Station",
@@ -1636,7 +1733,8 @@
             "location": "M G Metro Station",
             "goal_price": 12595206.81,
             "profit": 4595206.8100000005,
-            "profit_percentage": 57.44008512500001
+            "profit_percentage": 57.44008512500001,
+            "place":"Gurugram"
         },
         {
             "title": "Apartment  M G Metro Station",
@@ -1649,7 +1747,8 @@
             "location": "M G Metro Station",
             "goal_price": 12595206.81,
             "profit": 4595206.8100000005,
-            "profit_percentage": 57.44008512500001
+            "profit_percentage": 57.44008512500001,
+            "place":"Gurugram"
         },
         {
             "title": "Maruti Vihar,",
@@ -1662,7 +1761,8 @@
             "location": "Maruti Vihar,",
             "goal_price": 25190413.62,
             "profit": 9190413.620000001,
-            "profit_percentage": 57.44008512500001
+            "profit_percentage": 57.44008512500001,
+            "place":"Gurugram"
         },
         {
             "title": "Standalone Builiding  Sector 28",
@@ -1675,7 +1775,8 @@
             "location": "Sector 28",
             "goal_price": 15744008.51,
             "profit": 5744008.51,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place":"Gurugram"
         },
         {
             "title": "Sector 25",
@@ -1688,7 +1789,8 @@
             "location": "Sector 25",
             "goal_price": 78720042.55,
             "profit": 28720042.549999997,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place":"Gurugram"
         },
         {
             "title": "Sector 25",
@@ -1701,7 +1803,8 @@
             "location": "Sector 25",
             "goal_price": 62976034.04,
             "profit": 22976034.04,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place":"Gurugram"
         },
         {
             "title": "Standalone Building   Sector 25",
@@ -1714,20 +1817,8 @@
             "location": "Sector 25",
             "goal_price": 62976034.04,
             "profit": 22976034.04,
-            "profit_percentage": 57.44008509999999
-        },
-        {
-            "title": "Heritage City, Sector 25  Sector 25",
-            "price": 21000000,
-            "rate": "17573",
-            "address": "Heritage City, Sector 25  MG Road, Heritage City, Sector 25, Gurugram, Haryana 122002, India",
-            "area": 1195,
-            "estimated_emi": 12000,
-            "bhk": 2,
-            "location": "Sector 25",
-            "goal_price": 33062417.87,
-            "profit": 12062417.870000001,
-            "profit_percentage": 57.4400850952381
+            "profit_percentage": 57.44008509999999,
+            "place":"Gurugram"
         },
         {
             "title": "Dlf Phase 2",
@@ -1740,7 +1831,8 @@
             "location": "Dlf Phase 2",
             "goal_price": 55104029.78,
             "profit": 20104029.78,
-            "profit_percentage": 57.44008508571429
+            "profit_percentage": 57.44008508571429,
+            "place":"Gurugram"
         },
         {
             "title": "Dlf Phase 2",
@@ -1753,7 +1845,8 @@
             "location": "Dlf Phase 2",
             "goal_price": 55104029.78,
             "profit": 20104029.78,
-            "profit_percentage": 57.44008508571429
+            "profit_percentage": 57.44008508571429,
+            "place":"Gurugram"
         },
         {
             "title": "Sector 25",
@@ -1766,7 +1859,8 @@
             "location": "Sector 25",
             "goal_price": 56678430.63,
             "profit": 20678430.630000003,
-            "profit_percentage": 57.44008508333334
+            "profit_percentage": 57.44008508333334,
+            "place":"Gurugram"
         },
         {
             "title": "Unitech Heritage City, Sector-25  Sector-25",
@@ -1779,7 +1873,8 @@
             "location": "Sector-25",
             "goal_price": 39360021.27,
             "profit": 14360021.270000003,
-            "profit_percentage": 57.44008508000002
+            "profit_percentage": 57.44008508000002,
+            "place":"Gurugram"
         },
         {
             "title": "Balkishan Independent Floors At E3 59  Dlf Phase 2",
@@ -1792,7 +1887,8 @@
             "location": "Dlf Phase 2",
             "goal_price": 39360021.27,
             "profit": 14360021.270000003,
-            "profit_percentage": 57.44008508000002
+            "profit_percentage": 57.44008508000002,
+            "place":"Gurugram"
         },
         {
             "title": "K-310  Sector 25",
@@ -1805,7 +1901,8 @@
             "location": "Sector 25",
             "goal_price": 40934422.12,
             "profit": 14934422.119999997,
-            "profit_percentage": 57.44008507692306
+            "profit_percentage": 57.44008507692306,
+            "place":"Gurugram"
         },
         {
             "title": "Signature Global Grand Iva Sector 103  Sector 103",
@@ -1818,7 +1915,8 @@
             "location": "Sector 103",
             "goal_price": 10233605.53,
             "profit": 3733605.5299999993,
-            "profit_percentage": 57.44008507692306
+            "profit_percentage": 57.44008507692306,
+            "place":"Gurugram"
         },
         {
             "title": "Maruti Vihar Housing Society  Sector 28",
@@ -1831,7 +1929,8 @@
             "location": "Sector 28",
             "goal_price": 11808006.38,
             "profit": 4308006.380000001,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place":"Gurugram"
         },
         {
             "title": "Signature Global Grand Iva Sector 103, Sector 103  Sector 103",
@@ -1844,7 +1943,8 @@
             "location": "Sector 103",
             "goal_price": 11808006.38,
             "profit": 4308006.380000001,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place":"Gurugram"
         },
         {
             "title": "Gated Community Villa Chandralok   Sector 28",
@@ -1857,7 +1957,8 @@
             "location": "Sector 28",
             "goal_price": 13382407.23,
             "profit": 4882407.23,
-            "profit_percentage": 57.440085058823534
+            "profit_percentage": 57.440085058823534,
+            "place":"Gurugram"
         },
         {
             "title": "Signature Global Grand Iva Sector 103  Sector 103",
@@ -1870,7 +1971,8 @@
             "location": "Sector 103",
             "goal_price": 6297603.4,
             "profit": 2297603.4000000004,
-            "profit_percentage": 57.44008500000001
+            "profit_percentage": 57.44008500000001,
+            "place":"Gurugram"
         },
         {
             "title": "Ranga Prasad Enclave  Gachibowli,vinayaka Nagar",
@@ -1883,7 +1985,8 @@
             "location": "Gachibowli,vinayaka Nagar",
             "goal_price": 10705925.79,
             "profit": 3905925.789999999,
-            "profit_percentage": 57.44008514705881
+            "profit_percentage": 57.44008514705881,
+            "place": "Hyderabad"
         },
         {
             "title": "Maa East Wood  Maa East Wood Apartment",
@@ -1896,7 +1999,8 @@
             "location": "Maa Wood Apartment",
             "goal_price": 12280326.64,
             "profit": 4480326.640000001,
-            "profit_percentage": 57.44008512820513
+            "profit_percentage": 57.44008512820513,
+            "place": "Hyderabad"
         },
         {
             "title": "Magnum Opus Apartments  Gachibowli",
@@ -1909,7 +2013,8 @@
             "location": "Gachibowli",
             "goal_price": 25505293.79,
             "profit": 9305293.79,
-            "profit_percentage": 57.44008512345678
+            "profit_percentage": 57.44008512345678,
+            "place": "Hyderabad"
         },
         {
             "title": "Masjid Banda  Kondapur",
@@ -1922,7 +2027,8 @@
             "location": "Kondapur",
             "goal_price": 13539847.32,
             "profit": 4939847.32,
-            "profit_percentage": 57.44008511627907
+            "profit_percentage": 57.44008511627907,
+            "place": "Hyderabad"
         },
         {
             "title": "New Cyber Valley  Kondapur",
@@ -1935,7 +2041,8 @@
             "location": "Kondapur",
             "goal_price": 13854727.49,
             "profit": 5054727.49,
-            "profit_percentage": 57.440085113636364
+            "profit_percentage": 57.440085113636364,
+            "place": "Hyderabad"
         },
         {
             "title": "Durga Bhavani Residency  Kondapur",
@@ -1948,7 +2055,8 @@
             "location": "Kondapur",
             "goal_price": 13854727.49,
             "profit": 5054727.49,
-            "profit_percentage": 57.440085113636364
+            "profit_percentage": 57.440085113636364,
+            "place": "Hyderabad"
         },
         {
             "title": "Sri Lakshmi Narasimha Nilayam  Kondapur",
@@ -1961,7 +2069,8 @@
             "location": "Kondapur",
             "goal_price": 14169607.66,
             "profit": 5169607.66,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Hyderabad"
         },
         {
             "title": "Sumadhura Horizon  Kondapur",
@@ -1974,7 +2083,8 @@
             "location": "Kondapur",
             "goal_price": 21884171.83,
             "profit": 7984171.829999998,
-            "profit_percentage": 57.44008510791365
+            "profit_percentage": 57.44008510791365,
+            "place": "Hyderabad"
         },
         {
             "title": "Kaizan Jyothi Residency  Hitec City",
@@ -1987,7 +2097,8 @@
             "location": "Hitec City",
             "goal_price": 22828812.34,
             "profit": 8328812.34,
-            "profit_percentage": 57.44008510344828
+            "profit_percentage": 57.44008510344828,
+            "place": "Hyderabad"
         },
         {
             "title": "Swarna Ivy  Swarna Ivy Apartments",
@@ -2000,7 +2111,8 @@
             "location": "Swarna Ivy Apartments",
             "goal_price": 15429128.34,
             "profit": 5629128.34,
-            "profit_percentage": 57.44008510204082
+            "profit_percentage": 57.44008510204082,
+            "place": "Hyderabad"
         },
         {
             "title": "Asbl Loft For Sale near Gachibowli",
@@ -2013,7 +2125,8 @@
             "location": "Asbl Loft For Sale near Gachibowli",
             "goal_price": 26766081.86,
             "profit": 9765276.86,
-            "profit_percentage": 57.440085101852524
+            "profit_percentage": 57.440085101852524,
+            "place": "Hyderabad"
         },
         {
             "title": "Asbl Loft For Sale near Gachibowli",
@@ -2026,7 +2139,8 @@
             "location": "Asbl Loft For Sale near Gachibowli",
             "goal_price": 26766081.86,
             "profit": 9765276.86,
-            "profit_percentage": 57.440085101852524
+            "profit_percentage": 57.440085101852524,
+            "place": "Hyderabad"
         },
         {
             "title": "Ayyanna Prestige, Masjid Banda  Ayyanna Prestige",
@@ -2039,7 +2153,8 @@
             "location": "Ayyanna Prestige",
             "goal_price": 31488017.02,
             "profit": 11488017.02,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Hyderabad"
         },
         {
             "title": "Meenakshi Trident Towers  Gachibowli",
@@ -2052,7 +2167,8 @@
             "location": "Gachibowli",
             "goal_price": 78720042.55,
             "profit": 28720042.549999997,
-            "profit_percentage": 57.44008509999999
+            "profit_percentage": 57.44008509999999,
+            "place": "Hyderabad"
         },
         {
             "title": "Gayathri Saadath Imperial  Gachibowli",
@@ -2065,7 +2181,8 @@
             "location": "Gachibowli",
             "goal_price": 17318409.36,
             "profit": 6318409.359999999,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Hyderabad"
         },
         {
             "title": "Kondapur,",
@@ -2078,7 +2195,8 @@
             "location": "Kondapur,",
             "goal_price": 98400053.18,
             "profit": 35900053.18000001,
-            "profit_percentage": 57.44008508800002
+            "profit_percentage": 57.44008508800002,
+            "place": "Hyderabad"
         },
         {
             "title": "Pavani Aqua  3, Masjid Banda, Sree Prabhupada Twp, Gachibowli, Kondapur, Hyderabad, Telangana 500084, India",
@@ -2091,7 +2209,8 @@
             "location": "3, Masjid Banda, Sree Prabhupada Twp, Gachibowli, Kondapur, Hyderabad, Telangana 500084, India",
             "goal_price": 18892810.21,
             "profit": 6892810.210000001,
-            "profit_percentage": 57.44008508333334
+            "profit_percentage": 57.44008508333334,
+            "place": "Hyderabad"
         },
         {
             "title": "Lakshmi Cadillac  Kondapur",
@@ -2104,7 +2223,8 @@
             "location": "Kondapur",
             "goal_price": 20467211.06,
             "profit": 7467211.059999999,
-            "profit_percentage": 57.44008507692306
+            "profit_percentage": 57.44008507692306,
+            "place": "Hyderabad"
         },
         {
             "title": "Alekhya Palm Woods  Nanakaramguda",
@@ -2117,7 +2237,8 @@
             "location": "Nanakaramguda",
             "goal_price": 31330576.93,
             "profit": 11430576.93,
-            "profit_percentage": 57.44008507537688
+            "profit_percentage": 57.44008507537688,
+            "place": "Hyderabad"
         },
         {
             "title": "Asbl Spectra For Sale near Gachibowli",
@@ -2130,7 +2251,8 @@
             "location": "Asbl Spectra For Sale near Gachibowli",
             "goal_price": 31963517.56,
             "profit": 11661497.559999999,
-            "profit_percentage": 57.44008507527821
+            "profit_percentage": 57.44008507527821,
+            "place": "Hyderabad"
         },
         {
             "title": "Ramky Towers  Gachibowli",
@@ -2143,7 +2265,8 @@
             "location": "Gachibowli",
             "goal_price": 32275217.44,
             "profit": 11775217.440000001,
-            "profit_percentage": 57.44008507317074
+            "profit_percentage": 57.44008507317074,
+            "place": "Hyderabad"
         },
         {
             "title": "Sri Siva Priya Homes  Kondapur",
@@ -2156,7 +2279,8 @@
             "location": "Kondapur",
             "goal_price": 11493126.21,
             "profit": 4193126.210000001,
-            "profit_percentage": 57.44008506849316
+            "profit_percentage": 57.44008506849316,
+            "place": "Hyderabad"
         },
         {
             "title": "Kaizen Jyothi Residency  Madhapur",
@@ -2169,7 +2293,8 @@
             "location": "Madhapur",
             "goal_price": 23616012.76,
             "profit": 8616012.760000002,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place": "Hyderabad"
         },
         {
             "title": "Fortune Nest Kondapur  Kondapur",
@@ -2182,7 +2307,8 @@
             "location": "Kondapur",
             "goal_price": 14956808.08,
             "profit": 5456808.08,
-            "profit_percentage": 57.44008505263159
+            "profit_percentage": 57.44008505263159,
+            "place": "Hyderabad"
         },
         {
             "title": "Golden Tulip  Kondapur",
@@ -2195,7 +2321,8 @@
             "location": "Kondapur",
             "goal_price": 15901448.59,
             "profit": 5801448.59,
-            "profit_percentage": 57.44008504950495
+            "profit_percentage": 57.44008504950495,
+            "place": "Hyderabad"
         },
         {
             "title": "Eldeco Live By The Greens  Sector 150",
@@ -2208,7 +2335,8 @@
             "location": "Sector 150",
             "goal_price": 18105609.79,
             "profit": 6605609.789999999,
-            "profit_percentage": 57.44008513043477
+            "profit_percentage": 57.44008513043477,
+            "place": "Noida"
         },
         {
             "title": "Ats Le-grandiose  Sector-150",
@@ -2221,7 +2349,8 @@
             "location": "Sector-150",
             "goal_price": 28339215.32,
             "profit": 10339215.32,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Noida"
         },
         {
             "title": "Ats Le-grandiose  Sector 150",
@@ -2234,7 +2363,8 @@
             "location": "Sector 150",
             "goal_price": 43768343.66,
             "profit": 15968343.659999996,
-            "profit_percentage": 57.44008510791365
+            "profit_percentage": 57.44008510791365,
+            "place": "Noida"
         },
         {
             "title": "Ats Pious Orchards  Sector 150",
@@ -2247,7 +2377,8 @@
             "location": "Sector 150",
             "goal_price": 50892507.51,
             "profit": 18567507.509999998,
-            "profit_percentage": 57.44008510440835
+            "profit_percentage": 57.44008510440835,
+            "place": "Noida"
         },
         {
             "title": "Ace Parkway Noida  Sector 150",
@@ -2260,7 +2391,8 @@
             "location": "Sector 150",
             "goal_price": 53057308.68,
             "profit": 19357308.68,
-            "profit_percentage": 57.44008510385756
+            "profit_percentage": 57.44008510385756,
+            "place": "Noida"
         },
         {
             "title": "Samridhi Luxuriya Avenue  Sector 150",
@@ -2273,7 +2405,8 @@
             "location": "Sector 150",
             "goal_price": 22828812.34,
             "profit": 8328812.34,
-            "profit_percentage": 57.44008510344828
+            "profit_percentage": 57.44008510344828,
+            "place": "Noida"
         },
         {
             "title": "Godrej Palm Retreat  Sector 150",
@@ -2286,7 +2419,8 @@
             "location": "Sector 150",
             "goal_price": 54316829.36,
             "profit": 19816829.36,
-            "profit_percentage": 57.44008510144928
+            "profit_percentage": 57.44008510144928,
+            "place": "Noida"
         },
         {
             "title": "Godrej Nest  Sector 150",
@@ -2299,20 +2433,8 @@
             "location": "Sector 150",
             "goal_price": 47232025.53,
             "profit": 17232025.53,
-            "profit_percentage": 57.440085100000005
-        },
-        {
-            "title": "Samridhi Daksh Avenue  Sector 150",
-            "price": 43652010,
-            "rate": "14599",
-            "address": "Samridhi Daksh Avenue  Near City Center 150, Pushta Rd, Sector 150, Noida",
-            "area": 2990,
-            "estimated_emi": 25000,
-            "bhk": 4,
-            "location": "Sector 150",
-            "goal_price": 68725761.69,
-            "profit": 25073751.689999998,
-            "profit_percentage": 57.44008509573786
+            "profit_percentage": 57.440085100000005,
+            "place": "Noida"
         },
         {
             "title": "Godrej Palm Retreat  Sector 150",
@@ -2325,7 +2447,8 @@
             "location": "Sector 150",
             "goal_price": 41721622.55,
             "profit": 15221622.549999997,
-            "profit_percentage": 57.44008509433961
+            "profit_percentage": 57.44008509433961,
+            "place": "Noida"
         },
         {
             "title": "Samridhi Luxuriya Avenue  Sector 150, Noida",
@@ -2338,7 +2461,8 @@
             "location": "Sector 150, Noida",
             "goal_price": 33581970.15,
             "profit": 12251970.149999999,
-            "profit_percentage": 57.44008509142052
+            "profit_percentage": 57.44008509142052,
+            "place": "Noida"
         },
         {
             "title": "Eldeco Live By The Greens   Sector 150",
@@ -2351,7 +2475,8 @@
             "location": "Sector 150",
             "goal_price": 17318409.36,
             "profit": 6318409.359999999,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Noida"
         },
         {
             "title": "Godrej Nest, Sector 150  Sector 150",
@@ -2364,7 +2489,8 @@
             "location": "Sector 150",
             "goal_price": 43296023.4,
             "profit": 15796023.399999999,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Noida"
         },
         {
             "title": "Samridhi Daksh Avenue  Sector 150",
@@ -2377,7 +2503,8 @@
             "location": "Sector 150",
             "goal_price": 45670251.37,
             "profit": 16662231.369999997,
-            "profit_percentage": 57.44008508681391
+            "profit_percentage": 57.44008508681391,
+            "place": "Noida"
         },
         {
             "title": "Ace Parkway  Sector 150",
@@ -2390,7 +2517,8 @@
             "location": "Sector 150",
             "goal_price": 55104029.78,
             "profit": 20104029.78,
-            "profit_percentage": 57.44008508571429
+            "profit_percentage": 57.44008508571429,
+            "place": "Noida"
         },
         {
             "title": "Eldeco Live By The Greens  Sector 150",
@@ -2403,7 +2531,8 @@
             "location": "Sector 150",
             "goal_price": 28181775.23,
             "profit": 10281775.23,
-            "profit_percentage": 57.440085083798884
+            "profit_percentage": 57.440085083798884,
+            "place": "Noida"
         },
         {
             "title": "Eldeco Live By The Greens  Sector 150",
@@ -2416,7 +2545,8 @@
             "location": "Sector 150",
             "goal_price": 22927212.39,
             "profit": 8364712.390000001,
-            "profit_percentage": 57.440085081545064
+            "profit_percentage": 57.440085081545064,
+            "place": "Noida"
         },
         {
             "title": "Samridhi Luxuriya Avenue  Sector 150, Noida",
@@ -2429,7 +2559,8 @@
             "location": "Sector 150, Noida",
             "goal_price": 28071567.17,
             "profit": 10241567.170000002,
-            "profit_percentage": 57.44008508132362
+            "profit_percentage": 57.44008508132362,
+            "place": "Noida"
         },
         {
             "title": "Tata Eureka Park  Sector 150",
@@ -2442,7 +2573,8 @@
             "location": "Sector 150",
             "goal_price": 19764870.84,
             "profit": 7210970.84,
-            "profit_percentage": 57.44008507316452
+            "profit_percentage": 57.44008507316452,
+            "place": "Noida"
         },
         {
             "title": "Tower Three   Sector 150",
@@ -2455,7 +2587,8 @@
             "location": "Sector 150",
             "goal_price": 23616012.76,
             "profit": 8616012.760000002,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place": "Noida"
         },
         {
             "title": "Tower Three   Sector 150",
@@ -2468,7 +2601,8 @@
             "location": "Sector 150",
             "goal_price": 23616012.76,
             "profit": 8616012.760000002,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place": "Noida"
         },
         {
             "title": "Godrej Nest  Sector 150",
@@ -2481,7 +2615,8 @@
             "location": "Sector 150",
             "goal_price": 23616012.76,
             "profit": 8616012.760000002,
-            "profit_percentage": 57.44008506666668
+            "profit_percentage": 57.44008506666668,
+            "place": "Noida"
         },
         {
             "title": "Eldeco Live By The Greens  Sector 150",
@@ -2494,7 +2629,8 @@
             "location": "Sector 150",
             "goal_price": 14956808.08,
             "profit": 5456808.08,
-            "profit_percentage": 57.44008505263159
+            "profit_percentage": 57.44008505263159,
+            "place": "Noida"
         },
         {
             "title": "Yamuna Expressway Authority  Sector 22 D",
@@ -2507,7 +2643,8 @@
             "location": "Sector 22 D",
             "goal_price": 2361601.28,
             "profit": 861601.2799999998,
-            "profit_percentage": 57.44008533333332
+            "profit_percentage": 57.44008533333332,
+            "place": "Greater Noida"
         },
         {
             "title": "Yamuna Expressway Authority  Omega 1,",
@@ -2520,7 +2657,8 @@
             "location": "Omega 1,",
             "goal_price": 2361601.28,
             "profit": 861601.2799999998,
-            "profit_percentage": 57.44008533333332
+            "profit_percentage": 57.44008533333332,
+            "place": "Greater Noida"
         },
         {
             "title": "Yamuna Expressway Authority  Omega 1,",
@@ -2533,7 +2671,8 @@
             "location": "Omega 1,",
             "goal_price": 2361601.28,
             "profit": 861601.2799999998,
-            "profit_percentage": 57.44008533333332
+            "profit_percentage": 57.44008533333332,
+            "place": "Greater Noida"
         },
         {
             "title": "Yamuna Expressway Authority  Sector 22 D",
@@ -2546,7 +2685,8 @@
             "location": "Sector 22 D",
             "goal_price": 2361601.28,
             "profit": 861601.2799999998,
-            "profit_percentage": 57.44008533333332
+            "profit_percentage": 57.44008533333332,
+            "place": "Greater Noida"
         },
         {
             "title": "Janta  Sector 31",
@@ -2559,7 +2699,8 @@
             "location": "Sector 31",
             "goal_price": 2676481.45,
             "profit": 976481.4500000002,
-            "profit_percentage": 57.44008529411766
+            "profit_percentage": 57.44008529411766,
+            "place": "Greater Noida"
         },
         {
             "title": "Affordable Housing Society   Swarn Nagri",
@@ -2572,7 +2713,8 @@
             "location": "Swarn Nagri",
             "goal_price": 3306241.79,
             "profit": 1206241.79,
-            "profit_percentage": 57.44008523809524
+            "profit_percentage": 57.44008523809524,
+            "place": "Greater Noida"
         },
         {
             "title": "Svg Heights   Phi Iii",
@@ -2585,7 +2727,8 @@
             "location": "Phi Iii",
             "goal_price": 3936002.13,
             "profit": 1436002.13,
-            "profit_percentage": 57.44008519999999
+            "profit_percentage": 57.44008519999999,
+            "place": "Greater Noida"
         },
         {
             "title": "Svg Heights   Phi Iii",
@@ -2598,7 +2741,8 @@
             "location": "Phi Iii",
             "goal_price": 3936002.13,
             "profit": 1436002.13,
-            "profit_percentage": 57.44008519999999
+            "profit_percentage": 57.44008519999999,
+            "place": "Greater Noida"
         },
         {
             "title": "Sector Omega 1",
@@ -2611,7 +2755,8 @@
             "location": "Sector Omega 1",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Greater Noida"
         },
         {
             "title": "Today Homes Kings Park  Omega I",
@@ -2624,7 +2769,8 @@
             "location": "Omega I",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Greater Noida"
         },
         {
             "title": "Today Homes Kings Park  Omega 1",
@@ -2637,7 +2783,8 @@
             "location": "Omega 1",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Greater Noida"
         },
         {
             "title": "Senior Citizen Society   Phi Ii",
@@ -2650,7 +2797,8 @@
             "location": "Phi Ii",
             "goal_price": 10705925.79,
             "profit": 3905925.789999999,
-            "profit_percentage": 57.44008514705881
+            "profit_percentage": 57.44008514705881,
+            "place": "Greater Noida"
         },
         {
             "title": "Senior Citizen Society   Phi Ii",
@@ -2663,7 +2811,8 @@
             "location": "Phi Ii",
             "goal_price": 10705925.79,
             "profit": 3905925.789999999,
-            "profit_percentage": 57.44008514705881
+            "profit_percentage": 57.44008514705881,
+            "place": "Greater Noida"
         },
         {
             "title": "16th Parkview Gaur Yamuna City, Noida  Yamuna Express Way Industrial Development Authority Greater Noida",
@@ -2676,7 +2825,8 @@
             "location": "Yamuna Express Way Industrial Development Authority Greater Noida",
             "goal_price": 12555846.79,
             "profit": 4580846.789999999,
-            "profit_percentage": 57.44008514106582
+            "profit_percentage": 57.44008514106582,
+            "place": "Greater Noida"
         },
         {
             "title": "16th Parkview Gaur Yamuna City, Noida  Yamuna Express Way Industrial Development Authority Greater Noida",
@@ -2689,7 +2839,8 @@
             "location": "Yamuna Express Way Industrial Development Authority Greater Noida",
             "goal_price": 12555846.79,
             "profit": 4580846.789999999,
-            "profit_percentage": 57.44008514106582
+            "profit_percentage": 57.44008514106582,
+            "place": "Greater Noida"
         },
         {
             "title": "As Ultima One  Yatharth Super Speciality Hospital, Greater Noida",
@@ -2702,7 +2853,8 @@
             "location": "Yatharth Super Speciality Hospital, Greater Noida",
             "goal_price": 5825283.15,
             "profit": 2125283.1500000004,
-            "profit_percentage": 57.44008513513514
+            "profit_percentage": 57.44008513513514,
+            "place": "Greater Noida"
         },
         {
             "title": "As Ultima One  Yatharth Super Speciality Hospital, Greater Noida",
@@ -2715,7 +2867,8 @@
             "location": "Yatharth Super Speciality Hospital, Greater Noida",
             "goal_price": 5825283.15,
             "profit": 2125283.1500000004,
-            "profit_percentage": 57.44008513513514
+            "profit_percentage": 57.44008513513514,
+            "place": "Greater Noida"
         },
         {
             "title": "Presidency Heights  Yamuna Express Way Industrial Development Authority Greater Noida",
@@ -2728,7 +2881,8 @@
             "location": "Yamuna Express Way Industrial Development Authority Greater Noida",
             "goal_price": 17475849.45,
             "profit": 6375849.449999999,
-            "profit_percentage": 57.440085135135135
+            "profit_percentage": 57.440085135135135,
+            "place": "Greater Noida"
         },
         {
             "title": "Presidency Heights  Yamuna Express Way Industrial Development Authority Greater Noida",
@@ -2741,7 +2895,8 @@
             "location": "Yamuna Express Way Industrial Development Authority Greater Noida",
             "goal_price": 17475849.45,
             "profit": 6375849.449999999,
-            "profit_percentage": 57.440085135135135
+            "profit_percentage": 57.440085135135135,
+            "place": "Greater Noida"
         },
         {
             "title": "Phi Iii",
@@ -2754,7 +2909,8 @@
             "location": "Phi Iii",
             "goal_price": 25190413.62,
             "profit": 9190413.620000001,
-            "profit_percentage": 57.44008512500001
+            "profit_percentage": 57.44008512500001,
+            "place": "Greater Noida"
         },
         {
             "title": "Phi Iii",
@@ -2767,7 +2923,8 @@
             "location": "Phi Iii",
             "goal_price": 25190413.62,
             "profit": 9190413.620000001,
-            "profit_percentage": 57.44008512500001
+            "profit_percentage": 57.44008512500001,
+            "place": "Greater Noida"
         },
         {
             "title": "Today Homes Kings Park  Omega I",
@@ -2780,7 +2937,8 @@
             "location": "Omega I",
             "goal_price": 12595206.81,
             "profit": 4595206.8100000005,
-            "profit_percentage": 57.44008512500001
+            "profit_percentage": 57.44008512500001,
+            "place": "Greater Noida"
         },
         {
             "title": "Nimbus Express Park View 2  201310",
@@ -2793,7 +2951,8 @@
             "location": "201310",
             "goal_price": 13539847.32,
             "profit": 4939847.32,
-            "profit_percentage": 57.44008511627907
+            "profit_percentage": 57.44008511627907,
+            "place": "Greater Noida"
         },
         {
             "title": "Mitra Enclave",
@@ -2806,7 +2965,8 @@
             "location": "Mitra Enclave",
             "goal_price": 14169607.66,
             "profit": 5169607.66,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Greater Noida"
         },
         {
             "title": "Greater Noida",
@@ -2819,7 +2979,8 @@
             "location": "Greater Noida",
             "goal_price": 28339215.32,
             "profit": 10339215.32,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Greater Noida"
         },
         {
             "title": "Gda Flats  Indirapuram",
@@ -2832,7 +2993,8 @@
             "location": "Indirapuram",
             "goal_price": 3118888.09,
             "profit": 1137888.0899999999,
-            "profit_percentage": 57.44008531044926
+            "profit_percentage": 57.44008531044926,
+            "place": "Ghaziabad"
         },
         {
             "title": "Shakti Khand 3  Shakti Khand Iii",
@@ -2845,7 +3007,8 @@
             "location": "Shakti Khand Iii",
             "goal_price": 3306241.79,
             "profit": 1206241.79,
-            "profit_percentage": 57.44008523809524
+            "profit_percentage": 57.44008523809524,
+            "place": "Ghaziabad"
         },
         {
             "title": "Shakti Khand 3  Shakti Khand Iii",
@@ -2858,7 +3021,8 @@
             "location": "Shakti Khand Iii",
             "goal_price": 3306241.79,
             "profit": 1206241.79,
-            "profit_percentage": 57.44008523809524
+            "profit_percentage": 57.44008523809524,
+            "place": "Ghaziabad"
         },
         {
             "title": "Shipra Suncity  Indirapuram",
@@ -2871,7 +3035,8 @@
             "location": "Indirapuram",
             "goal_price": 8816644.77,
             "profit": 3216644.7699999996,
-            "profit_percentage": 57.44008517857142
+            "profit_percentage": 57.44008517857142,
+            "place": "Ghaziabad"
         },
         {
             "title": "Shipra Suncity  Indirapuram",
@@ -2884,7 +3049,8 @@
             "location": "Indirapuram",
             "goal_price": 8816644.77,
             "profit": 3216644.7699999996,
-            "profit_percentage": 57.44008517857142
+            "profit_percentage": 57.44008517857142,
+            "place": "Ghaziabad"
         },
         {
             "title": "Apartment  Vasundhara",
@@ -2897,7 +3063,8 @@
             "location": "Vasundhara",
             "goal_price": 9131524.94,
             "profit": 3331524.9399999995,
-            "profit_percentage": 57.44008517241378
+            "profit_percentage": 57.44008517241378,
+            "place": "Ghaziabad"
         },
         {
             "title": "Apartment  Vasundhara",
@@ -2910,7 +3077,8 @@
             "location": "Vasundhara",
             "goal_price": 9131524.94,
             "profit": 3331524.9399999995,
-            "profit_percentage": 57.44008517241378
+            "profit_percentage": 57.44008517241378,
+            "place": "Ghaziabad"
         },
         {
             "title": "White  Apartments  Indirapuram",
@@ -2923,7 +3091,8 @@
             "location": "Apartments",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Ghaziabad"
         },
         {
             "title": "White  Apartments  Indirapuram",
@@ -2936,7 +3105,8 @@
             "location": "Apartments",
             "goal_price": 9446405.11,
             "profit": 3446405.1099999994,
-            "profit_percentage": 57.440085166666655
+            "profit_percentage": 57.440085166666655,
+            "place": "Ghaziabad"
         },
         {
             "title": "Indirapuram",
@@ -2949,7 +3119,8 @@
             "location": "Indirapuram",
             "goal_price": 4880642.64,
             "profit": 1780642.6399999997,
-            "profit_percentage": 57.44008516129031
+            "profit_percentage": 57.44008516129031,
+            "place": "Ghaziabad"
         },
         {
             "title": "Indirapuram",
@@ -2962,7 +3133,8 @@
             "location": "Indirapuram",
             "goal_price": 4880642.64,
             "profit": 1780642.6399999997,
-            "profit_percentage": 57.44008516129031
+            "profit_percentage": 57.44008516129031,
+            "place": "Ghaziabad"
         },
         {
             "title": "Shakti Khand 2  Indirapuram",
@@ -2975,7 +3147,8 @@
             "location": "Indirapuram",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Ghaziabad"
         },
         {
             "title": "White  Apartments  Indirapuram",
@@ -2988,7 +3161,8 @@
             "location": "Apartments",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Ghaziabad"
         },
         {
             "title": "Indirapuram",
@@ -3001,7 +3175,8 @@
             "location": "Indirapuram",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Ghaziabad"
         },
         {
             "title": "White  Apartments  Indirapuram",
@@ -3014,7 +3189,8 @@
             "location": "Apartments",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Ghaziabad"
         },
         {
             "title": "Shakti Khand 4  Indirapuram",
@@ -3027,7 +3203,8 @@
             "location": "Indirapuram",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Ghaziabad"
         },
         {
             "title": "Gda Flats   Indirapuram",
@@ -3040,7 +3217,8 @@
             "location": "Indirapuram",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Ghaziabad"
         },
         {
             "title": "Shakti Khand 4  Indirapuram",
@@ -3053,7 +3231,8 @@
             "location": "Indirapuram",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Ghaziabad"
         },
         {
             "title": "35, Islam Nagar, Madhopura, Ghaziabad, Uttar Pradesh 201009, India",
@@ -3066,7 +3245,8 @@
             "location": "35, Islam Nagar, Madhopura, Ghaziabad, Uttar Pradesh 201009, India",
             "goal_price": 11335686.13,
             "profit": 4135686.130000001,
-            "profit_percentage": 57.4400851388889
+            "profit_percentage": 57.4400851388889,
+            "place": "Ghaziabad"
         },
         {
             "title": "35, Islam Nagar, Madhopura, Ghaziabad, Uttar Pradesh 201009, India",
@@ -3079,7 +3259,8 @@
             "location": "35, Islam Nagar, Madhopura, Ghaziabad, Uttar Pradesh 201009, India",
             "goal_price": 11335686.13,
             "profit": 4135686.130000001,
-            "profit_percentage": 57.4400851388889
+            "profit_percentage": 57.4400851388889,
+            "place": "Ghaziabad"
         },
         {
             "title": "Mangalaya Apartment   Indirapuram, Ghaziabad",
@@ -3092,7 +3273,8 @@
             "location": "Indirapuram, Ghaziabad",
             "goal_price": 5825283.15,
             "profit": 2125283.1500000004,
-            "profit_percentage": 57.44008513513514
+            "profit_percentage": 57.44008513513514,
+            "place": "Ghaziabad"
         },
         {
             "title": "Indirapuram",
@@ -3105,7 +3287,8 @@
             "location": "Indirapuram",
             "goal_price": 5825283.15,
             "profit": 2125283.1500000004,
-            "profit_percentage": 57.44008513513514
+            "profit_percentage": 57.44008513513514,
+            "place": "Ghaziabad"
         },
         {
             "title": "Mangalaya Apartment   Indirapuram, Ghaziabad",
@@ -3118,7 +3301,8 @@
             "location": "Indirapuram, Ghaziabad",
             "goal_price": 5825283.15,
             "profit": 2125283.1500000004,
-            "profit_percentage": 57.44008513513514
+            "profit_percentage": 57.44008513513514,
+            "place": "Ghaziabad"
         },
         {
             "title": "Real World Residency  Indirapuram",
@@ -3131,7 +3315,8 @@
             "location": "Indirapuram",
             "goal_price": 18105609.79,
             "profit": 6605609.789999999,
-            "profit_percentage": 57.44008513043477
+            "profit_percentage": 57.44008513043477,
+            "place": "Ghaziabad"
         },
         {
             "title": "Real World Residency  Indirapuram",
@@ -3144,7 +3329,8 @@
             "location": "Indirapuram",
             "goal_price": 18105609.79,
             "profit": 6605609.789999999,
-            "profit_percentage": 57.44008513043477
+            "profit_percentage": 57.44008513043477,
+            "place": "Ghaziabad"
         },
         {
             "title": "Old Faridabad",
@@ -3157,7 +3343,8 @@
             "location": "Old Faridabad",
             "goal_price": 3936002.13,
             "profit": 1436002.13,
-            "profit_percentage": 57.44008519999999
+            "profit_percentage": 57.44008519999999,
+            "place": "Faridabad"
         },
         {
             "title": "Old Faridabad",
@@ -3170,7 +3357,8 @@
             "location": "Old Faridabad",
             "goal_price": 3936002.13,
             "profit": 1436002.13,
-            "profit_percentage": 57.44008519999999
+            "profit_percentage": 57.44008519999999,
+            "place": "Faridabad"
         },
         {
             "title": "Srs Pearl",
@@ -3183,7 +3371,8 @@
             "location": "Srs Pearl",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Gated Community Villa Conscient Habitat Residences   Sector 78, Faridabad",
@@ -3196,7 +3385,8 @@
             "location": "Sector 78, Faridabad",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Wazirpur Road",
@@ -3209,7 +3399,8 @@
             "location": "Wazirpur Road",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Wazirpur Road",
@@ -3222,7 +3413,8 @@
             "location": "Wazirpur Road",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Hanuman Nagar,",
@@ -3235,7 +3427,8 @@
             "location": "Hanuman Nagar,",
             "goal_price": 2755201.49,
             "profit": 1005201.4900000002,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Sector 87",
@@ -3248,7 +3441,8 @@
             "location": "Sector 87",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Gated Community Villa Conscient Habitat Residences   Sector 78, Faridabad",
@@ -3261,7 +3455,8 @@
             "location": "Sector 78, Faridabad",
             "goal_price": 5510402.98,
             "profit": 2010402.9800000004,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Srs Pearl",
@@ -3274,7 +3469,8 @@
             "location": "Srs Pearl",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Srs Pearl Floor Society  Neharpar Faridabad",
@@ -3287,7 +3483,8 @@
             "location": "Neharpar Faridabad",
             "goal_price": 11020805.96,
             "profit": 4020805.960000001,
-            "profit_percentage": 57.44008514285716
+            "profit_percentage": 57.44008514285716,
+            "place": "Faridabad"
         },
         {
             "title": "Srs Pearl Heights  Neharpar Faridabad",
@@ -3300,7 +3497,8 @@
             "location": "Neharpar Faridabad",
             "goal_price": 8341175.71,
             "profit": 3043175.71,
-            "profit_percentage": 57.44008512646281
+            "profit_percentage": 57.44008512646281,
+            "place": "Faridabad"
         },
         {
             "title": "Srs Pearl Heights  Neharpar Faridabad",
@@ -3313,7 +3511,8 @@
             "location": "Neharpar Faridabad",
             "goal_price": 8341175.71,
             "profit": 3043175.71,
-            "profit_percentage": 57.44008512646281
+            "profit_percentage": 57.44008512646281,
+            "place": "Faridabad"
         },
         {
             "title": "Sector 87",
@@ -3326,7 +3525,8 @@
             "location": "Sector 87",
             "goal_price": 7084803.83,
             "profit": 2584803.83,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Faridabad"
         },
         {
             "title": "Srs Royal Hills, Sector-87  Sector-87",
@@ -3339,7 +3539,8 @@
             "location": "Sector-87",
             "goal_price": 14169607.66,
             "profit": 5169607.66,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Faridabad"
         },
         {
             "title": "Neharpar",
@@ -3352,7 +3553,8 @@
             "location": "Neharpar",
             "goal_price": 7084803.83,
             "profit": 2584803.83,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Faridabad"
         },
         {
             "title": "Neharpar",
@@ -3365,7 +3567,8 @@
             "location": "Neharpar",
             "goal_price": 7084803.83,
             "profit": 2584803.83,
-            "profit_percentage": 57.44008511111112
+            "profit_percentage": 57.44008511111112,
+            "place": "Faridabad"
         },
         {
             "title": "Sector 16",
@@ -3378,7 +3581,8 @@
             "location": "Sector 16",
             "goal_price": 21254411.49,
             "profit": 7754411.489999998,
-            "profit_percentage": 57.440085111111095
+            "profit_percentage": 57.440085111111095,
+            "place": "Faridabad"
         },
         {
             "title": "Sls Anusree  Sector 87",
@@ -3391,7 +3595,8 @@
             "location": "Sector 87",
             "goal_price": 8029444.34,
             "profit": 2929444.34,
-            "profit_percentage": 57.44008509803922
+            "profit_percentage": 57.44008509803922,
+            "place": "Faridabad"
         },
         {
             "title": "Sls Anusree  Sector 87",
@@ -3404,7 +3609,8 @@
             "location": "Sector 87",
             "goal_price": 8029444.34,
             "profit": 2929444.34,
-            "profit_percentage": 57.44008509803922
+            "profit_percentage": 57.44008509803922,
+            "place": "Faridabad"
         },
         {
             "title": "Srs Royal Hills  Sector-87",
@@ -3417,7 +3623,8 @@
             "location": "Sector-87",
             "goal_price": 8659204.68,
             "profit": 3159204.6799999997,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Faridabad"
         },
         {
             "title": "Independent Floor With Roof  Sector 16",
@@ -3430,7 +3637,8 @@
             "location": "Sector 16",
             "goal_price": 25977614.04,
             "profit": 9477614.04,
-            "profit_percentage": 57.440085090909086
+            "profit_percentage": 57.440085090909086,
+            "place": "Faridabad"
         },
         {
             "title": "19, Naharpur, Sector 87, Neharpar Faridabad, Faridabad, Haryana 121014, India",
@@ -3443,7 +3651,8 @@
             "location": "19, Naharpur, Sector 87, Neharpar Faridabad, Faridabad, Haryana 121014, India",
             "goal_price": 39360021.27,
             "profit": 14360021.270000003,
-            "profit_percentage": 57.44008508000002
+            "profit_percentage": 57.44008508000002,
+            "place": "Faridabad"
         },
         {
             "title": "Neharpar Faridabad",
@@ -3456,7 +3665,8 @@
             "location": "Neharpar Faridabad",
             "goal_price": 20467211.06,
             "profit": 7467211.059999999,
-            "profit_percentage": 57.44008507692306
+            "profit_percentage": 57.44008507692306,
+            "place": "Faridabad"
         },
         {
             "title": "Old Faridabad",
@@ -3469,7 +3679,8 @@
             "location": "Old Faridabad",
             "goal_price": 20467211.06,
             "profit": 7467211.059999999,
-            "profit_percentage": 57.44008507692306
+            "profit_percentage": 57.44008507692306,
+            "place": "Faridabad"
         }
     ]
 }
