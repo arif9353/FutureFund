@@ -142,7 +142,7 @@ const PropertyTable = () => {
                             <p><span className="font-bold">Location:</span> {property.location}</p>
                             <p><span className="font-bold">Goal Price:</span> {property.goal_price.toFixed(2)}</p>
                             <p><span className="font-bold">Profit:</span> {property.profit.toFixed(2)}</p>
-                            <p><span className="font-bold">Profit %:</span> {property.profit_percentage.toFixed(2)}</p>
+                            {/* <p><span className="font-bold">Profit %:</span> {property.profit_percentage.toFixed(2)}</p> */}
                         </div>
                     ))}
                 </div>

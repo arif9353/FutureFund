@@ -10,15 +10,24 @@ import { PuffLoader } from 'react-spinners';
 
 const InvestmentForm = () => {
     const [formData, setFormData] = useRecoilState<any>(investmentFormDataRecoil);
-    const [localFormData, setLocalFormData] = useState(formData);
+    const [localFormData, setLocalFormData] = useState({
+        ...formData,
+        stock_allocation_bool: 1,
+        crypto_allocation_bool: 1,
+        property_allocation_bool: 1,
+        bond_allocation_bool:  1,
+        recurrent_deposit_allocation_bool: 1,
+        gold_allocation_bool:  1
+    });
+
     const [_, setData] = useRecoilState(allocationDataRecoil);
     const [loading, setLoading] = useState(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
+    const handleChange = (e: any) => {
+        const { name, value, type, checked } = e.target;
         setLocalFormData((prevData: any) => ({
             ...prevData,
-            [name]: value,
+            [name]: type === 'checkbox' ? checked ? 1 : 0 : value,
         }));
     };
 
@@ -42,7 +51,7 @@ const InvestmentForm = () => {
             return;
         }
 
-        if(!localFormData?.years_to_retire){
+        if (!localFormData?.years_to_retire) {
             toast.error('Please select years to retire');
 
             return;
@@ -52,13 +61,12 @@ const InvestmentForm = () => {
         const numberFields = ['salary', 'investment_amount', 'current_savings', 'debt', 'other_expenses', 'number_of_dependents', 'current_invested_amount'];
         const isAnyFieldNotNumber = numberFields.some(field => isNaN(localFormData[field]));
 
-
         if (isAnyFieldNotNumber) {
             toast.error('Please enter valid numbers for salary, investment amount, current savings, debt, other expenses, number of dependents, and current invested amount');
             return;
         }
 
-        // All validations passed, call api and finally  set the form data
+        // All validations passed, call api and finally set the form data
 
         if (localFormData) {
             setLoading(true)
@@ -75,7 +83,6 @@ const InvestmentForm = () => {
                 setLoading(false)
             })
         }
-
     };
 
     const bankOptions = {
@@ -129,6 +136,15 @@ const InvestmentForm = () => {
         { value: 'faridabad', label: 'Faridabad' },
     ];
 
+    const investmentOptions = [
+        { label: 'Stocks', name: 'stock_allocation_bool' },
+        { label: 'Crypto', name: 'crypto_allocation_bool' },
+        { label: 'Properties', name: 'property_allocation_bool' },
+        { label: 'Bonds', name: 'bond_allocation_bool' },
+        { label: 'RDs', name: 'recurrent_deposit_allocation_bool' },
+        { label: 'Gold', name: 'gold_allocation_bool' }
+    ];
+
     if (loading) {
         return (
             <>
@@ -145,24 +161,6 @@ const InvestmentForm = () => {
             <h2 className="text-2xl font-bold text-center mb-6 flex justify-center">
                 <span className='gradient-text-ai'><HiOutlineSparkles className='inline' color='#9583d0' /> AI  INVESTMENT ALLOCATION </span>
             </h2>
-            {/* <div className="flex items-center space-x-2 mb-4">
-                <div className="text-gray-400"><FaMapMarkerAlt /></div>
-                <div className="flex-1">
-                    <label className="block text-gray-300 font-bold mb-1">
-                        Location
-                    </label>
-                    <select
-                        className="appearance-none block w-full bg-[#ffffff10] text-gray-300 border border-gray-700 rounded py-2 px-3 leading-tight focus:outline-none focus:bg-[#ffffff10] focus:border-blue-500"
-                        name="location"
-                        value={localFormData.location || ''}
-                        onChange={handleChange}
-                    >
-                        {locationOptions.map(option => (
-                            <option className='bg-[#2b2d32]' key={option.value} value={option.value}>{option.label}</option>
-                        ))}
-                    </select>
-                </div>
-            </div> */}
 
             <div className="flex items-center space-x-2 mb-4">
                 <div className="text-gray-400"><FaBuilding /></div>
@@ -222,6 +220,26 @@ const InvestmentForm = () => {
                     </div>
                 </div>
             ))}
+
+
+
+            <div className="flex flex-col ">
+                <label className="block text-gray-300 font-bold mb-1">Invest in:</label>
+                <div className="flex flex-row  flex-wrap justify-evenly">
+                    {investmentOptions.map(({ label, name }) => (
+                        <label className="inline-flex items-center w-[40%] my-2" key={name}>
+                            <input
+                                type="checkbox"
+                                name={name}
+                                checked={localFormData[name] || false}
+                                onChange={handleChange}
+                                className=" accent-blue-500 rounded-full size-4"
+                            />
+                            <span className="ml-2 text-gray-300">{label}</span>
+                        </label>
+                    ))}
+                </div>
+            </div>
 
             <div className="flex justify-center">
                 <button
