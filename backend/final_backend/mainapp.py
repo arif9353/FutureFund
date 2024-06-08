@@ -53,7 +53,7 @@ async def fetch_data():
 async def main_model(request:Request):
     try:
         data = await request.json()
-        json_data = {'years_to_retire': int(data["years_to_retire"]), 'salary': float(data["salary"]), 'investment_amount': float(data["investment_amount"]), 'current_savings': float(data["current_savings"]), 'debt': float(data["debt"]), 'other_expenses': float(data["other_expenses"]), 'number_of_dependents': int(data["number_of_dependents"]), 'current_invested_amount': float(data["current_invested_amount"]), 'bank': data["bank"]} 
+        json_data = {'years_to_retire': int(data["years_to_retire"]), 'salary': float(data["salary"]), 'investment_amount': float(data["investment_amount"]), 'current_savings': float(data["current_savings"]), 'debt': float(data["debt"]), 'other_expenses': float(data["other_expenses"]), 'number_of_dependents': int(data["number_of_dependents"]), 'current_invested_amount': float(data["current_invested_amount"]), 'bank': data["bank"], 'stock_allocation_bool': int(data['stock_allocation_bool']),'crypto_allocation_bool': int(data['crypto_allocation_bool']),'bond_allocation_bool': int(data['bond_allocation_bool']),'gold_allocation_bool': int(data['gold_allocation_bool']),'property_allocation_bool': int(data['property_allocation_bool']),'recurrent_deposit_allocation_bool': int(data['recurrent_deposit_allocation_bool']) } 
         ans = await model_predict(json_data,data["details"])
         return JSONResponse(content={'low_json':ans[0],'mid_json':ans[1],'high_json':ans[2]},status_code=200)
     except Exception as e:

@@ -40,11 +40,11 @@ async def fetch_data():
         with open('properties.json', 'r') as f:
             property_data = json.load(f)
         Json_Main = {
-            "stock": stock_main_data,
-            "crypto":crypto_data[1],
+            "stock_data": stock_main_data,
+            "crypto_data":crypto_data[1],
             "recurrent_deposit": recurrent_deposit_data,
-            "gold":gold_data,
-            "bond":bond_data[1],
+            "gold_data":gold_data,
+            "bond_data":bond_data[1],
         }
         return JSONResponse(content={'stock_data': stock_data, 'crypto_data': crypto_data[0], 'recurrent_deposit': recurrent_deposit_data,  'gold_data': gold_data,'bond_data': bond_data[0], 'property_data':property_data["property"][:25], 'details':Json_Main,'success': True}, status_code=200)
     except Exception as e:
@@ -53,11 +53,11 @@ async def fetch_data():
 #'stock_data': stock_data, 'crypto_data': crypto_data, 'recurrent_deposit': recurrent_deposit_data, 'gold_data': gold_data,'bond_data': bond_data,          
 
 @app.post('/model')
-async def main_model(details:str=Form(...),years_to_retire: str = Form(...),salary: str=Form(...),investment_amount: str=Form(...),current_savings: str=Form(...),debt: str=Form(...),other_expenses: str=Form(...),number_of_dependents: str=Form(...),current_invested_amount: str=Form(...),bank: str=Form(...)):
+async def main_model(details:str=Form(...),years_to_retire: str = Form(...),salary: str=Form(...),investment_amount: str=Form(...),current_savings: str=Form(...),debt: str=Form(...),other_expenses: str=Form(...),number_of_dependents: str=Form(...),current_invested_amount: str=Form(...),bank: str=Form(...),s1:str=Form(...),s2:str=Form(...),s3:str=Form(...),s4:str=Form(...),s5:str=Form(...),s6:str=Form(...)):
     try:
         global Json_Main
-        json_data = {'years_to_retire': int(years_to_retire), 'salary': float(salary), 'investment_amount': float(investment_amount), 'current_savings': float(current_savings), 'debt': float(debt), 'other_expenses': float(other_expenses), 'number_of_dependents': int(number_of_dependents), 'current_invested_amount': float(current_invested_amount), 'bank': bank} 
-        ans = await model_predict(json_data,details)
+        json_data = {'years_to_retire': int(years_to_retire), 'salary': float(salary), 'investment_amount': float(investment_amount), 'current_savings': float(current_savings), 'debt': float(debt), 'other_expenses': float(other_expenses), 'number_of_dependents': int(number_of_dependents), 'current_invested_amount': float(current_invested_amount), 'bank': bank, 'stock_allocation_bool':int(s1),'crypto_allocation_bool':int(s2),'recurrent_deposit_allocation_bool':int(s3), 'property_allocation_bool':int(s4),'gold_allocation_bool':int(s5),'bond_allocation_bool':int(s6)} 
+        ans = await model_predict(json_data,Json_Main)
         return JSONResponse(content={'low_json':ans[0],'mid_json':ans[1],'high_json':ans[2]},status_code=200)
     except Exception as e:
         return JSONResponse(content={'message':f'failure while trying {str(e)}', 'success': False}, status_code=500)

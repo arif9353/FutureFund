@@ -12,12 +12,12 @@ const InvestmentForm = () => {
     const [formData, setFormData] = useRecoilState<any>(investmentFormDataRecoil);
     const [localFormData, setLocalFormData] = useState({
         ...formData,
-        stock_allocation_bool: 1,
-        crypto_allocation_bool: 1,
-        property_allocation_bool: 1,
-        bond_allocation_bool:  1,
-        recurrent_deposit_allocation_bool: 1,
-        gold_allocation_bool:  1
+        stock_allocation_bool: "1",
+        crypto_allocation_bool: "1",
+        property_allocation_bool: "1",
+        bond_allocation_bool:  "1",
+        recurrent_deposit_allocation_bool: "1",
+        gold_allocation_bool:  "1"
     });
 
     const [_, setData] = useRecoilState(allocationDataRecoil);
@@ -27,7 +27,7 @@ const InvestmentForm = () => {
         const { name, value, type, checked } = e.target;
         setLocalFormData((prevData: any) => ({
             ...prevData,
-            [name]: type === 'checkbox' ? checked ? 1 : 0 : value,
+            [name]: type === 'checkbox' ? checked ? "1" : "0" : value,
         }));
     };
 
@@ -231,7 +231,7 @@ const InvestmentForm = () => {
                             <input
                                 type="checkbox"
                                 name={name}
-                                checked={localFormData[name] || false}
+                                checked={localFormData[name]=="1" || false}
                                 onChange={handleChange}
                                 className=" accent-blue-500 rounded-full size-4"
                             />

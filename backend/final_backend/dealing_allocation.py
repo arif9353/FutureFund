@@ -346,7 +346,7 @@ async def dealing_high(investment_amount,years,bank,realtime_json, categorized_s
             gold_difference_amount = round((high_amounts["s5"] - (gold_quantity*realtime_json["gold_data"])),2)
             high_amounts["s2"] = round((high_amounts["s2"]+gold_difference_amount),2)
             high_amounts["s5"] = high_amounts["s5"]-gold_difference_amount
-        
+        print("\nThis is crypto data dummy:\n",realtime_json["crypto_data"])
         crypto_data, crypto_max_profit, crypto_max_quantity = await crypto_values_giver(realtime_json["crypto_data"],high_amounts["s2"])
         
         print("after changes:\n",high_amounts)

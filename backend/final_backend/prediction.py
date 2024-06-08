@@ -1,5 +1,7 @@
 import joblib
 from tensorflow.keras.models import load_model
+from tensorflow.keras.losses import CategoricalCrossentropy
+
 import pandas as pd
 import numpy as np
 import copy
@@ -7,6 +9,25 @@ from dealing_allocation import dealing_low,dealing_high,dealing_mid
 from stock import stock_cluster_gen
 import json
 
+
+async def omit_assets(allocations, omit):
+    # Asset indices corresponding to s1, s2, ..., s6
+    asset_indices = {'s1': 0, 's2': 1, 's3': 2, 's4': 3, 's5': 4, 's6': 5}
+
+    # Set the values of omitted assets to 0
+    for asset in omit:
+        allocations[0][asset_indices[asset]] = 0
+
+    # Calculate the sum of remaining assets
+    remaining_sum = allocations.sum(axis=1, keepdims=True)
+
+    # Redistribute the values of omitted assets proportionally to the remaining assets
+    allocations = allocations / remaining_sum
+
+    # Convert the final allocation to a percentage scale (0-100%)
+    allocations_percentage = allocations 
+    
+    return allocations_percentage
 
 async def display_results(low_pred, mid_pred, high_pred):
     try:
@@ -30,34 +51,81 @@ async def display_results(low_pred, mid_pred, high_pred):
 
 async def model_predict(employee_json, realtime_json):
     try:
+        print(employee_json)
         years_to_retire = employee_json["years_to_retire"]
+        print(type(years_to_retire))
         salary = employee_json["salary"]
+        print(type(salary))
         investment_amount = employee_json["investment_amount"]
+        print(type(investment_amount))
         current_savings = employee_json["current_savings"]
+        print(type(current_savings))
         debt = employee_json["debt"]
+        print(type(debt))
         other_expenses = employee_json["other_expenses"]
+        print(type(other_expenses))
         number_of_dependents = employee_json["number_of_dependents"]
+        print(type(number_of_dependents))
         current_invested_amount = employee_json["current_invested_amount"]
+        print(type(current_invested_amount))
         bank = employee_json["bank"]
+        print(type(bank))
+        stock_allocation_bool = employee_json["stock_allocation_bool"]
+        print(type(stock_allocation_bool))
+        crypto_allocation_bool = employee_json["crypto_allocation_bool"]
+        print(type(crypto_allocation_bool))
+        bond_allocation_bool = employee_json["bond_allocation_bool"]
+        print(type(stock_allocation_bool))
+        recurrent_deposit_allocation_bool = employee_json["recurrent_deposit_allocation_bool"]
+        print(type(recurrent_deposit_allocation_bool))
+        property_allocation_bool = employee_json["property_allocation_bool"]
+        print(type(property_allocation_bool))
+        gold_allocation_bool = employee_json["gold_allocation_bool"]
+        print(type(gold_allocation_bool))
+        print("This iss gold allocation",gold_allocation_bool)
 
-        loaded_model = load_model('./new_better_allocation.h5')
-        preprocessor = joblib.load('./scaler_for_new_allocation.pkl')
+        
+        # Load the model with custom objects
+        loaded_model = load_model('finals_allocation.h5')
+
+        preprocessor = joblib.load('finals_preprocessor.pkl')
 
         features = ['years_to_retire', 'salary', 'investment_amount', 'current_savings', 'debt',
-                    'other_expenses', 'number_of_dependents', 'current_invested_amount']
-        new_employee = pd.DataFrame([[years_to_retire, salary, investment_amount, current_savings, debt, other_expenses, number_of_dependents, current_invested_amount]], columns=features)
+                    'other_expenses', 'number_of_dependents', 'current_invested_amount','s1','s2','s3','s4','s5','s6']
+        new_employee = pd.DataFrame([[years_to_retire, salary, investment_amount, current_savings, debt, other_expenses, number_of_dependents, current_invested_amount,stock_allocation_bool,
+                                      crypto_allocation_bool,recurrent_deposit_allocation_bool,property_allocation_bool,gold_allocation_bool,bond_allocation_bool]], columns=features)
         
         # Preprocess the new data
         new_employee_processed = preprocessor.transform(new_employee)
         
         predicted_low, predicted_mid, predicted_high = loaded_model.predict(new_employee_processed)
-
+        print("\n\nthis is predicted_low\n\n",type(predicted_low))
         # Display the prediction results
-        ans = await display_results(predicted_low[0], predicted_mid[0], predicted_high[0])
-
+        boolean_list = []
+        if stock_allocation_bool == 0:
+            boolean_list.append('s1')
+        if crypto_allocation_bool == 0:
+            boolean_list.append('s2')        
+        if recurrent_deposit_allocation_bool == 0:
+            boolean_list.append('s3')        
+        if property_allocation_bool == 0:
+            boolean_list.append('s4')
+        if gold_allocation_bool == 0:
+            boolean_list.append('s5')
+        if bond_allocation_bool == 0:
+            boolean_list.append('s6')
+        
+        low_per = await omit_assets(np.array(predicted_low),boolean_list)
+        mid_per = await omit_assets(np.array(predicted_mid),boolean_list)
+        high_per = await omit_assets(np.array(predicted_high),boolean_list)
+        ans = await display_results(np.array(low_per[0]), np.array(mid_per[0]), np.array(high_per[0]))
+        
         low_percent = ans[0]
         mid_percent = ans[1]
         high_percent = ans[2]
+
+        print("\n\nThis is:\n",high_percent)
+
         scaler = joblib.load('scaler_for_goal.pkl')
         model_high = joblib.load('new_model_high.pkl')
         model_mid = joblib.load('new_model_mid.pkl')
